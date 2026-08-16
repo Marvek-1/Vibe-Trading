@@ -1,0 +1,12 @@
+{
+  "session_id": "demo_10k_8pair_5m_20260710_164304",
+  "status": "RECONSTRUCTABLE",
+  "original_reconciled": false,
+  "original_final_equity": 7345.339762692283,
+  "original_reconciliation_error": -2754.0203466810544,
+  "reconstructed_reconciled": true,
+  "reconstructed_final_equity": 10099.36010937334,
+  "reconstructed_reconciliation_error": 1.8189894035458565e-12,
+  "cash_ledger_gap": 2754.0203466810563,
+  "taint_reason": "historical cash ledger excluded trade notional"
+}
