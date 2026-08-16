@@ -1,0 +1,17 @@
+{
+  "receipts": {
+    "research": {
+      "path": "/home/idona/MoStar/_apps/financial/Vibe-Trading-main/Vibe-Trading-main/crypto_momentum_trend.json",
+      "bytes_written": 33063,
+      "sha256": "2d0170a998d1e764264ec27a0e7b67784ad9d89e2eb1c90645066d2e2cb93b0d",
+      "mtime": "2026-07-21T16:58:24Z"
+    },
+    "paper_handoff": {
+      "path": "/home/idona/MoStar/_apps/financial/Vibe-Trading-main/Vibe-Trading-main/crypto_momentum_trend.paper.json",
+      "bytes_written": 202,
+      "sha256": "36770bfae3f72db05409fc96590058b7dc1035cb218e6e2fb157e058ed36ec8d",
+      "mtime": "2026-07-21T16:58:24Z"
+    }
+  },
+  "shadow_paper_candidates": []
+}

@@ -1,0 +1,542 @@
+diff --git a/agent/paper_accounting_guard.py b/agent/paper_accounting_guard.py
+new file mode 100644
+--- /dev/null
++++ b/agent/paper_accounting_guard.py
+@@ -0,0 +1,202 @@
++"""Fail-closed valuation and accounting guards for paper trading.
++
++This module is dependency-free so it can be unit-tested without importing
++ccxt, the API server, or the mutable paper-session runtime.
++"""
++
++from __future__ import annotations
++
++from dataclasses import asdict, dataclass
++from math import isclose, isfinite
++from typing import Any, Literal, Mapping, Sequence
++
++
++AccountingState = Literal["OK", "DEFERRED", "ERROR"]
++
++
++class PriceSnapshotError(RuntimeError):
++    """Raised before ledger mutation when a mark snapshot is incomplete."""
++
++    def __init__(
++        self,
++        *,
++        missing_symbols: Sequence[str] = (),
++        invalid_symbols: Sequence[str] = (),
++    ) -> None:
++        self.missing_symbols = tuple(sorted(set(missing_symbols)))
++        self.invalid_symbols = tuple(sorted(set(invalid_symbols)))
++        details: list[str] = []
++        if self.missing_symbols:
++            details.append(f"missing={list(self.missing_symbols)}")
++        if self.invalid_symbols:
++            details.append(f"invalid={list(self.invalid_symbols)}")
++        super().__init__("incomplete price snapshot: " + ", ".join(details))
++
++
++@dataclass(frozen=True)
++class AccountingDecision:
++    state: AccountingState
++    reason: str
++    residual: float | None
++    tolerance: float | None
++    stale_mark_symbols: tuple[str, ...] = ()
++    position_differences: dict[str, dict[str, float]] | None = None
++
++    def to_dict(self) -> dict[str, Any]:
++        return asdict(self)
++
++
++def normalize_price_snapshot(
++    symbols: Sequence[str],
++    prices: Mapping[str, Any],
++) -> dict[str, float]:
++    """Return finite, strictly positive prices for every configured symbol.
++
++    Extra prices are ignored. Missing, non-numeric, NaN, infinite, zero, and
++    negative values all fail before any position, cash, trade, or mark mutation.
++    """
++    missing: list[str] = []
++    invalid: list[str] = []
++    normalized: dict[str, float] = {}
++
++    for symbol in symbols:
++        if symbol not in prices:
++            missing.append(symbol)
++            continue
++        value = prices[symbol]
++        if isinstance(value, bool):
++            invalid.append(symbol)
++            continue
++        try:
++            numeric = float(value)
++        except (TypeError, ValueError):
++            invalid.append(symbol)
++            continue
++        if not isfinite(numeric) or numeric <= 0.0:
++            invalid.append(symbol)
++            continue
++        normalized[symbol] = numeric
++
++    if missing or invalid:
++        raise PriceSnapshotError(
++            missing_symbols=missing,
++            invalid_symbols=invalid,
++        )
++    return normalized
++
++
++def position_ledger_differences(
++    book_positions: Mapping[str, Any],
++    by_symbol: Mapping[str, Mapping[str, Any]],
++    *,
++    abs_tolerance: float = 1e-12,
++    rel_tolerance: float = 1e-9,
++) -> dict[str, dict[str, float]]:
++    """Compare mutable book quantities with quantities reconstructed from trades."""
++    symbols = set(book_positions) | set(by_symbol)
++    differences: dict[str, dict[str, float]] = {}
++
++    for symbol in sorted(symbols):
++        book_qty = float(book_positions.get(symbol, 0.0) or 0.0)
++        trade_qty = float(by_symbol.get(symbol, {}).get("open_qty", 0.0) or 0.0)
++        if not isclose(
++            book_qty,
++            trade_qty,
++            abs_tol=abs_tolerance,
++            rel_tol=rel_tolerance,
++        ):
++            differences[symbol] = {
++                "book_qty": book_qty,
++                "trade_qty": trade_qty,
++                "difference": book_qty - trade_qty,
++            }
++    return differences
++
++
++def assess_accounting(
++    *,
++    configured_symbols: Sequence[str],
++    initial_cash: float,
++    equity: float,
++    realized_pnl: float,
++    unrealized_pnl: float | None,
++    stale_mark_symbols: Sequence[str] = (),
++    position_differences: Mapping[str, Mapping[str, float]] | None = None,
++    abs_tolerance: float = 1e-6,
++    rel_tolerance: float = 1e-9,
++) -> AccountingDecision:
++    """Classify an accounting check as valid, indeterminate, or corrupted.
++
++    DEFERRED means the valuation evidence is incomplete. It must not freeze a
++    session. ERROR is reserved for a fully-valued numerical violation or a
++    deterministic ledger/configuration mismatch.
++    """
++    configured = set(configured_symbols)
++    stale = tuple(sorted(set(stale_mark_symbols)))
++    diffs = dict(position_differences or {})
++
++    if diffs:
++        return AccountingDecision(
++            state="ERROR",
++            reason="POSITION_LEDGER_MISMATCH",
++            residual=None,
++            tolerance=None,
++            stale_mark_symbols=stale,
++            position_differences=diffs,
++        )
++
++    unconfigured_stale = tuple(symbol for symbol in stale if symbol not in configured)
++    if unconfigured_stale:
++        return AccountingDecision(
++            state="ERROR",
++            reason="LEDGER_SYMBOL_MISMATCH",
++            residual=None,
++            tolerance=None,
++            stale_mark_symbols=unconfigured_stale,
++        )
++
++    if stale:
++        return AccountingDecision(
++            state="DEFERRED",
++            reason="INCOMPLETE_PRICE_SNAPSHOT",
++            residual=None,
++            tolerance=None,
++            stale_mark_symbols=stale,
++        )
++
++    if unrealized_pnl is None:
++        return AccountingDecision(
++            state="DEFERRED",
++            reason="UNAVAILABLE_UNREALIZED_PNL",
++            residual=None,
++            tolerance=None,
++        )
++
++    values = (initial_cash, equity, realized_pnl, unrealized_pnl)
++    if not all(isfinite(float(value)) for value in values):
++        return AccountingDecision(
++            state="ERROR",
++            reason="NON_FINITE_ACCOUNTING_VALUE",
++            residual=None,
++            tolerance=None,
++        )
++
++    residual = float(equity) - (
++        float(initial_cash) + float(realized_pnl) + float(unrealized_pnl)
++    )
++    tolerance = max(float(abs_tolerance), abs(float(equity)) * float(rel_tolerance))
++
++    if abs(residual) <= tolerance:
++        return AccountingDecision(
++            state="OK",
++            reason="RECONCILED",
++            residual=residual,
++            tolerance=tolerance,
++        )
++
++    return AccountingDecision(
++        state="ERROR",
++        reason="SELF_FINANCING_RESIDUAL",
++        residual=residual,
++        tolerance=tolerance,
++    )
+diff --git a/agent/paper_session.py b/agent/paper_session.py
+--- a/agent/paper_session.py
++++ b/agent/paper_session.py
+@@
+ from write_receipt import receipted_write  # agent/write_receipt.py, top-level module
++from paper_accounting_guard import (
++    assess_accounting,
++    normalize_price_snapshot,
++    position_ledger_differences,
++)
+@@
+ def _build_mark(
+@@
+ ) -> dict[str, Any]:
++    # Defense in depth. Callers must also validate before any risk exit,
++    # rebalance, trade, cash, or book mutation.
++    prices = normalize_price_snapshot(session["symbols"], prices)
+     positions = book["positions"]
+@@
+ def mark_once(
+@@
+-    prices = dict(prices) if prices is not None else fetch_last_prices(session["symbols"])
++    prices = normalize_price_snapshot(
++        session["symbols"],
++        dict(prices) if prices is not None else fetch_last_prices(session["symbols"]),
++    )
+@@
+ def rebalance_if_due(
+@@
+-    prices = dict(prices) if prices is not None else fetch_last_prices(session["symbols"])
++    # Validate before _check_risk_exits or any ledger mutation. A partial
++    # snapshot aborts this poll; it does not create a cash-only mark.
++    prices = normalize_price_snapshot(
++        session["symbols"],
++        dict(prices) if prices is not None else fetch_last_prices(session["symbols"]),
++    )
+@@
+ def _check_and_flag_accounting_invariant(
+@@
+-    if unrealized_pnl is None:
+-        reconciled = False
+-        error = None
+-    else:
+-        error = equity - (initial_cash + realized_pnl + unrealized_pnl)
+-        tolerance = max(RECONCILIATION_ABS_TOLERANCE, abs(equity) * RECONCILIATION_REL_TOLERANCE)
+-        reconciled = abs(error) <= tolerance
+-
+-    if not reconciled:
++    differences = position_ledger_differences(
++        book.get("positions", {}),
++        trade_stats["by_symbol"],
++    )
++    decision = assess_accounting(
++        configured_symbols=session["symbols"],
++        initial_cash=initial_cash,
++        equity=equity,
++        realized_pnl=realized_pnl,
++        unrealized_pnl=unrealized_pnl,
++        stale_mark_symbols=position.get("stale_mark_symbols", []),
++        position_differences=differences,
++        abs_tolerance=RECONCILIATION_ABS_TOLERANCE,
++        rel_tolerance=RECONCILIATION_REL_TOLERANCE,
++    )
++
++    if decision.state == "DEFERRED":
++        print(
++            json.dumps({
++                "event": "accounting_check_deferred",
++                "session_id": session_dir.name,
++                "reason": decision.reason,
++                "stale_mark_symbols": list(decision.stale_mark_symbols),
++                "timestamp": mark["timestamp"],
++            }),
++            flush=True,
++        )
++        return
++
++    if decision.state == "ERROR":
+         session = dict(session)
+         session["accounting_status"] = "ACCOUNTING_ERROR"
+-        session["accounting_error"] = error
++        session["accounting_error"] = decision.residual
++        session["accounting_error_kind"] = decision.reason
++        session["accounting_position_differences"] = decision.position_differences
++        session["accounting_stale_mark_symbols"] = list(decision.stale_mark_symbols)
+         session["accounting_error_detected_at"] = mark["timestamp"]
+@@
+-                "reconciliation_error": error,
++                "reconciliation_error": decision.residual,
++                "reason": decision.reason,
+                 "timestamp": mark["timestamp"],
+@@
+ def funding_rebalance_if_due(
+@@
+-    prices = dict(prices) if prices is not None else fetch_last_prices(symbols)
++    prices = normalize_price_snapshot(
++        symbols,
++        dict(prices) if prices is not None else fetch_last_prices(symbols),
++    )
+diff --git a/frontend/src/router.tsx b/frontend/src/router.tsx
+--- a/frontend/src/router.tsx
++++ b/frontend/src/router.tsx
+@@
+-const PaperTradingDashboard = lazy(() =>
+-  import("@/pages/PaperTradingDashboard").then((m) => ({ default: m.default }))
++const PaperTrading = lazy(() =>
++  import("@/pages/PaperTrading").then((m) => ({ default: m.PaperTrading }))
+ );
+@@
+-{ path: "/paper-trading", element: wrap(PaperTradingDashboard) },
++{ path: "/paper-trading", element: wrap(PaperTrading) },
+diff --git a/tools/recover_paper_sessions.py b/tools/recover_paper_sessions.py
+new file mode 100755
+--- /dev/null
++++ b/tools/recover_paper_sessions.py
+@@ -0,0 +1,219 @@
++#!/usr/bin/env python3
++"""Safely inspect and conditionally unfreeze paper-trading sessions.
++
++Default mode is dry-run. The tool refuses to clear ACCOUNTING_ERROR unless:
++1. session.json and book.json receipts verify;
++2. every configured symbol has a finite, positive fresh price;
++3. book quantities equal quantities reconstructed from trades; and
++4. the fully-valued self-financing residual is within tolerance.
++
++It never rewrites book.json or trades.jsonl. A failing session remains frozen
++and must be reconstructed/quarantined with the repository reconciliation tool.
++"""
++
++from __future__ import annotations
++
++import argparse
++from datetime import datetime, timezone
++import json
++from pathlib import Path
++import shutil
++import sys
++from typing import Any
++
++REPO_ROOT = Path(__file__).resolve().parents[1]
++AGENT_DIR = REPO_ROOT / "agent"
++sys.path.insert(0, str(AGENT_DIR))
++
++import paper_session as ps  # noqa: E402
++from paper_accounting_guard import (  # noqa: E402
++    assess_accounting,
++    normalize_price_snapshot,
++    position_ledger_differences,
++)
++
++
++def _timestamp() -> str:
++    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
++
++
++def _backup(path: Path) -> Path:
++    backup = path.with_name(f"{path.name}.pre-recovery.{_timestamp()}.bak")
++    shutil.copy2(path, backup)
++    hash_path = path.with_suffix(path.suffix + ".hash")
++    if hash_path.exists():
++        shutil.copy2(
++            hash_path,
++            backup.with_suffix(backup.suffix + ".hash"),
++        )
++    return backup
++
++
++def inspect_session(session_dir: Path) -> dict[str, Any]:
++    required = (session_dir / "session.json", session_dir / "book.json")
++    for path in required:
++        if not path.exists():
++            raise FileNotFoundError(path)
++        if not ps.verify_receipted_file(path):
++            raise RuntimeError(f"receipt verification failed: {path}")
++
++    session = ps._load_session(session_dir)
++    book = ps._load_book(session_dir)
++    trades = ps._read_jsonl(session_dir / "trades.jsonl")
++    trade_stats = ps.compute_trade_stats(trades)
++
++    prices = normalize_price_snapshot(
++        session["symbols"],
++        ps.fetch_last_prices(session["symbols"]),
++    )
++    candidate_mark = ps._build_mark(
++        session,
++        book,
++        prices,
++        now=datetime.now(timezone.utc).isoformat(),
++    )
++    position = ps._compute_unrealized_position_pnl(
++        trade_stats["by_symbol"],
++        candidate_mark["prices"],
++    )
++    differences = position_ledger_differences(
++        book.get("positions", {}),
++        trade_stats["by_symbol"],
++    )
++    decision = assess_accounting(
++        configured_symbols=session["symbols"],
++        initial_cash=float(session["initial_cash"]),
++        equity=float(candidate_mark["equity"]),
++        realized_pnl=float(trade_stats["overall"]["realized_pnl"]),
++        unrealized_pnl=position["unrealized_pnl"],
++        stale_mark_symbols=position.get("stale_mark_symbols", []),
++        position_differences=differences,
++        abs_tolerance=ps.RECONCILIATION_ABS_TOLERANCE,
++        rel_tolerance=ps.RECONCILIATION_REL_TOLERANCE,
++    )
++    return {
++        "session": session,
++        "book": book,
++        "candidate_mark": candidate_mark,
++        "position": position,
++        "decision": decision,
++    }
++
++
++def recover(session_dir: Path, *, apply: bool) -> dict[str, Any]:
++    inspected = inspect_session(session_dir)
++    session = inspected["session"]
++    decision = inspected["decision"]
++
++    report: dict[str, Any] = {
++        "session_id": session_dir.name,
++        "current_status": session.get("accounting_status"),
++        "decision": decision.to_dict(),
++        "action": "NO_CHANGE",
++    }
++
++    if decision.state != "OK":
++        report["action"] = "REFUSED"
++        return report
++
++    if session.get("accounting_status") != "ACCOUNTING_ERROR":
++        report["action"] = "ALREADY_OK"
++        return report
++
++    if not apply:
++        report["action"] = "WOULD_UNFREEZE"
++        return report
++
++    backup = _backup(session_dir / "session.json")
++    updated = dict(session)
++    updated["accounting_status"] = "OK"
++    for key in (
++        "accounting_error",
++        "accounting_error_detected_at",
++        "accounting_error_kind",
++        "accounting_position_differences",
++        "accounting_stale_mark_symbols",
++    ):
++        updated.pop(key, None)
++    updated["accounting_recovered_at"] = datetime.now(timezone.utc).isoformat()
++    updated["accounting_recovery_method"] = "fresh-price-full-ledger-reconciliation"
++
++    ps.receipted_write(
++        session_dir / "session.json",
++        json.dumps(updated, indent=2),
++    )
++    ps._mirror_session_to_store(session_dir.name, updated)
++    ps._append_jsonl(
++        session_dir / "recovery_audit.jsonl",
++        {
++            "timestamp": updated["accounting_recovered_at"],
++            "event": "accounting_status_recovered",
++            "previous_status": "ACCOUNTING_ERROR",
++            "new_status": "OK",
++            "decision": decision.to_dict(),
++            "backup": backup.name,
++        },
++    )
++    report["action"] = "UNFROZEN"
++    report["backup"] = str(backup)
++    return report
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser()
++    parser.add_argument(
++        "--session-root",
++        type=Path,
++        default=REPO_ROOT / "agent" / "paper_sessions",
++    )
++    parser.add_argument("--session-id", action="append", default=[])
++    parser.add_argument(
++        "--all-errors",
++        action="store_true",
++        help="inspect every session currently marked ACCOUNTING_ERROR",
++    )
++    parser.add_argument(
++        "--apply",
++        action="store_true",
++        help="perform eligible status changes; default is dry-run",
++    )
++    args = parser.parse_args()
++
++    session_dirs: list[Path] = []
++    if args.session_id:
++        session_dirs.extend(args.session_root / value for value in args.session_id)
++
++    if args.all_errors:
++        for candidate in sorted(args.session_root.iterdir()):
++            session_path = candidate / "session.json"
++            if not session_path.exists():
++                continue
++            try:
++                payload = json.loads(session_path.read_text(encoding="utf-8"))
++            except (OSError, json.JSONDecodeError):
++                continue
++            if payload.get("accounting_status") == "ACCOUNTING_ERROR":
++                session_dirs.append(candidate)
++
++    unique_dirs = list(dict.fromkeys(session_dirs))
++    if not unique_dirs:
++        parser.error("provide --session-id or --all-errors")
++
++    exit_code = 0
++    for session_dir in unique_dirs:
++        try:
++            report = recover(session_dir, apply=args.apply)
++        except Exception as exc:  # noqa: BLE001
++            report = {
++                "session_id": session_dir.name,
++                "action": "ERROR",
++                "error": str(exc),
++            }
++            exit_code = 1
++        print(json.dumps(report, sort_keys=True))
++
++    return exit_code
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())

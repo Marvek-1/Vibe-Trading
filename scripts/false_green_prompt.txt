@@ -1,0 +1,22 @@
+﻿Apply the False-Green Principle to preflight.
+
+Goal:
+Replace component-only health with aggregate workflow health.
+
+Requirements:
+1. Keep per-service checks.
+2. Add end-to-end readiness checks for:
+   - active LLM provider and model usability
+   - source="auto" market data routing
+   - fallback path viability
+3. Mark system READY only if at least one complete workflow succeeds:
+   - prompt
+   - model response
+   - market data fetch
+   - formatted output
+4. Mark DEGRADED if services are individually green but workflow fails.
+5. Emit witness output showing:
+   - component health
+   - workflow health
+   - divergence / false-green flag
+6. After this passes, run the full fallback-aware SMA backtest.

@@ -1,0 +1,15 @@
+[Unit]
+Description=Validated Vibe-Trading PostgreSQL backup
+Wants=network-online.target docker.service
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/vibe-trading/backend/scripts/vibe_daily_backup.sh
+TimeoutStartSec=30min
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+
+[Install]
+WantedBy=multi-user.target

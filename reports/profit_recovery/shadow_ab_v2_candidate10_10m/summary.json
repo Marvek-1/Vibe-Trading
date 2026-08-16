@@ -1,0 +1,125 @@
+{
+  "session_id": "shadow_ab_v2_candidate10_10m",
+  "session_symbols": [
+    "BTC-USDT",
+    "ETH-USDT",
+    "SOL-USDT",
+    "BNB-USDT",
+    "XRP-USDT",
+    "ADA-USDT",
+    "DOGE-USDT",
+    "LINK-USDT"
+  ],
+  "rebalance_interval_hours": 0.16666666666666666,
+  "fee_rate": 0.001,
+  "min_rebalance_notional": 10.0,
+  "risk_config": {
+    "take_profit_pct": null,
+    "stop_loss_pct": null,
+    "trailing_stop_pct": null,
+    "max_hold_hours": null,
+    "leverage": 1.0,
+    "margin_mode": "isolated",
+    "liquidation_buffer_pct": 0.1,
+    "fixed_margin_per_trade": 0.0
+  },
+  "initial_cash": 10000.0,
+  "current_equity": 9617.167188210586,
+  "closed_trade_count": 9,
+  "turnover": 10194.81206024363,
+  "total_fees_paid": 10.19481206024363,
+  "gross_pnl_of_closed_trades": -0.007601753991156103,
+  "net_pnl_of_closed_trades": -0.2126487394395495,
+  "cost_drag_pct_of_gross": 1341.113126273791,
+  "symbol_diagnostics": [
+    {
+      "symbol": "ADA-USDT",
+      "closed_trades": 2,
+      "gross_pnl": 0.7748644782548872,
+      "net_pnl": 0.7162368115281859,
+      "win_rate": 1.0
+    },
+    {
+      "symbol": "BNB-USDT",
+      "closed_trades": 3,
+      "gross_pnl": -0.13102680345404716,
+      "net_pnl": -0.1939721981085217,
+      "win_rate": 0.0
+    },
+    {
+      "symbol": "BTC-USDT",
+      "closed_trades": 2,
+      "gross_pnl": -0.13430909330404311,
+      "net_pnl": -0.17489961924067615,
+      "win_rate": 0.0
+    },
+    {
+      "symbol": "DOGE-USDT",
+      "closed_trades": 1,
+      "gross_pnl": -0.41144906612363213,
+      "net_pnl": -0.4324488018859687,
+      "win_rate": 0.0
+    },
+    {
+      "symbol": "LINK-USDT",
+      "closed_trades": 1,
+      "gross_pnl": -0.10568126936432094,
+      "net_pnl": -0.1275649317325689,
+      "win_rate": 0.0
+    }
+  ],
+  "volatility_regime_diagnostics": {
+    "median_daily_vol_pct": 0.0004146418158401044,
+    "high_vol_days": [
+      "2026-07-22",
+      "2026-07-24"
+    ],
+    "low_vol_days": [
+      "2026-07-23"
+    ],
+    "high_vol_avg_daily_net_pnl": 0.06716922282871035,
+    "low_vol_avg_daily_net_pnl": -0.34698718509697035,
+    "daily_net_pnl": {
+      "2026-07-22": 0.6943521792759583,
+      "2026-07-23": -0.34698718509697035,
+      "2026-07-24": -0.5600137336185376
+    }
+  },
+  "benchmark_attribution": {
+    "strategy_nav": 9617.167188210586,
+    "static_equal_weight_buy_hold_nav": 9616.58553791129,
+    "cash_nav": 10000.0,
+    "basket_return": -0.038341446208870915,
+    "strategy_return": -0.03828328117894143,
+    "active_return_dollars": 0.581650299294779,
+    "active_return_pct": 5.81650299294779e-05,
+    "fee_drag_total": 10.19481206024363,
+    "turnover_drag_rebalance_fees_only": 0.2048020702336384,
+    "active_return_decomposition": {
+      "realized_alpha_from_closed_trades": -0.007601753991156103,
+      "unrealized_allocation_drift": 0.7940541235195735,
+      "turnover_drag": 0.2048020702336384,
+      "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+    },
+    "unrealized_pnl": -382.6201630499763,
+    "realized_pnl": -0.21264873943954954,
+    "gross_exposure_pct_of_equity": 0.9999966194420984,
+    "net_exposure_pct_of_equity": 0.9999966194420984,
+    "ledger_integrity_check": {
+      "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+      "reconstructed_cash": 0.03251139052933816,
+      "book_cash_remaining": 0.03251139052934526,
+      "residual": -7.105427357601002e-15,
+      "tolerance": 9.617167188210587e-06,
+      "within_tolerance": true
+    },
+    "interpretation": "rebalancing_added_value_but_did_not_overcome_beta"
+  },
+  "verdict": {
+    "signal_negative_before_costs": true,
+    "gross_edge_positive_but_cost_consumed": false,
+    "single_symbol_dominates_losses": false,
+    "worst_symbol": "DOGE-USDT",
+    "worst_symbol_share_of_losses": 0.46555660321708425
+  }
+}

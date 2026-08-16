@@ -1,0 +1,808 @@
+[
+  {
+    "session_id": "shadow_ab_v2_control_5m",
+    "session_symbols": [
+      "BTC-USDT",
+      "ETH-USDT",
+      "SOL-USDT",
+      "BNB-USDT",
+      "XRP-USDT",
+      "ADA-USDT",
+      "DOGE-USDT",
+      "LINK-USDT"
+    ],
+    "rebalance_interval_hours": 0.08333333333333333,
+    "fee_rate": 0.001,
+    "min_rebalance_notional": 0.0,
+    "risk_config": {
+      "take_profit_pct": null,
+      "stop_loss_pct": null,
+      "trailing_stop_pct": null,
+      "max_hold_hours": null,
+      "leverage": 1.0,
+      "margin_mode": "isolated",
+      "liquidation_buffer_pct": 0.1,
+      "fixed_margin_per_trade": 0.0
+    },
+    "initial_cash": 10000.0,
+    "current_equity": 9616.315347224085,
+    "closed_trade_count": 489,
+    "turnover": 11556.22990107953,
+    "total_fees_paid": 11.556229901079533,
+    "gross_pnl_of_closed_trades": -7.737794368497893,
+    "net_pnl_of_closed_trades": -9.314500208805063,
+    "cost_drag_pct_of_gross": 1.4934785483738433,
+    "symbol_diagnostics": [
+      {
+        "symbol": "ADA-USDT",
+        "closed_trades": 102,
+        "gross_pnl": -0.1529566134173125,
+        "net_pnl": -0.5678375858202588,
+        "win_rate": 0.5098039215686274
+      },
+      {
+        "symbol": "BNB-USDT",
+        "closed_trades": 72,
+        "gross_pnl": -0.45992106618362727,
+        "net_pnl": -0.6881967063979856,
+        "win_rate": 0.1111111111111111
+      },
+      {
+        "symbol": "BTC-USDT",
+        "closed_trades": 54,
+        "gross_pnl": -0.9649037863535013,
+        "net_pnl": -1.1368562355804464,
+        "win_rate": 0.018518518518518517
+      },
+      {
+        "symbol": "DOGE-USDT",
+        "closed_trades": 71,
+        "gross_pnl": -3.0927244310087234,
+        "net_pnl": -3.3005902694582003,
+        "win_rate": 0.16901408450704225
+      },
+      {
+        "symbol": "ETH-USDT",
+        "closed_trades": 42,
+        "gross_pnl": -0.6823977093375835,
+        "net_pnl": -0.8039635976079793,
+        "win_rate": 0.16666666666666666
+      },
+      {
+        "symbol": "LINK-USDT",
+        "closed_trades": 50,
+        "gross_pnl": -0.6726831069602585,
+        "net_pnl": -0.8231073610060013,
+        "win_rate": 0.16
+      },
+      {
+        "symbol": "SOL-USDT",
+        "closed_trades": 42,
+        "gross_pnl": -0.4865896667378298,
+        "net_pnl": -0.6104833612071165,
+        "win_rate": 0.2857142857142857
+      },
+      {
+        "symbol": "XRP-USDT",
+        "closed_trades": 56,
+        "gross_pnl": -1.2256179884990566,
+        "net_pnl": -1.3834650917270748,
+        "win_rate": 0.19642857142857142
+      }
+    ],
+    "volatility_regime_diagnostics": {
+      "median_daily_vol_pct": 0.00041485469182948263,
+      "high_vol_days": [
+        "2026-07-22",
+        "2026-07-24"
+      ],
+      "low_vol_days": [
+        "2026-07-23"
+      ],
+      "high_vol_avg_daily_net_pnl": -2.7059936103081395,
+      "low_vol_avg_daily_net_pnl": -3.9025129881887852,
+      "daily_net_pnl": {
+        "2026-07-22": 1.6306946550449164,
+        "2026-07-23": -3.9025129881887852,
+        "2026-07-24": -7.042681875661195
+      }
+    },
+    "benchmark_attribution": {
+      "strategy_nav": 9616.315347224085,
+      "static_equal_weight_buy_hold_nav": 9617.253589963519,
+      "cash_nav": 10000.0,
+      "basket_return": -0.03827464100364814,
+      "strategy_return": -0.03836846527759153,
+      "active_return_dollars": -0.9382427394339174,
+      "active_return_pct": -9.382427394339175e-05,
+      "fee_drag_total": 11.556229901079531,
+      "turnover_drag_rebalance_fees_only": 1.56621991106954,
+      "active_return_decomposition": {
+        "realized_alpha_from_closed_trades": -7.737794368497893,
+        "unrealized_allocation_drift": 8.365771540133515,
+        "turnover_drag": 1.56621991106954,
+        "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+      },
+      "unrealized_pnl": -374.37015256710765,
+      "realized_pnl": -9.314500208805065,
+      "gross_exposure_pct_of_equity": 0.9998770927413062,
+      "net_exposure_pct_of_equity": 0.9998770927413062,
+      "ledger_integrity_check": {
+        "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+        "reconstructed_cash": 1.1819149580626107,
+        "book_cash_remaining": 1.181914958062633,
+        "residual": -2.220446049250313e-14,
+        "tolerance": 9.616315347224085e-06,
+        "within_tolerance": true
+      },
+      "interpretation": "rebalancing_destroyed_value"
+    },
+    "verdict": {
+      "signal_negative_before_costs": true,
+      "gross_edge_positive_but_cost_consumed": false,
+      "single_symbol_dominates_losses": false,
+      "worst_symbol": "DOGE-USDT",
+      "worst_symbol_share_of_losses": 0.3543496908549241
+    }
+  },
+  {
+    "session_id": "shadow_ab_v2_control_10m",
+    "session_symbols": [
+      "BTC-USDT",
+      "ETH-USDT",
+      "SOL-USDT",
+      "BNB-USDT",
+      "XRP-USDT",
+      "ADA-USDT",
+      "DOGE-USDT",
+      "LINK-USDT"
+    ],
+    "rebalance_interval_hours": 0.16666666666666666,
+    "fee_rate": 0.001,
+    "min_rebalance_notional": 0.0,
+    "risk_config": {
+      "take_profit_pct": null,
+      "stop_loss_pct": null,
+      "trailing_stop_pct": null,
+      "max_hold_hours": null,
+      "leverage": 1.0,
+      "margin_mode": "isolated",
+      "liquidation_buffer_pct": 0.1,
+      "fixed_margin_per_trade": 0.0
+    },
+    "initial_cash": 10000.0,
+    "current_equity": 9615.876651508359,
+    "closed_trade_count": 360,
+    "turnover": 11264.5357581029,
+    "total_fees_paid": 11.2645357581029,
+    "gross_pnl_of_closed_trades": -6.245932683629007,
+    "net_pnl_of_closed_trades": -7.527978910173639,
+    "cost_drag_pct_of_gross": 1.803499385708715,
+    "symbol_diagnostics": [
+      {
+        "symbol": "ADA-USDT",
+        "closed_trades": 67,
+        "gross_pnl": -0.17326696018983626,
+        "net_pnl": -0.503372162601332,
+        "win_rate": 0.4925373134328358
+      },
+      {
+        "symbol": "BNB-USDT",
+        "closed_trades": 56,
+        "gross_pnl": -0.3979622205088475,
+        "net_pnl": -0.5889941655784608,
+        "win_rate": 0.08928571428571429
+      },
+      {
+        "symbol": "BTC-USDT",
+        "closed_trades": 44,
+        "gross_pnl": -0.7784358177646798,
+        "net_pnl": -0.9240634063991142,
+        "win_rate": 0.022727272727272728
+      },
+      {
+        "symbol": "DOGE-USDT",
+        "closed_trades": 48,
+        "gross_pnl": -2.394458581917505,
+        "net_pnl": -2.5578076525354243,
+        "win_rate": 0.14583333333333334
+      },
+      {
+        "symbol": "ETH-USDT",
+        "closed_trades": 38,
+        "gross_pnl": -0.6849243832504017,
+        "net_pnl": -0.7976832072438431,
+        "win_rate": 0.23684210526315788
+      },
+      {
+        "symbol": "LINK-USDT",
+        "closed_trades": 37,
+        "gross_pnl": -0.6709435881405522,
+        "net_pnl": -0.7965254212359514,
+        "win_rate": 0.05405405405405406
+      },
+      {
+        "symbol": "SOL-USDT",
+        "closed_trades": 31,
+        "gross_pnl": -0.28871395118771503,
+        "net_pnl": -0.38749738852203397,
+        "win_rate": 0.2903225806451613
+      },
+      {
+        "symbol": "XRP-USDT",
+        "closed_trades": 39,
+        "gross_pnl": -0.8572271806694701,
+        "net_pnl": -0.9720355060574789,
+        "win_rate": 0.1282051282051282
+      }
+    ],
+    "volatility_regime_diagnostics": {
+      "median_daily_vol_pct": 0.0004146418158401044,
+      "high_vol_days": [
+        "2026-07-22",
+        "2026-07-24"
+      ],
+      "low_vol_days": [
+        "2026-07-23"
+      ],
+      "high_vol_avg_daily_net_pnl": -2.3260026152992337,
+      "low_vol_avg_daily_net_pnl": -2.875973679575171,
+      "daily_net_pnl": {
+        "2026-07-22": 1.1747118553626945,
+        "2026-07-23": -2.875973679575171,
+        "2026-07-24": -5.826717085961162
+      }
+    },
+    "benchmark_attribution": {
+      "strategy_nav": 9615.876651508359,
+      "static_equal_weight_buy_hold_nav": 9616.58553791129,
+      "cash_nav": 10000.0,
+      "basket_return": -0.038341446208870915,
+      "strategy_return": -0.038412334849164106,
+      "active_return_dollars": -0.7088864029319666,
+      "active_return_pct": -7.088864029319665e-05,
+      "fee_drag_total": 11.2645357581029,
+      "turnover_drag_rebalance_fees_only": 1.274525768092909,
+      "active_return_decomposition": {
+        "realized_alpha_from_closed_trades": -6.245932683629007,
+        "unrealized_allocation_drift": 6.81157204878995,
+        "turnover_drag": 1.274525768092909,
+        "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+      },
+      "unrealized_pnl": -376.5953695814642,
+      "realized_pnl": -7.527978910173639,
+      "gross_exposure_pct_of_equity": 1.0,
+      "net_exposure_pct_of_equity": 1.0,
+      "ledger_integrity_check": {
+        "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+        "reconstructed_cash": -1.1546319456101628e-14,
+        "book_cash_remaining": 0.0,
+        "residual": -1.1546319456101628e-14,
+        "tolerance": 9.61587665150836e-06,
+        "within_tolerance": true
+      },
+      "interpretation": "rebalancing_destroyed_value"
+    },
+    "verdict": {
+      "signal_negative_before_costs": true,
+      "gross_edge_positive_but_cost_consumed": false,
+      "single_symbol_dominates_losses": false,
+      "worst_symbol": "DOGE-USDT",
+      "worst_symbol_share_of_losses": 0.3397734880843903
+    }
+  },
+  {
+    "session_id": "shadow_ab_v2_control_15m",
+    "session_symbols": [
+      "BTC-USDT",
+      "ETH-USDT",
+      "SOL-USDT",
+      "BNB-USDT",
+      "XRP-USDT",
+      "ADA-USDT",
+      "DOGE-USDT",
+      "LINK-USDT"
+    ],
+    "rebalance_interval_hours": 0.25,
+    "fee_rate": 0.001,
+    "min_rebalance_notional": 0.0,
+    "risk_config": {
+      "take_profit_pct": null,
+      "stop_loss_pct": null,
+      "trailing_stop_pct": null,
+      "max_hold_hours": null,
+      "leverage": 1.0,
+      "margin_mode": "isolated",
+      "liquidation_buffer_pct": 0.1,
+      "fixed_margin_per_trade": 0.0
+    },
+    "initial_cash": 10000.0,
+    "current_equity": 9615.500615475796,
+    "closed_trade_count": 309,
+    "turnover": 11215.341908745362,
+    "total_fees_paid": 11.21534190874536,
+    "gross_pnl_of_closed_trades": -5.513314080305493,
+    "net_pnl_of_closed_trades": -6.7453846450399055,
+    "cost_drag_pct_of_gross": 2.0342287316459062,
+    "symbol_diagnostics": [
+      {
+        "symbol": "ADA-USDT",
+        "closed_trades": 55,
+        "gross_pnl": 0.3748943622965967,
+        "net_pnl": 0.06651183307668665,
+        "win_rate": 0.509090909090909
+      },
+      {
+        "symbol": "BNB-USDT",
+        "closed_trades": 44,
+        "gross_pnl": -0.32955400762057996,
+        "net_pnl": -0.5124635780892906,
+        "win_rate": 0.11363636363636363
+      },
+      {
+        "symbol": "BTC-USDT",
+        "closed_trades": 38,
+        "gross_pnl": -0.7021285009532057,
+        "net_pnl": -0.8366487184583861,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "DOGE-USDT",
+        "closed_trades": 41,
+        "gross_pnl": -2.4803306374394603,
+        "net_pnl": -2.639288378425827,
+        "win_rate": 0.14634146341463414
+      },
+      {
+        "symbol": "ETH-USDT",
+        "closed_trades": 31,
+        "gross_pnl": -0.583883606226427,
+        "net_pnl": -0.6885370460473432,
+        "win_rate": 0.16129032258064516
+      },
+      {
+        "symbol": "LINK-USDT",
+        "closed_trades": 37,
+        "gross_pnl": -0.6315826670826485,
+        "net_pnl": -0.7697325751298191,
+        "win_rate": 0.10810810810810811
+      },
+      {
+        "symbol": "SOL-USDT",
+        "closed_trades": 27,
+        "gross_pnl": -0.3246340384810665,
+        "net_pnl": -0.41774397687420495,
+        "win_rate": 0.2962962962962963
+      },
+      {
+        "symbol": "XRP-USDT",
+        "closed_trades": 36,
+        "gross_pnl": -0.8360949847987021,
+        "net_pnl": -0.9474822050917209,
+        "win_rate": 0.2222222222222222
+      }
+    ],
+    "volatility_regime_diagnostics": {
+      "median_daily_vol_pct": 0.0004143387326020492,
+      "high_vol_days": [
+        "2026-07-22",
+        "2026-07-24"
+      ],
+      "low_vol_days": [
+        "2026-07-23"
+      ],
+      "high_vol_avg_daily_net_pnl": -1.8429875772552955,
+      "low_vol_avg_daily_net_pnl": -3.0594094905293128,
+      "daily_net_pnl": {
+        "2026-07-22": 1.3528843779718926,
+        "2026-07-23": -3.0594094905293128,
+        "2026-07-24": -5.038859532482483
+      }
+    },
+    "benchmark_attribution": {
+      "strategy_nav": 9615.500615475796,
+      "static_equal_weight_buy_hold_nav": 9615.95112227305,
+      "cash_nav": 10000.0,
+      "basket_return": -0.03840488777269493,
+      "strategy_return": -0.03844993845242043,
+      "active_return_dollars": -0.4505067972550023,
+      "active_return_pct": -4.5050679725500234e-05,
+      "fee_drag_total": 11.215341908745362,
+      "turnover_drag_rebalance_fees_only": 1.225331918735371,
+      "active_return_decomposition": {
+        "realized_alpha_from_closed_trades": -5.513314080305493,
+        "unrealized_allocation_drift": 6.288139201785862,
+        "turnover_drag": 1.225331918735371,
+        "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+      },
+      "unrealized_pnl": -377.75399987916353,
+      "realized_pnl": -6.7453846450399055,
+      "gross_exposure_pct_of_equity": 1.0,
+      "net_exposure_pct_of_equity": 1.0,
+      "ledger_integrity_check": {
+        "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+        "reconstructed_cash": -9.103828801926284e-15,
+        "book_cash_remaining": 0.0,
+        "residual": -9.103828801926284e-15,
+        "tolerance": 9.615500615475796e-06,
+        "within_tolerance": true
+      },
+      "interpretation": "rebalancing_destroyed_value"
+    },
+    "verdict": {
+      "signal_negative_before_costs": true,
+      "gross_edge_positive_but_cost_consumed": false,
+      "single_symbol_dominates_losses": false,
+      "worst_symbol": "DOGE-USDT",
+      "worst_symbol_share_of_losses": 0.3874528021534994
+    }
+  },
+  {
+    "session_id": "shadow_ab_v2_candidate10_5m",
+    "session_symbols": [
+      "BTC-USDT",
+      "ETH-USDT",
+      "SOL-USDT",
+      "BNB-USDT",
+      "XRP-USDT",
+      "ADA-USDT",
+      "DOGE-USDT",
+      "LINK-USDT"
+    ],
+    "rebalance_interval_hours": 0.08333333333333333,
+    "fee_rate": 0.001,
+    "min_rebalance_notional": 10.0,
+    "risk_config": {
+      "take_profit_pct": null,
+      "stop_loss_pct": null,
+      "trailing_stop_pct": null,
+      "max_hold_hours": null,
+      "leverage": 1.0,
+      "margin_mode": "isolated",
+      "liquidation_buffer_pct": 0.1,
+      "fixed_margin_per_trade": 0.0
+    },
+    "initial_cash": 10000.0,
+    "current_equity": 9617.645373019055,
+    "closed_trade_count": 10,
+    "turnover": 10217.954092000553,
+    "total_fees_paid": 10.217954092000554,
+    "gross_pnl_of_closed_trades": 0.22513716871554174,
+    "net_pnl_of_closed_trades": -0.0028097402082966523,
+    "cost_drag_pct_of_gross": 45.3854605629816,
+    "symbol_diagnostics": [
+      {
+        "symbol": "ADA-USDT",
+        "closed_trades": 3,
+        "gross_pnl": 1.1610370259596459,
+        "net_pnl": 1.0792439053872158,
+        "win_rate": 1.0
+      },
+      {
+        "symbol": "BNB-USDT",
+        "closed_trades": 3,
+        "gross_pnl": -0.10568787491715097,
+        "net_pnl": -0.16632777919799382,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "BTC-USDT",
+        "closed_trades": 2,
+        "gross_pnl": -0.3047959564438751,
+        "net_pnl": -0.34893048087700257,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "DOGE-USDT",
+        "closed_trades": 1,
+        "gross_pnl": -0.4153314542598347,
+        "net_pnl": -0.436156109860924,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "LINK-USDT",
+        "closed_trades": 1,
+        "gross_pnl": -0.11008457162324345,
+        "net_pnl": -0.130639275659592,
+        "win_rate": 0.0
+      }
+    ],
+    "volatility_regime_diagnostics": {
+      "median_daily_vol_pct": 0.00041485469182948263,
+      "high_vol_days": [
+        "2026-07-22",
+        "2026-07-24"
+      ],
+      "low_vol_days": [
+        "2026-07-23"
+      ],
+      "high_vol_avg_daily_net_pnl": 0.24945573390253145,
+      "low_vol_avg_daily_net_pnl": -0.5017212080133594,
+      "daily_net_pnl": {
+        "2026-07-22": 1.065706853325579,
+        "2026-07-23": -0.5017212080133594,
+        "2026-07-24": -0.566795385520516
+      }
+    },
+    "benchmark_attribution": {
+      "strategy_nav": 9617.645373019055,
+      "static_equal_weight_buy_hold_nav": 9617.253589963519,
+      "cash_nav": 10000.0,
+      "basket_return": -0.03827464100364814,
+      "strategy_return": -0.03823546269809449,
+      "active_return_dollars": 0.39178305553650716,
+      "active_return_pct": 3.917830555365072e-05,
+      "fee_drag_total": 10.217954092000554,
+      "turnover_drag_rebalance_fees_only": 0.2279441019905626,
+      "active_return_decomposition": {
+        "realized_alpha_from_closed_trades": 0.22513716871554174,
+        "unrealized_allocation_drift": 0.394589988811528,
+        "turnover_drag": 0.2279441019905626,
+        "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+      },
+      "unrealized_pnl": -382.35181724073664,
+      "realized_pnl": -0.002809740208296607,
+      "gross_exposure_pct_of_equity": 1.0,
+      "net_exposure_pct_of_equity": 1.0,
+      "ledger_integrity_check": {
+        "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+        "reconstructed_cash": -7.105427357601002e-15,
+        "book_cash_remaining": 0.0,
+        "residual": -7.105427357601002e-15,
+        "tolerance": 9.617645373019055e-06,
+        "within_tolerance": true
+      },
+      "interpretation": "rebalancing_added_value_but_did_not_overcome_beta"
+    },
+    "verdict": {
+      "signal_negative_before_costs": false,
+      "gross_edge_positive_but_cost_consumed": true,
+      "single_symbol_dominates_losses": false,
+      "worst_symbol": "DOGE-USDT",
+      "worst_symbol_share_of_losses": 0.4030817803131044
+    }
+  },
+  {
+    "session_id": "shadow_ab_v2_candidate10_10m",
+    "session_symbols": [
+      "BTC-USDT",
+      "ETH-USDT",
+      "SOL-USDT",
+      "BNB-USDT",
+      "XRP-USDT",
+      "ADA-USDT",
+      "DOGE-USDT",
+      "LINK-USDT"
+    ],
+    "rebalance_interval_hours": 0.16666666666666666,
+    "fee_rate": 0.001,
+    "min_rebalance_notional": 10.0,
+    "risk_config": {
+      "take_profit_pct": null,
+      "stop_loss_pct": null,
+      "trailing_stop_pct": null,
+      "max_hold_hours": null,
+      "leverage": 1.0,
+      "margin_mode": "isolated",
+      "liquidation_buffer_pct": 0.1,
+      "fixed_margin_per_trade": 0.0
+    },
+    "initial_cash": 10000.0,
+    "current_equity": 9617.167188210586,
+    "closed_trade_count": 9,
+    "turnover": 10194.81206024363,
+    "total_fees_paid": 10.19481206024363,
+    "gross_pnl_of_closed_trades": -0.007601753991156103,
+    "net_pnl_of_closed_trades": -0.2126487394395495,
+    "cost_drag_pct_of_gross": 1341.113126273791,
+    "symbol_diagnostics": [
+      {
+        "symbol": "ADA-USDT",
+        "closed_trades": 2,
+        "gross_pnl": 0.7748644782548872,
+        "net_pnl": 0.7162368115281859,
+        "win_rate": 1.0
+      },
+      {
+        "symbol": "BNB-USDT",
+        "closed_trades": 3,
+        "gross_pnl": -0.13102680345404716,
+        "net_pnl": -0.1939721981085217,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "BTC-USDT",
+        "closed_trades": 2,
+        "gross_pnl": -0.13430909330404311,
+        "net_pnl": -0.17489961924067615,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "DOGE-USDT",
+        "closed_trades": 1,
+        "gross_pnl": -0.41144906612363213,
+        "net_pnl": -0.4324488018859687,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "LINK-USDT",
+        "closed_trades": 1,
+        "gross_pnl": -0.10568126936432094,
+        "net_pnl": -0.1275649317325689,
+        "win_rate": 0.0
+      }
+    ],
+    "volatility_regime_diagnostics": {
+      "median_daily_vol_pct": 0.0004146418158401044,
+      "high_vol_days": [
+        "2026-07-22",
+        "2026-07-24"
+      ],
+      "low_vol_days": [
+        "2026-07-23"
+      ],
+      "high_vol_avg_daily_net_pnl": 0.06716922282871035,
+      "low_vol_avg_daily_net_pnl": -0.34698718509697035,
+      "daily_net_pnl": {
+        "2026-07-22": 0.6943521792759583,
+        "2026-07-23": -0.34698718509697035,
+        "2026-07-24": -0.5600137336185376
+      }
+    },
+    "benchmark_attribution": {
+      "strategy_nav": 9617.167188210586,
+      "static_equal_weight_buy_hold_nav": 9616.58553791129,
+      "cash_nav": 10000.0,
+      "basket_return": -0.038341446208870915,
+      "strategy_return": -0.03828328117894143,
+      "active_return_dollars": 0.581650299294779,
+      "active_return_pct": 5.81650299294779e-05,
+      "fee_drag_total": 10.19481206024363,
+      "turnover_drag_rebalance_fees_only": 0.2048020702336384,
+      "active_return_decomposition": {
+        "realized_alpha_from_closed_trades": -0.007601753991156103,
+        "unrealized_allocation_drift": 0.7940541235195735,
+        "turnover_drag": 0.2048020702336384,
+        "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+      },
+      "unrealized_pnl": -382.6201630499763,
+      "realized_pnl": -0.21264873943954954,
+      "gross_exposure_pct_of_equity": 0.9999966194420984,
+      "net_exposure_pct_of_equity": 0.9999966194420984,
+      "ledger_integrity_check": {
+        "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+        "reconstructed_cash": 0.03251139052933816,
+        "book_cash_remaining": 0.03251139052934526,
+        "residual": -7.105427357601002e-15,
+        "tolerance": 9.617167188210587e-06,
+        "within_tolerance": true
+      },
+      "interpretation": "rebalancing_added_value_but_did_not_overcome_beta"
+    },
+    "verdict": {
+      "signal_negative_before_costs": true,
+      "gross_edge_positive_but_cost_consumed": false,
+      "single_symbol_dominates_losses": false,
+      "worst_symbol": "DOGE-USDT",
+      "worst_symbol_share_of_losses": 0.46555660321708425
+    }
+  },
+  {
+    "session_id": "shadow_ab_v2_candidate10_15m",
+    "session_symbols": [
+      "BTC-USDT",
+      "ETH-USDT",
+      "SOL-USDT",
+      "BNB-USDT",
+      "XRP-USDT",
+      "ADA-USDT",
+      "DOGE-USDT",
+      "LINK-USDT"
+    ],
+    "rebalance_interval_hours": 0.25,
+    "fee_rate": 0.001,
+    "min_rebalance_notional": 10.0,
+    "risk_config": {
+      "take_profit_pct": null,
+      "stop_loss_pct": null,
+      "trailing_stop_pct": null,
+      "max_hold_hours": null,
+      "leverage": 1.0,
+      "margin_mode": "isolated",
+      "liquidation_buffer_pct": 0.1,
+      "fixed_margin_per_trade": 0.0
+    },
+    "initial_cash": 10000.0,
+    "current_equity": 9616.692299562546,
+    "closed_trade_count": 9,
+    "turnover": 10200.926194395148,
+    "total_fees_paid": 10.20092619439515,
+    "gross_pnl_of_closed_trades": 0.38244637826491856,
+    "net_pnl_of_closed_trades": 0.17104138737176477,
+    "cost_drag_pct_of_gross": 26.67282728803624,
+    "symbol_diagnostics": [
+      {
+        "symbol": "ADA-USDT",
+        "closed_trades": 3,
+        "gross_pnl": 0.9433413290906887,
+        "net_pnl": 0.8676796017716423,
+        "win_rate": 1.0
+      },
+      {
+        "symbol": "BNB-USDT",
+        "closed_trades": 3,
+        "gross_pnl": -0.12250166490198756,
+        "net_pnl": -0.1906306175128908,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "BTC-USDT",
+        "closed_trades": 2,
+        "gross_pnl": -0.3282155606010327,
+        "net_pnl": -0.375257774112126,
+        "win_rate": 0.0
+      },
+      {
+        "symbol": "LINK-USDT",
+        "closed_trades": 1,
+        "gross_pnl": -0.11017772532274993,
+        "net_pnl": -0.13074982277486066,
+        "win_rate": 0.0
+      }
+    ],
+    "volatility_regime_diagnostics": {
+      "median_daily_vol_pct": 0.0004143387326020492,
+      "high_vol_days": [
+        "2026-07-22",
+        "2026-07-24"
+      ],
+      "low_vol_days": [
+        "2026-07-23"
+      ],
+      "high_vol_avg_daily_net_pnl": 0.15959903219401184,
+      "low_vol_avg_daily_net_pnl": -0.14815667701625893,
+      "daily_net_pnl": {
+        "2026-07-22": 0.7291035702504729,
+        "2026-07-23": -0.14815667701625893,
+        "2026-07-24": -0.4099055058624492
+      }
+    },
+    "benchmark_attribution": {
+      "strategy_nav": 9616.692299562546,
+      "static_equal_weight_buy_hold_nav": 9615.95112227305,
+      "cash_nav": 10000.0,
+      "basket_return": -0.03840488777269493,
+      "strategy_return": -0.03833077004374536,
+      "active_return_dollars": 0.7411772894956812,
+      "active_return_pct": 7.411772894956812e-05,
+      "fee_drag_total": 10.20092619439515,
+      "turnover_drag_rebalance_fees_only": 0.21091620438515868,
+      "active_return_decomposition": {
+        "realized_alpha_from_closed_trades": 0.38244637826491856,
+        "unrealized_allocation_drift": 0.5696471156159213,
+        "turnover_drag": 0.21091620438515868,
+        "note": "realized + unrealized_drift - turnover_drag == active_return_dollars by construction; this is a split, not a check"
+      },
+      "unrealized_pnl": -383.478741824827,
+      "realized_pnl": 0.1710413873717647,
+      "gross_exposure_pct_of_equity": 0.9999313364032761,
+      "net_exposure_pct_of_equity": 0.9999313364032761,
+      "ledger_integrity_check": {
+        "description": "cash reconstructed from trades.jsonl cash flows vs. book.json's actual cash_remaining -- genuinely independent of the NAV/buy-hold comparison above",
+        "reconstructed_cash": 0.6603166818755053,
+        "book_cash_remaining": 0.6603166818755053,
+        "residual": 0.0,
+        "tolerance": 9.616692299562547e-06,
+        "within_tolerance": true
+      },
+      "interpretation": "rebalancing_added_value_but_did_not_overcome_beta"
+    },
+    "verdict": {
+      "signal_negative_before_costs": false,
+      "gross_edge_positive_but_cost_consumed": false,
+      "single_symbol_dominates_losses": true,
+      "worst_symbol": "BTC-USDT",
+      "worst_symbol_share_of_losses": 0.5386695222216509
+    }
+  }
+]

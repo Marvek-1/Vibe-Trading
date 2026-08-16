@@ -1,0 +1,271 @@
+name: vibe-trading-main
+
+x-paper-worker: &paper-worker
+  build:
+    context: ../..
+    dockerfile: backend/scripts/Dockerfile.paper-runtime
+  image: vibe-trading-main-paper-runtime
+  # Docker does not restart a merely unhealthy container; freshness failures
+  # remain visible. This policy recovers only from process/host exits.
+  restart: unless-stopped
+  healthcheck: &paper-worker-healthcheck
+    test:
+      - CMD-SHELL
+      - >-
+        test -n "$${PAPER_HEARTBEAT_FILE:-}" &&
+        test -f "$${PAPER_HEARTBEAT_FILE}" &&
+        test $$(( $$(date +%s) - $$(stat -c %Y "$${PAPER_HEARTBEAT_FILE}") ))
+        -lt "$${PAPER_HEARTBEAT_MAX_AGE_SECONDS}"
+    interval: 30s
+    timeout: 5s
+    retries: 3
+    start_period: 120s
+  environment: &paper-worker-environment
+    VIBE_PAPER_DATABASE_URL: postgresql://vibe_worker@paper-db:5432/idim_ikang
+    PGPASSFILE: /run/secrets/vibe_worker.pgpass
+    ENABLE_LIVE_TRADING: "false"
+    TRADING_MODE: paper
+    ALLOW_AUTO_EXECUTION: "false"
+    REQUIRE_MANUAL_APPROVAL: "true"
+    NEW_ENTRIES_ENABLED: "true"
+  depends_on:
+    paper-db:
+      condition: service_healthy
+  volumes: &paper-worker-volumes
+    - type: bind
+      source: ${VIBE_WORKER_PGPASS_PATH:-/opt/vibe-trading/secrets/vibe_worker.pgpass}
+      target: /run/secrets/vibe_worker.pgpass
+      read_only: true
+    - type: bind
+      source: ../agent
+      target: /app/agent
+    - type: bind
+      source: ../agent/paper_sessions
+      target: /app/agent/paper_sessions
+    - type: bind
+      source: ../agent/data
+      target: /app/agent/data
+    - type: bind
+      source: ../agent/config/paper_sessions_registry.json
+      target: /app/agent/config/paper_sessions_registry.json
+      read_only: true
+    - type: bind
+      source: ../agent/config/paper_accounts.json
+      target: /app/agent/config/paper_accounts.json
+      read_only: true
+
+services:
+  paper-db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: idim_ikang
+      POSTGRES_USER: postgres
+      # The database is not published to the VPS. Trust is limited to the
+      # private Compose network, avoiding a password in worker command lines.
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - paper-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d idim_ikang"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  vibe-trading:
+    # This file lives at backend/scripts/docker-compose.yml (moved here from
+    # the repo root by the frontend/backend reorg -- cc569e7). Every relative
+    # path below is relative to THIS file's directory, not the repo root.
+    build:
+      context: ../..
+      dockerfile: backend/scripts/Dockerfile.paper-runtime
+    image: vibe-trading-main-paper-runtime
+    ports:
+      # The public dashboard reaches the API through the frontend's internal
+      # Vite proxy. Keep the raw API off the public interface.
+      - "127.0.0.1:8899:8899"
+      - "127.0.0.1:5899:5899"
+    env_file:
+      - ../agent/.env
+    environment:
+      - VIBE_TRADING_TRUST_DOCKER_LOOPBACK=1
+      - API_AUTH_KEY_FILE=/run/secrets/vibe_dashboard_api_key
+      - VIBE_PAPER_DATABASE_URL=postgresql://vibe_app@paper-db:5432/idim_ikang
+      - PGPASSFILE=/run/secrets/vibe_app.pgpass
+      # Ollama runs on the host; from inside the container "localhost" is the
+      # container itself, so default to reaching the host via host.docker.internal.
+      # Override by exporting OLLAMA_BASE_URL (or setting it in a top-level .env)
+      # when Ollama runs elsewhere or on a different port.
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+    extra_hosts:
+      # Maps host.docker.internal -> host gateway (needed on Linux; harmless on Docker Desktop).
+      # Requires Docker Engine >= 20.10 / Compose v2 (host-gateway support).
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - type: bind
+        source: ${VIBE_DASHBOARD_API_KEY_PATH:-/opt/vibe-trading/secrets/dashboard_api_key}
+        target: /run/secrets/vibe_dashboard_api_key
+        read_only: true
+      - type: bind
+        source: ${VIBE_APP_PGPASS_PATH:-/opt/vibe-trading/secrets/vibe_app.pgpass}
+        target: /run/secrets/vibe_app.pgpass
+        read_only: true
+      - type: bind
+        source: ../agent
+        target: /app/agent
+      - vibe-runs:/app/agent/runs
+      - vibe-sessions:/app/agent/sessions
+      # User-level agent state: persistent memory, cross-session search index
+      # (sessions.db), user-created skills, shadow accounts, hypothesis
+      # registry, broker connector config, agent.json. Without this volume a
+      # rebuild/recreate wipes it all (#197).
+      - vibe-home:/home/vibe/.vibe-trading
+      - vibe-swarm-runs:/app/agent/.swarm/runs
+      - vibe-uploads:/app/agent/uploads
+      # Bind mounts (not named volumes) -- these paths are written by
+      # host-side processes (PM2 paper_session.py loops; the
+      # vibe-trading-sync.timer -> vibe_repair.py journal), not by anything
+      # running inside this container. A named volume would just be a second,
+      # still-static copy. Path is relative to this compose file, i.e. must
+      # match the PM2 processes' cwd (backend/agent/) -- if the repo ever
+      # moves or compose runs from elsewhere, this silently mounts an empty
+      # dir and you're back to stale-looking data with a different root
+      # cause. (This already happened once: this file used to live at the
+      # repo root, where ./agent/paper_sessions was correct; after the move
+      # to backend/scripts/ these paths went stale and Docker silently
+      # created empty replacement directories at the repo root instead of
+      # erroring -- see repair/unify-paper-engine.)
+      - type: bind
+        source: ../agent/paper_sessions
+        target: /app/agent/paper_sessions
+      - type: bind
+        source: ../agent/data
+        target: /app/agent/data
+      # Dashboard classification and account identity must come from the
+      # same host-side registry used by the paper workers. Keeping baked
+      # copies here made newly activated workers appear as "unknown" until
+      # the entire API image was rebuilt.
+      - type: bind
+        source: ../agent/config/paper_sessions_registry.json
+        target: /app/agent/config/paper_sessions_registry.json
+        read_only: true
+      - type: bind
+        source: ../agent/config/paper_accounts.json
+        target: /app/agent/config/paper_accounts.json
+        read_only: true
+    restart: unless-stopped
+    depends_on:
+      paper-db:
+        condition: service_healthy
+
+  frontend:
+    image: node:20-slim
+    working_dir: /app
+    network_mode: "service:vibe-trading"
+    volumes:
+      - ../../frontend:/app
+      - type: bind
+        source: ${VIBE_DASHBOARD_API_KEY_PATH:-/opt/vibe-trading/secrets/dashboard_api_key}
+        target: /run/secrets/vibe_dashboard_api_key
+        read_only: true
+    environment:
+      - VITE_API_URL=http://127.0.0.1:8899
+    # Vite's proxy (vite.config.ts) reads API_AUTH_KEY directly from the
+    # process env to authenticate to the backend -- unlike the backend
+    # itself, it has no *_FILE indirection, so the secret is read into the
+    # env here at container start rather than baked into the image/compose.
+    command: sh -c "npm install && API_AUTH_KEY=\$$(cat /run/secrets/vibe_dashboard_api_key) npm run dev -- --host --port 5899"
+    depends_on:
+      vibe-trading:
+        condition: service_started
+
+  control-5m:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/control_5m_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "660"
+    command: ["python", "agent/scripts/grid_futures_runner.py", "--session-dir", "agent/paper_sessions/control_5m_futures", "--worker-id", "control_5m", "--account-id", "59961ec7-10d3-4284-aaac-2030b9de6cc1", "--strategy-id", "control", "--timeframe", "5m", "--mode", "paper", "--leverage", "5", "--poll-seconds", "300"]
+
+  control-10m:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/control_10m_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "1260"
+    command: ["python", "agent/scripts/grid_futures_runner.py", "--session-dir", "agent/paper_sessions/control_10m_futures", "--worker-id", "control_10m", "--account-id", "805a5633-81c5-40b6-bda8-eae4e42b414b", "--strategy-id", "control", "--timeframe", "10m", "--mode", "paper", "--leverage", "5", "--poll-seconds", "600"]
+
+  control-15m:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/control_15m_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "1860"
+    command: ["python", "agent/scripts/grid_futures_runner.py", "--session-dir", "agent/paper_sessions/control_15m_futures", "--worker-id", "control_15m", "--account-id", "ab23f2fe-368c-48ba-873d-9173da8ad489", "--strategy-id", "control", "--timeframe", "15m", "--mode", "paper", "--leverage", "5", "--poll-seconds", "900"]
+
+  candidate-5m:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/candidate_5m_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "660"
+    command: ["python", "agent/scripts/grid_futures_runner.py", "--session-dir", "agent/paper_sessions/candidate_5m_futures", "--worker-id", "candidate_5m", "--account-id", "7673c15e-44fe-4520-b866-3f1d88e2a4be", "--strategy-id", "candidate", "--timeframe", "5m", "--mode", "paper", "--leverage", "10", "--poll-seconds", "300"]
+
+  candidate-10m:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/candidate_10m_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "1260"
+    command: ["python", "agent/scripts/grid_futures_runner.py", "--session-dir", "agent/paper_sessions/candidate_10m_futures", "--worker-id", "candidate_10m", "--account-id", "6ff5c12f-d48d-4f8b-bd79-ae4aa75eee7f", "--strategy-id", "candidate", "--timeframe", "10m", "--mode", "paper", "--leverage", "10", "--poll-seconds", "600"]
+
+  candidate-15m:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/candidate_15m_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "1860"
+    command: ["python", "agent/scripts/grid_futures_runner.py", "--session-dir", "agent/paper_sessions/candidate_15m_futures", "--worker-id", "candidate_15m", "--account-id", "f1e4fca1-b329-46fc-8b04-a25683b6abcf", "--strategy-id", "candidate", "--timeframe", "15m", "--mode", "paper", "--leverage", "10", "--poll-seconds", "900"]
+
+  grid-5x:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/grid_futures_5x_v3/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "60"
+    command: ["python", "agent/scripts/bounded_grid_runner.py", "--session-dir", "agent/paper_sessions/grid_futures_5x_v3", "--worker-id", "grid_futures_5x", "--account-id", "b7e2b9d0-6b7a-4c4a-9c8b-1a2f3e4d5c6a", "--strategy-id", "bounded_grid_v1", "--timeframe", "tick", "--mode", "paper", "--leverage", "5", "--tick-seconds", "5"]
+
+  grid-10x:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/grid_futures_10x_v3/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "60"
+    command: ["python", "agent/scripts/bounded_grid_runner.py", "--session-dir", "agent/paper_sessions/grid_futures_10x_v3", "--worker-id", "grid_futures_10x", "--account-id", "c8f3cae1-7c8b-4d5b-ad9c-2b3f4e5d6c7b", "--strategy-id", "bounded_grid_v1", "--timeframe", "tick", "--mode", "paper", "--leverage", "10", "--tick-seconds", "5"]
+
+  morning-glory:
+    <<: *paper-worker
+    environment:
+      <<: *paper-worker-environment
+      PAPER_HEARTBEAT_FILE: /app/agent/paper_sessions/morning_glory_futures/.heartbeat
+      PAPER_HEARTBEAT_MAX_AGE_SECONDS: "180"
+    command: ["python", "agent/scripts/morning_glory_runner.py", "--session-dir", "agent/paper_sessions/morning_glory_futures", "--worker-id", "morning_glory", "--account-id", "da4f02c8-b49e-4c87-a3bc-9399b78f60a1", "--strategy-id", "funding_rate_zscore", "--timeframe", "tick", "--mode", "paper", "--leverage", "5", "--poll-seconds", "60"]
+
+  paper-supervisor:
+    <<: *paper-worker
+    healthcheck:
+      disable: true
+    environment:
+      <<: *paper-worker-environment
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: ["python", "agent/scripts/paper_supervisor.py"]
+
+volumes:
+  vibe-runs:
+  vibe-sessions:
+  vibe-home:
+  vibe-swarm-runs:
+  vibe-uploads:
+  paper-postgres:

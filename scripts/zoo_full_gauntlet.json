@@ -1,0 +1,1925 @@
+{
+  "adapter_rejections": [],
+  "bench": {
+    "n_alphas_tested": 388,
+    "n_skipped": 68,
+    "report_path": "/home/idona/.vibe-trading/reports/alpha_bench_20260720T180139Z.html",
+    "status": "ok",
+    "top": [
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_min}(\\\\mathrm{low}, 20) / \\\\mathrm{close}",
+        "ic_count": 8319,
+        "ic_mean": 0.043221,
+        "ic_positive_ratio": 0.5612,
+        "ic_std": 0.276461,
+        "id": "qlib158_min20",
+        "ir": 0.1563,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.2}}(\\\\mathrm{close}, 5) / \\\\mathrm{close}",
+        "ic_count": 8334,
+        "ic_mean": 0.039831,
+        "ic_positive_ratio": 0.5632,
+        "ic_std": 0.25712,
+        "id": "qlib158_qtld5",
+        "ir": 0.1549,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_min}(\\\\mathrm{low}, 5) / \\\\mathrm{close}",
+        "ic_count": 8334,
+        "ic_mean": 0.043307,
+        "ic_positive_ratio": 0.5655,
+        "ic_std": 0.280996,
+        "id": "qlib158_min5",
+        "ir": 0.1541,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.2}}(\\\\mathrm{close}, 20) / \\\\mathrm{close}",
+        "ic_count": 8319,
+        "ic_mean": 0.039868,
+        "ic_positive_ratio": 0.556,
+        "ic_std": 0.259036,
+        "id": "qlib158_qtld20",
+        "ir": 0.1539,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.2}}(\\\\mathrm{close}, 10) / \\\\mathrm{close}",
+        "ic_count": 8329,
+        "ic_mean": 0.039477,
+        "ic_positive_ratio": 0.5607,
+        "ic_std": 0.257828,
+        "id": "qlib158_qtld10",
+        "ir": 0.1531,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_min}(\\\\mathrm{low}, 10) / \\\\mathrm{close}",
+        "ic_count": 8329,
+        "ic_mean": 0.041679,
+        "ic_positive_ratio": 0.5589,
+        "ic_std": 0.279136,
+        "id": "qlib158_min10",
+        "ir": 0.1493,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.2}}(\\\\mathrm{close}, 30) / \\\\mathrm{close}",
+        "ic_count": 8309,
+        "ic_mean": 0.038699,
+        "ic_positive_ratio": 0.5611,
+        "ic_std": 0.260875,
+        "id": "qlib158_qtld30",
+        "ir": 0.1483,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_min}(\\\\mathrm{low}, 30) / \\\\mathrm{close}",
+        "ic_count": 8309,
+        "ic_mean": 0.040669,
+        "ic_positive_ratio": 0.5567,
+        "ic_std": 0.275302,
+        "id": "qlib158_min30",
+        "ir": 0.1477,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_min}(\\\\mathrm{low}, 60) / \\\\mathrm{close}",
+        "ic_count": 8279,
+        "ic_mean": 0.038979,
+        "ic_positive_ratio": 0.5559,
+        "ic_std": 0.271671,
+        "id": "qlib158_min60",
+        "ir": 0.1435,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "(MEAN(CLOSE,3)+MEAN(CLOSE,6)+MEAN(CLOSE,12)+MEAN(CLOSE,24))/(4*CLOSE)",
+        "ic_count": 8315,
+        "ic_mean": 0.037654,
+        "ic_positive_ratio": 0.5507,
+        "ic_std": 0.268165,
+        "id": "gtja191_046",
+        "ir": 0.1404,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "gtja191"
+      },
+      {
+        "formula_latex": "MEAN(CLOSE,6)/CLOSE",
+        "ic_count": 8333,
+        "ic_mean": 0.035147,
+        "ic_positive_ratio": 0.5506,
+        "ic_std": 0.267341,
+        "id": "gtja191_065",
+        "ir": 0.1315,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "gtja191"
+      },
+      {
+        "formula_latex": "(-1*rank(ts_rank(close,10))) * rank(close/open)",
+        "ic_count": 8329,
+        "ic_mean": 0.033049,
+        "ic_positive_ratio": 0.5531,
+        "ic_std": 0.252088,
+        "id": "alpha101_038",
+        "ir": 0.1311,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "alpha101"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.2}}(\\\\mathrm{close}, 60) / \\\\mathrm{close}",
+        "ic_count": 8279,
+        "ic_mean": 0.033764,
+        "ic_positive_ratio": 0.5532,
+        "ic_std": 0.261962,
+        "id": "qlib158_qtld60",
+        "ir": 0.1289,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_mean}(\\\\mathrm{close}, 5) / \\\\mathrm{close}",
+        "ic_count": 8334,
+        "ic_mean": 0.034326,
+        "ic_positive_ratio": 0.5506,
+        "ic_std": 0.266909,
+        "id": "qlib158_ma5",
+        "ir": 0.1286,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_mean}(\\\\mathrm{close}, 10) / \\\\mathrm{close}",
+        "ic_count": 8329,
+        "ic_mean": 0.034073,
+        "ic_positive_ratio": 0.5499,
+        "ic_std": 0.266778,
+        "id": "qlib158_ma10",
+        "ir": 0.1277,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_mean}(\\\\mathrm{close}, 20) / \\\\mathrm{close}",
+        "ic_count": 8319,
+        "ic_mean": 0.033604,
+        "ic_positive_ratio": 0.5448,
+        "ic_std": 0.269118,
+        "id": "qlib158_ma20",
+        "ir": 0.1249,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "MEAN(CLOSE,12)/CLOSE",
+        "ic_count": 8327,
+        "ic_mean": 0.033253,
+        "ic_positive_ratio": 0.5444,
+        "ic_std": 0.267069,
+        "id": "gtja191_034",
+        "ir": 0.1245,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "gtja191"
+      },
+      {
+        "formula_latex": "rank(-1*(1-open/close))",
+        "ic_count": 8338,
+        "ic_mean": 0.033017,
+        "ic_positive_ratio": 0.5523,
+        "ic_std": 0.26827,
+        "id": "alpha101_033",
+        "ir": 0.1231,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "alpha101"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_mean}(\\\\mathrm{close}, 30) / \\\\mathrm{close}",
+        "ic_count": 8309,
+        "ic_mean": 0.03118,
+        "ic_positive_ratio": 0.5443,
+        "ic_std": 0.272487,
+        "id": "qlib158_ma30",
+        "ir": 0.1144,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\mathrm{zscore}_{x}\\bigl(-(\\mathrm{close}_t - \\mathrm{close}_{t-21}) / \\mathrm{close}_{t-21}\\bigr)",
+        "ic_count": 8317,
+        "ic_mean": 0.028901,
+        "ic_positive_ratio": 0.5381,
+        "ic_std": 0.271272,
+        "id": "academic_strev",
+        "ir": 0.1065,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "academic"
+      },
+      {
+        "formula_latex": "ts_rank(volume,32) * (1 - ts_rank((close+high-low),16)) * (1 - ts_rank(returns,32))",
+        "ic_count": 8294,
+        "ic_mean": 0.022848,
+        "ic_positive_ratio": 0.5452,
+        "ic_std": 0.220567,
+        "id": "alpha101_035",
+        "ir": 0.1036,
+        "theme": [
+          "volume",
+          "momentum"
+        ],
+        "zoo": "alpha101"
+      },
+      {
+        "formula_latex": "tsrank(v,32)*(1-tsrank(c+h-l,16))*(1-tsrank(ret,32))",
+        "ic_count": 8294,
+        "ic_mean": 0.022829,
+        "ic_positive_ratio": 0.5451,
+        "ic_std": 0.220569,
+        "id": "gtja191_117",
+        "ir": 0.1035,
+        "theme": [
+          "volume",
+          "momentum"
+        ],
+        "zoo": "gtja191"
+      },
+      {
+        "formula_latex": "\\\\mathrm{ts\\\\_mean}(\\\\mathrm{close}, 60) / \\\\mathrm{close}",
+        "ic_count": 8279,
+        "ic_mean": 0.027219,
+        "ic_positive_ratio": 0.5426,
+        "ic_std": 0.27509,
+        "id": "qlib158_ma60",
+        "ir": 0.0989,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.8}}(\\\\mathrm{close}, 5) / \\\\mathrm{close}",
+        "ic_count": 8334,
+        "ic_mean": 0.026464,
+        "ic_positive_ratio": 0.54,
+        "ic_std": 0.267925,
+        "id": "qlib158_qtlu5",
+        "ir": 0.0988,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.8}}(\\\\mathrm{close}, 20) / \\\\mathrm{close}",
+        "ic_count": 8319,
+        "ic_mean": 0.026677,
+        "ic_positive_ratio": 0.5365,
+        "ic_std": 0.271446,
+        "id": "qlib158_qtlu20",
+        "ir": 0.0983,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\sum \\\\max(-\\\\Delta\\\\mathrm{close}, 0) / \\\\sum |\\\\Delta\\\\mathrm{close}|",
+        "ic_count": 8328,
+        "ic_mean": 0.022777,
+        "ic_positive_ratio": 0.5391,
+        "ic_std": 0.23499,
+        "id": "qlib158_sumn10",
+        "ir": 0.0969,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\sum \\\\max(-\\\\Delta\\\\mathrm{close}, 0) / \\\\sum |\\\\Delta\\\\mathrm{close}|",
+        "ic_count": 8318,
+        "ic_mean": 0.022736,
+        "ic_positive_ratio": 0.5319,
+        "ic_std": 0.236631,
+        "id": "qlib158_sumn20",
+        "ir": 0.0961,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "sma(v*((c-l)-(h-c))/(h-l),11,2)-sma(v*((c-l)-(h-c))/(h-l),4,2)",
+        "ic_count": 8337,
+        "ic_mean": 0.024674,
+        "ic_positive_ratio": 0.5437,
+        "ic_std": 0.257686,
+        "id": "gtja191_111",
+        "ir": 0.0958,
+        "theme": [
+          "volume",
+          "microstructure"
+        ],
+        "zoo": "gtja191"
+      },
+      {
+        "formula_latex": "\\\\sum \\\\max(-\\\\Delta\\\\mathrm{close}, 0) / \\\\sum |\\\\Delta\\\\mathrm{close}|",
+        "ic_count": 8333,
+        "ic_mean": 0.021978,
+        "ic_positive_ratio": 0.5355,
+        "ic_std": 0.23133,
+        "id": "qlib158_sumn5",
+        "ir": 0.095,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "qlib158"
+      },
+      {
+        "formula_latex": "\\\\mathrm{quantile}_{{0.8}}(\\\\mathrm{close}, 10) / \\\\mathrm{close}",
+        "ic_count": 8329,
+        "ic_mean": 0.025617,
+        "ic_positive_ratio": 0.5339,
+        "ic_std": 0.27019,
+        "id": "qlib158_qtlu10",
+        "ir": 0.0948,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "qlib158"
+      }
+    ]
+  },
+  "configuration": {
+    "bars_per_year": 8760.0,
+    "bench_top": 30,
+    "fee_rate": 0.001,
+    "initial_cash": 10000.0,
+    "n_splits": 10,
+    "period": "2025-01-01/2025-12-31",
+    "portfolio_top_n": 10,
+    "promotion_metric": "sharpe",
+    "rebalance_every": 24,
+    "slippage_rate": 0.0005,
+    "stop_loss": 0.03,
+    "take_profit": 0.05,
+    "universe": "binance_perps_34",
+    "zoo": "alpha101,qlib158,gtja191,academic"
+  },
+  "gauntlet": {
+    "per_split": {
+      "split_1": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.4352987872015781,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9865.227642895356,
+          "max_drawdown": -0.1293510700685846,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.9908964957099426,
+          "sharpe": -0.31086448618285195,
+          "total_return": -0.013477235710464441,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.3681212062547332,
+          "closed_trades": 85.0,
+          "expectancy": 0.8701806248247602,
+          "fees_paid": 17.597373445728522,
+          "final_equity": 9891.591899138548,
+          "max_drawdown": -0.12774989772561704,
+          "profit_factor": 12.02466720130589,
+          "return_profit_factor": 0.9950155104661218,
+          "sharpe": -0.1700364445349256,
+          "total_return": -0.010840810086145236,
+          "trades": 222,
+          "turnover": 11731.582297152365
+        },
+        "qlib158_ma5": {
+          "bars": 209,
+          "cagr": -0.821316541742001,
+          "closed_trades": 78.0,
+          "expectancy": -4.351383502929779,
+          "fees_paid": 217.2586144651457,
+          "final_equity": 9599.337744411143,
+          "max_drawdown": -0.12783227195663505,
+          "profit_factor": 0.773731294249236,
+          "return_profit_factor": 0.9086907883575882,
+          "sharpe": -2.814736406630271,
+          "total_return": -0.040066225558885726,
+          "trades": 158,
+          "turnover": 144839.07631009718
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.6019780452690741,
+          "closed_trades": 110.0,
+          "expectancy": -0.574775885505103,
+          "fees_paid": 92.22588289325348,
+          "final_equity": 9783.631249954862,
+          "max_drawdown": -0.1306880643039374,
+          "profit_factor": 0.8775398534672253,
+          "return_profit_factor": 0.9785464930316562,
+          "sharpe": -0.7439353814333419,
+          "total_return": -0.021636875004513834,
+          "trades": 248,
+          "turnover": 61483.92192883563
+        }
+      },
+      "split_10": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 0.386533464750608,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10077.89979540773,
+          "max_drawdown": -0.060317340538913286,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.0302621347663323,
+          "sharpe": 0.9740181860317182,
+          "total_return": 0.007789979540772984,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 0.3642386151295316,
+          "closed_trades": 86.0,
+          "expectancy": 0.27126469803614056,
+          "fees_paid": 16.52800569456695,
+          "final_equity": 10074.021551378952,
+          "max_drawdown": -0.06026787712434102,
+          "profit_factor": 24.20145087699027,
+          "return_profit_factor": 1.029091893599185,
+          "sharpe": 0.9359485104239936,
+          "total_return": 0.007402155137895106,
+          "trades": 209,
+          "turnover": 11018.670463044617
+        },
+        "qlib158_qtld30": {
+          "bars": 209,
+          "cagr": -0.4562753471794275,
+          "closed_trades": 66.0,
+          "expectancy": -1.6950891619846384,
+          "fees_paid": 197.06207911717127,
+          "final_equity": 9856.364644989888,
+          "max_drawdown": -0.07246340776362305,
+          "profit_factor": 0.8696913041067528,
+          "return_profit_factor": 0.9584973446948966,
+          "sharpe": -1.3414757476028274,
+          "total_return": -0.014363535501011215,
+          "trades": 148,
+          "turnover": 131374.71941144762
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.08351411254580732,
+          "closed_trades": 114.0,
+          "expectancy": 0.8703850018057888,
+          "fees_paid": 88.30958086352535,
+          "final_equity": 9979.314357096973,
+          "max_drawdown": -0.06217407917113237,
+          "profit_factor": 1.4258778814018533,
+          "return_profit_factor": 1.00051208349459,
+          "sharpe": 0.016390312440522643,
+          "total_return": -0.0020685642903026658,
+          "trades": 250,
+          "turnover": 58873.05390901695
+        }
+      },
+      "split_2": {
+        "alpha101_035": {
+          "bars": 209,
+          "cagr": 4.209056101761841,
+          "closed_trades": 73.0,
+          "expectancy": 5.565586071103355,
+          "fees_paid": 214.30279069023928,
+          "final_equity": 10399.655091264169,
+          "max_drawdown": -0.07298768657707297,
+          "profit_factor": 1.344936362683902,
+          "return_profit_factor": 1.1197093994998466,
+          "sharpe": 3.1464910871863006,
+          "total_return": 0.03996550912641683,
+          "trades": 151,
+          "turnover": 142868.52712682605
+        },
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 35.364829410772394,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10890.737213513325,
+          "max_drawdown": -0.10260031062848461,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.167374181213395,
+          "sharpe": 5.23286720084679,
+          "total_return": 0.0890737213513324,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 38.00220430152969,
+          "closed_trades": 84.0,
+          "expectancy": 1.8717323816762084,
+          "fees_paid": 17.610897506963237,
+          "final_equity": 10908.857930144633,
+          "max_drawdown": -0.10170543517765727,
+          "profit_factor": null,
+          "return_profit_factor": 1.1729459357892644,
+          "sharpe": 5.376792603207044,
+          "total_return": 0.09088579301446331,
+          "trades": 217,
+          "turnover": 11740.598337975476
+        },
+        "random": {
+          "bars": 209,
+          "cagr": 38.493385402907776,
+          "closed_trades": 116.0,
+          "expectancy": 11.287606469654236,
+          "fees_paid": 110.82955548366085,
+          "final_equity": 10912.100095046746,
+          "max_drawdown": -0.10244543284380547,
+          "profit_factor": 7.783192985630283,
+          "return_profit_factor": 1.1706730880484257,
+          "sharpe": 5.319187431902265,
+          "total_return": 0.09121000950467462,
+          "trades": 251,
+          "turnover": 73886.37032244059
+        }
+      },
+      "split_3": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.9578241728009885,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9275.83700325778,
+          "max_drawdown": -0.12443248165028918,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.876288012653412,
+          "sharpe": -4.534155900584256,
+          "total_return": -0.07241629967422192,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.9571116002770048,
+          "closed_trades": 82.0,
+          "expectancy": -0.222467289933516,
+          "fees_paid": 16.33140647668879,
+          "final_equity": 9279.527807338407,
+          "max_drawdown": -0.12441471032186181,
+          "profit_factor": 0.07723799025200924,
+          "return_profit_factor": 0.8773819258790878,
+          "sharpe": -4.492914059410228,
+          "total_return": -0.07204721926615931,
+          "trades": 214,
+          "turnover": 10887.604317792502
+        },
+        "qlib158_min10": {
+          "bars": 209,
+          "cagr": -0.9913099895673256,
+          "closed_trades": 74.0,
+          "expectancy": -15.180422744426078,
+          "fees_paid": 192.3744559505254,
+          "final_equity": 8934.360982518152,
+          "max_drawdown": -0.12471423530366338,
+          "profit_factor": 0.22954906797689165,
+          "return_profit_factor": 0.7425696998238814,
+          "sharpe": -9.351078130949732,
+          "total_return": -0.10656390174818475,
+          "trades": 153,
+          "turnover": 128249.63730035021
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9568408494257922,
+          "closed_trades": 105.0,
+          "expectancy": -7.0847894594055205,
+          "fees_paid": 91.21561099901903,
+          "final_equity": 9280.914500272569,
+          "max_drawdown": -0.12567565823614288,
+          "profit_factor": 0.09410646420240583,
+          "return_profit_factor": 0.8780275715858599,
+          "sharpe": -4.470785167687762,
+          "total_return": -0.0719085499727431,
+          "trades": 249,
+          "turnover": 60810.407332679344
+        }
+      },
+      "split_4": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 15.696921675518379,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10691.302956832638,
+          "max_drawdown": -0.08490991329445564,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.1960363645279877,
+          "sharpe": 6.141663721406354,
+          "total_return": 0.06913029568326379,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 15.055174536406781,
+          "closed_trades": 88.0,
+          "expectancy": 0.49040510884717664,
+          "fees_paid": 16.95508522171276,
+          "final_equity": 10681.358107112632,
+          "max_drawdown": -0.08459359635501915,
+          "profit_factor": 13.217019821063024,
+          "return_profit_factor": 1.193022063069474,
+          "sharpe": 6.069342791831768,
+          "total_return": 0.06813581071126329,
+          "trades": 221,
+          "turnover": 11303.3901478085
+        },
+        "qlib158_qtld5": {
+          "bars": 209,
+          "cagr": 6.786458949694901,
+          "closed_trades": 64.0,
+          "expectancy": 6.142895890758869,
+          "fees_paid": 197.85541756429762,
+          "final_equity": 10499.394097974418,
+          "max_drawdown": -0.07094247822994287,
+          "profit_factor": 1.5745821498612464,
+          "return_profit_factor": 1.1802781333337178,
+          "sharpe": 5.34054685918215,
+          "total_return": 0.049939409797441936,
+          "trades": 146,
+          "turnover": 131903.61170953186
+        },
+        "random": {
+          "bars": 209,
+          "cagr": 13.292398884698708,
+          "closed_trades": 115.0,
+          "expectancy": 2.136266357490862,
+          "fees_paid": 87.49302888181354,
+          "final_equity": 10651.901792965275,
+          "max_drawdown": -0.0843984747433433,
+          "profit_factor": 1.7536619992544495,
+          "return_profit_factor": 1.1873025572322728,
+          "sharpe": 5.870571133542939,
+          "total_return": 0.06519017929652748,
+          "trades": 247,
+          "turnover": 58328.68592120903
+        }
+      },
+      "split_5": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 308.2126877561379,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 11458.542956981888,
+          "max_drawdown": -0.04261338910758829,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.347230922482852,
+          "sharpe": 9.989664234382953,
+          "total_return": 0.14585429569818875,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 146.03423741833407,
+          "closed_trades": 73.0,
+          "expectancy": 3.02833571253241,
+          "fees_paid": 17.35111635573028,
+          "final_equity": 11258.066706845964,
+          "max_drawdown": -0.04329926605665084,
+          "profit_factor": 526.8103013504833,
+          "return_profit_factor": 1.3154826574891014,
+          "sharpe": 9.117412290994151,
+          "total_return": 0.1258066706845964,
+          "trades": 226,
+          "turnover": 11567.410903820195
+        },
+        "gtja191_065": {
+          "bars": 209,
+          "cagr": 6.828282711915878,
+          "closed_trades": 65.0,
+          "expectancy": 8.289975650338315,
+          "fees_paid": 189.30232399672568,
+          "final_equity": 10500.729679535889,
+          "max_drawdown": -0.04500788206349561,
+          "profit_factor": 1.888055474411986,
+          "return_profit_factor": 1.1457321870300963,
+          "sharpe": 4.549431754050941,
+          "total_return": 0.050072967953588954,
+          "trades": 142,
+          "turnover": 126201.5493311505
+        },
+        "random": {
+          "bars": 209,
+          "cagr": 49.4106324733552,
+          "closed_trades": 109.0,
+          "expectancy": 6.519917850358574,
+          "fees_paid": 99.39489880799877,
+          "final_equity": 10975.521968834288,
+          "max_drawdown": -0.04335879030621114,
+          "profit_factor": 5.84688660295461,
+          "return_profit_factor": 1.2402137359327792,
+          "sharpe": 7.252242254165377,
+          "total_return": 0.09755219688342875,
+          "trades": 250,
+          "turnover": 66263.2658719992
+        }
+      },
+      "split_6": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.9857747304696304,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9039.52746981392,
+          "max_drawdown": -0.1595817703392799,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.860817295184333,
+          "sharpe": -4.987349364165176,
+          "total_return": -0.09604725301860795,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.9850786667547987,
+          "closed_trades": 98.0,
+          "expectancy": -0.2874801563019199,
+          "fees_paid": 16.669899302031027,
+          "final_equity": 9049.786939807662,
+          "max_drawdown": -0.1597357100542385,
+          "profit_factor": 0.20226136992731467,
+          "return_profit_factor": 0.8624801790734322,
+          "sharpe": -4.91692028795689,
+          "total_return": -0.09502130601923386,
+          "trades": 221,
+          "turnover": 11113.266201354007
+        },
+        "qlib158_qtlu20": {
+          "bars": 209,
+          "cagr": -0.9893670734154137,
+          "closed_trades": 73.0,
+          "expectancy": -15.971300982648861,
+          "fees_paid": 210.2337669550145,
+          "final_equity": 8977.269598106019,
+          "max_drawdown": -0.14090812132423988,
+          "profit_factor": 0.4107017870934379,
+          "return_profit_factor": 0.7820003397386263,
+          "sharpe": -7.374920582774192,
+          "total_return": -0.10227304018939809,
+          "trades": 159,
+          "turnover": 140155.84463667654
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9931140677534591,
+          "closed_trades": 109.0,
+          "expectancy": -7.955916315222718,
+          "fees_paid": 89.5911118806214,
+          "final_equity": 8885.133460845387,
+          "max_drawdown": -0.15988207182512199,
+          "profit_factor": 0.14993651674512032,
+          "return_profit_factor": 0.8352982591061219,
+          "sharpe": -5.981265379816419,
+          "total_return": -0.11148665391546131,
+          "trades": 248,
+          "turnover": 59727.40792041426
+        }
+      },
+      "split_7": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 1.2316237133226133,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10192.430485012184,
+          "max_drawdown": -0.16402038598994007,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.040851746650644,
+          "sharpe": 1.301722663995762,
+          "total_return": 0.019243048501218496,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 1.0039345519851484,
+          "closed_trades": 86.0,
+          "expectancy": 1.6082402323154295,
+          "fees_paid": 18.859989456939367,
+          "final_equity": 10166.419141404702,
+          "max_drawdown": -0.1621403784727711,
+          "profit_factor": 4.9827411876764485,
+          "return_profit_factor": 1.0374029536743197,
+          "sharpe": 1.200754291390234,
+          "total_return": 0.016641914140470115,
+          "trades": 231,
+          "turnover": 12573.32630462624
+        },
+        "qlib158_qtld60": {
+          "bars": 209,
+          "cagr": -0.9370705368197667,
+          "closed_trades": 72.0,
+          "expectancy": -10.352175353267207,
+          "fees_paid": 197.38663666383206,
+          "final_equity": 9364.393158363306,
+          "max_drawdown": -0.1250347655239237,
+          "profit_factor": 0.5714426384796946,
+          "return_profit_factor": 0.8538753734374003,
+          "sharpe": -4.412055524425223,
+          "total_return": -0.06356068416366945,
+          "trades": 153,
+          "turnover": 131591.09110922157
+        },
+        "random": {
+          "bars": 209,
+          "cagr": 0.21519819072029267,
+          "closed_trades": 112.0,
+          "expectancy": -3.511522980465447,
+          "fees_paid": 84.68655926827977,
+          "final_equity": 10046.386585440245,
+          "max_drawdown": -0.16288787230012203,
+          "profit_factor": 0.5940746863157697,
+          "return_profit_factor": 1.0216057069698512,
+          "sharpe": 0.6895779071253535,
+          "total_return": 0.004638658544024565,
+          "trades": 247,
+          "turnover": 56457.70617885314
+        }
+      },
+      "split_8": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.7149658022872836,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9706.37160987463,
+          "max_drawdown": -0.14633734716506663,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.9711176128117619,
+          "sharpe": -0.9887625100767161,
+          "total_return": -0.029362839012537,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.6823504079063838,
+          "closed_trades": 89.0,
+          "expectancy": -0.11552798123270124,
+          "fees_paid": 17.31683544257269,
+          "final_equity": 9731.372903803545,
+          "max_drawdown": -0.14642169927638296,
+          "profit_factor": 0.7217322501388014,
+          "return_profit_factor": 0.9747092631533594,
+          "sharpe": -0.8646593735879089,
+          "total_return": -0.02686270961964543,
+          "trades": 226,
+          "turnover": 11544.55696171511
+        },
+        "qlib158_sumn10": {
+          "bars": 209,
+          "cagr": 1.9398912034495157,
+          "closed_trades": 73.0,
+          "expectancy": 3.6966564556063894,
+          "fees_paid": 213.0013478255096,
+          "final_equity": 10259.3582243837,
+          "max_drawdown": -0.1211970677753083,
+          "profit_factor": 1.2292282777844257,
+          "return_profit_factor": 1.0732609802182256,
+          "sharpe": 2.0216553865098197,
+          "total_return": 0.025935822438370115,
+          "trades": 161,
+          "turnover": 142000.89855033983
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.7821913997017734,
+          "closed_trades": 113.0,
+          "expectancy": -6.36588978472744,
+          "fees_paid": 91.70421102770891,
+          "final_equity": 9644.574228287838,
+          "max_drawdown": -0.1511745925798571,
+          "profit_factor": 0.2536115126987923,
+          "return_profit_factor": 0.9620148734611453,
+          "sharpe": -1.311645893559377,
+          "total_return": -0.03554257717121623,
+          "trades": 251,
+          "turnover": 61136.140685139195
+        }
+      },
+      "split_9": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.47697062339025376,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9847.287122146727,
+          "max_drawdown": -0.09699249978842817,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.9764135159560643,
+          "sharpe": -0.7163612614943259,
+          "total_return": -0.015271287785327381,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.42455259691041347,
+          "closed_trades": 91.0,
+          "expectancy": 0.7681138330106719,
+          "fees_paid": 17.387777689060652,
+          "final_equity": 9869.644358733098,
+          "max_drawdown": -0.096141211910637,
+          "profit_factor": 47.33481168334682,
+          "return_profit_factor": 0.9813212035377166,
+          "sharpe": -0.5649248651715981,
+          "total_return": -0.013035564126690269,
+          "trades": 232,
+          "turnover": 11591.851792707066
+        },
+        "qlib158_min10": {
+          "bars": 209,
+          "cagr": -0.8629004502238946,
+          "closed_trades": 66.0,
+          "expectancy": -5.003475053429368,
+          "fees_paid": 183.43152882208665,
+          "final_equity": 9539.146777638496,
+          "max_drawdown": -0.09134946931380118,
+          "profit_factor": 0.7367390974240229,
+          "return_profit_factor": 0.8541130004071116,
+          "sharpe": -4.358906883925953,
+          "total_return": -0.04608532223615036,
+          "trades": 143,
+          "turnover": 122287.68588139115
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.5683884418035985,
+          "closed_trades": 114.0,
+          "expectancy": 1.1421116050496785,
+          "fees_paid": 99.6618687948444,
+          "final_equity": 9802.470480497252,
+          "max_drawdown": -0.10339462491367225,
+          "profit_factor": 1.4607531733970052,
+          "return_profit_factor": 0.9679085955049271,
+          "sharpe": -0.9769060364101847,
+          "total_return": -0.019752951950274822,
+          "trades": 248,
+          "turnover": 66441.24586322959
+        }
+      }
+    },
+    "selected_per_split": {
+      "split_1": {
+        "qlib158_ma5": 5.59756258511454
+      },
+      "split_10": {
+        "qlib158_qtld30": -9.18642521541121
+      },
+      "split_2": {
+        "alpha101_035": -7.8814173612558935
+      },
+      "split_3": {
+        "qlib158_min10": -3.2734583566977844
+      },
+      "split_4": {
+        "qlib158_qtld5": 4.493326368812814
+      },
+      "split_5": {
+        "gtja191_065": -7.826399097772688
+      },
+      "split_6": {
+        "qlib158_qtlu20": 1.529580551827669
+      },
+      "split_7": {
+        "qlib158_qtld60": 0.5893750335938023
+      },
+      "split_8": {
+        "qlib158_sumn10": -6.872205932430167
+      },
+      "split_9": {
+        "qlib158_min10": -5.669948006686677
+      }
+    },
+    "splits": [
+      "split_1",
+      "split_2",
+      "split_3",
+      "split_4",
+      "split_5",
+      "split_6",
+      "split_7",
+      "split_8",
+      "split_9",
+      "split_10"
+    ],
+    "test_summary": {
+      "alpha101_035": {
+        "bars": 209.0,
+        "cagr": 4.209056101761841,
+        "closed_trades": 73.0,
+        "expectancy": 5.565586071103355,
+        "fees_paid": 214.30279069023928,
+        "final_equity": 10399.655091264169,
+        "max_drawdown": -0.07298768657707297,
+        "profit_factor": 1.344936362683902,
+        "return_profit_factor": 1.1197093994998466,
+        "sharpe": 3.1464910871863006,
+        "total_return": 0.03996550912641683,
+        "trades": 151.0,
+        "turnover": 142868.52712682605
+      },
+      "buy_hold": {
+        "bars": 209.0,
+        "cagr": 35.73217619043521,
+        "closed_trades": 0.0,
+        "expectancy": 0.0,
+        "fees_paid": 14.977533699450827,
+        "final_equity": 10104.516425573618,
+        "max_drawdown": -0.11111565085710304,
+        "profit_factor": 0.0,
+        "return_profit_factor": 1.0457288281956725,
+        "sharpe": 1.210244248416025,
+        "total_return": 0.010451642557361774,
+        "trades": 28.0,
+        "turnover": 9985.02246630055
+      },
+      "equal_weight": {
+        "bars": 209.0,
+        "cagr": 19.70425749452819,
+        "closed_trades": 86.2,
+        "expectancy": 0.828279716377466,
+        "fees_paid": 17.26083865919943,
+        "final_equity": 10091.064734570815,
+        "max_drawdown": -0.11064697824751768,
+        "profit_factor": null,
+        "return_profit_factor": 1.0438853585731063,
+        "sharpe": 1.169079545718564,
+        "total_return": 0.00910647345708141,
+        "trades": 221.9,
+        "turnover": 11507.225772799608
+      },
+      "gtja191_065": {
+        "bars": 209.0,
+        "cagr": 6.828282711915878,
+        "closed_trades": 65.0,
+        "expectancy": 8.289975650338315,
+        "fees_paid": 189.30232399672568,
+        "final_equity": 10500.729679535889,
+        "max_drawdown": -0.04500788206349561,
+        "profit_factor": 1.888055474411986,
+        "return_profit_factor": 1.1457321870300963,
+        "sharpe": 4.549431754050941,
+        "total_return": 0.050072967953588954,
+        "trades": 142.0,
+        "turnover": 126201.5493311505
+      },
+      "qlib158_ma5": {
+        "bars": 209.0,
+        "cagr": -0.821316541742001,
+        "closed_trades": 78.0,
+        "expectancy": -4.351383502929779,
+        "fees_paid": 217.2586144651457,
+        "final_equity": 9599.337744411143,
+        "max_drawdown": -0.12783227195663505,
+        "profit_factor": 0.773731294249236,
+        "return_profit_factor": 0.9086907883575882,
+        "sharpe": -2.814736406630271,
+        "total_return": -0.040066225558885726,
+        "trades": 158.0,
+        "turnover": 144839.07631009718
+      },
+      "qlib158_min10": {
+        "bars": 209.0,
+        "cagr": -0.9271052198956101,
+        "closed_trades": 70.0,
+        "expectancy": -10.091948898927724,
+        "fees_paid": 187.90299238630604,
+        "final_equity": 9236.753880078324,
+        "max_drawdown": -0.10803185230873227,
+        "profit_factor": 0.4831440827004573,
+        "return_profit_factor": 0.7983413501154966,
+        "sharpe": -6.854992507437842,
+        "total_return": -0.07632461199216756,
+        "trades": 148.0,
+        "turnover": 125268.66159087067
+      },
+      "qlib158_qtld30": {
+        "bars": 209.0,
+        "cagr": -0.4562753471794275,
+        "closed_trades": 66.0,
+        "expectancy": -1.6950891619846384,
+        "fees_paid": 197.06207911717127,
+        "final_equity": 9856.364644989888,
+        "max_drawdown": -0.07246340776362305,
+        "profit_factor": 0.8696913041067528,
+        "return_profit_factor": 0.9584973446948966,
+        "sharpe": -1.3414757476028274,
+        "total_return": -0.014363535501011215,
+        "trades": 148.0,
+        "turnover": 131374.71941144762
+      },
+      "qlib158_qtld5": {
+        "bars": 209.0,
+        "cagr": 6.786458949694901,
+        "closed_trades": 64.0,
+        "expectancy": 6.142895890758869,
+        "fees_paid": 197.85541756429762,
+        "final_equity": 10499.394097974418,
+        "max_drawdown": -0.07094247822994287,
+        "profit_factor": 1.5745821498612464,
+        "return_profit_factor": 1.1802781333337178,
+        "sharpe": 5.34054685918215,
+        "total_return": 0.049939409797441936,
+        "trades": 146.0,
+        "turnover": 131903.61170953186
+      },
+      "qlib158_qtld60": {
+        "bars": 209.0,
+        "cagr": -0.9370705368197667,
+        "closed_trades": 72.0,
+        "expectancy": -10.352175353267207,
+        "fees_paid": 197.38663666383206,
+        "final_equity": 9364.393158363306,
+        "max_drawdown": -0.1250347655239237,
+        "profit_factor": 0.5714426384796946,
+        "return_profit_factor": 0.8538753734374003,
+        "sharpe": -4.412055524425223,
+        "total_return": -0.06356068416366945,
+        "trades": 153.0,
+        "turnover": 131591.09110922157
+      },
+      "qlib158_qtlu20": {
+        "bars": 209.0,
+        "cagr": -0.9893670734154137,
+        "closed_trades": 73.0,
+        "expectancy": -15.971300982648861,
+        "fees_paid": 210.2337669550145,
+        "final_equity": 8977.269598106019,
+        "max_drawdown": -0.14090812132423988,
+        "profit_factor": 0.4107017870934379,
+        "return_profit_factor": 0.7820003397386263,
+        "sharpe": -7.374920582774192,
+        "total_return": -0.10227304018939809,
+        "trades": 159.0,
+        "turnover": 140155.84463667654
+      },
+      "qlib158_sumn10": {
+        "bars": 209.0,
+        "cagr": 1.9398912034495157,
+        "closed_trades": 73.0,
+        "expectancy": 3.6966564556063894,
+        "fees_paid": 213.0013478255096,
+        "final_equity": 10259.3582243837,
+        "max_drawdown": -0.1211970677753083,
+        "profit_factor": 1.2292282777844257,
+        "return_profit_factor": 1.0732609802182256,
+        "sharpe": 2.0216553865098197,
+        "total_return": 0.025935822438370115,
+        "trades": 161.0,
+        "turnover": 142000.89855033983
+      },
+      "random": {
+        "bars": 209.0,
+        "cagr": 9.742558803518246,
+        "closed_trades": 111.7,
+        "expectancy": -0.3536607140967088,
+        "fees_paid": 93.51123089007255,
+        "final_equity": 9996.194871924145,
+        "max_drawdown": -0.11260796612233459,
+        "profit_factor": 2.023964167606752,
+        "return_profit_factor": 1.0242102964367628,
+        "sharpe": 0.5663431180269373,
+        "total_return": -0.0003805128075856534,
+        "trades": 248.9,
+        "turnover": 62340.82059338169
+      }
+    }
+  },
+  "generated_at": "2026-07-20T18:01:52.576523Z",
+  "paper_handoff": {
+    "auto_start": false,
+    "candidates": [],
+    "destination": "paper_trading_shadow_only",
+    "generated_at": "2026-07-20T18:01:52.576495Z",
+    "production_authority": "none",
+    "schema_version": "1.0"
+  },
+  "pipeline": "alpha_zoo_to_gauntlet_to_shadow_paper",
+  "readiness": [
+    {
+      "alpha_id": "qlib158_min20",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtld5",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": true,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": true,
+        "minimum_test_splits": false,
+        "positive_test_return": true
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": 6.786458949694901,
+        "closed_trades": 64.0,
+        "expectancy": 6.142895890758869,
+        "fees_paid": 197.85541756429762,
+        "final_equity": 10499.394097974418,
+        "max_drawdown": -0.07094247822994287,
+        "profit_factor": 1.5745821498612464,
+        "return_profit_factor": 1.1802781333337178,
+        "sharpe": 5.34054685918215,
+        "total_return": 0.049939409797441936,
+        "trades": 146.0,
+        "turnover": 131903.61170953186
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": 0.040832936340360525,
+      "test_splits": 1,
+      "total_closed_trades": 64
+    },
+    {
+      "alpha_id": "qlib158_min5",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtld20",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtld10",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_min10",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": -0.9271052198956101,
+        "closed_trades": 70.0,
+        "expectancy": -10.091948898927724,
+        "fees_paid": 187.90299238630604,
+        "final_equity": 9236.753880078324,
+        "max_drawdown": -0.10803185230873227,
+        "profit_factor": 0.4831440827004573,
+        "return_profit_factor": 0.7983413501154966,
+        "sharpe": -6.854992507437842,
+        "total_return": -0.07632461199216756,
+        "trades": 148.0,
+        "turnover": 125268.66159087067
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.08543108544924896,
+      "test_splits": 2,
+      "total_closed_trades": 140
+    },
+    {
+      "alpha_id": "qlib158_qtld30",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": true,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": -0.4562753471794275,
+        "closed_trades": 66.0,
+        "expectancy": -1.6950891619846384,
+        "fees_paid": 197.06207911717127,
+        "final_equity": 9856.364644989888,
+        "max_drawdown": -0.07246340776362305,
+        "profit_factor": 0.8696913041067528,
+        "return_profit_factor": 0.9584973446948966,
+        "sharpe": -1.3414757476028274,
+        "total_return": -0.014363535501011215,
+        "trades": 148.0,
+        "turnover": 131374.71941144762
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.023470008958092627,
+      "test_splits": 1,
+      "total_closed_trades": 66
+    },
+    {
+      "alpha_id": "qlib158_min30",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_min60",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "gtja191_046",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "gtja191_065",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": true,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": true,
+        "minimum_test_splits": false,
+        "positive_test_return": true
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": 6.828282711915878,
+        "closed_trades": 65.0,
+        "expectancy": 8.289975650338315,
+        "fees_paid": 189.30232399672568,
+        "final_equity": 10500.729679535889,
+        "max_drawdown": -0.04500788206349561,
+        "profit_factor": 1.888055474411986,
+        "return_profit_factor": 1.1457321870300963,
+        "sharpe": 4.549431754050941,
+        "total_return": 0.050072967953588954,
+        "trades": 142.0,
+        "turnover": 126201.5493311505
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": 0.04096649449650754,
+      "test_splits": 1,
+      "total_closed_trades": 65
+    },
+    {
+      "alpha_id": "alpha101_038",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtld60",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": -0.9370705368197667,
+        "closed_trades": 72.0,
+        "expectancy": -10.352175353267207,
+        "fees_paid": 197.38663666383206,
+        "final_equity": 9364.393158363306,
+        "max_drawdown": -0.1250347655239237,
+        "profit_factor": 0.5714426384796946,
+        "return_profit_factor": 0.8538753734374003,
+        "sharpe": -4.412055524425223,
+        "total_return": -0.06356068416366945,
+        "trades": 153.0,
+        "turnover": 131591.09110922157
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.07266715762075085,
+      "test_splits": 1,
+      "total_closed_trades": 72
+    },
+    {
+      "alpha_id": "qlib158_ma5",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": -0.821316541742001,
+        "closed_trades": 78.0,
+        "expectancy": -4.351383502929779,
+        "fees_paid": 217.2586144651457,
+        "final_equity": 9599.337744411143,
+        "max_drawdown": -0.12783227195663505,
+        "profit_factor": 0.773731294249236,
+        "return_profit_factor": 0.9086907883575882,
+        "sharpe": -2.814736406630271,
+        "total_return": -0.040066225558885726,
+        "trades": 158.0,
+        "turnover": 144839.07631009718
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.04917269901596714,
+      "test_splits": 1,
+      "total_closed_trades": 78
+    },
+    {
+      "alpha_id": "qlib158_ma10",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_ma20",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "gtja191_034",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "alpha101_033",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_ma30",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "academic_strev",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "alpha101_035",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": true,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": true,
+        "minimum_test_splits": false,
+        "positive_test_return": true
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": 4.209056101761841,
+        "closed_trades": 73.0,
+        "expectancy": 5.565586071103355,
+        "fees_paid": 214.30279069023928,
+        "final_equity": 10399.655091264169,
+        "max_drawdown": -0.07298768657707297,
+        "profit_factor": 1.344936362683902,
+        "return_profit_factor": 1.1197093994998466,
+        "sharpe": 3.1464910871863006,
+        "total_return": 0.03996550912641683,
+        "trades": 151.0,
+        "turnover": 142868.52712682605
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": 0.03085903566933542,
+      "test_splits": 1,
+      "total_closed_trades": 73
+    },
+    {
+      "alpha_id": "gtja191_117",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_ma60",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtlu5",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtlu20",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": -0.9893670734154137,
+        "closed_trades": 73.0,
+        "expectancy": -15.971300982648861,
+        "fees_paid": 210.2337669550145,
+        "final_equity": 8977.269598106019,
+        "max_drawdown": -0.14090812132423988,
+        "profit_factor": 0.4107017870934379,
+        "return_profit_factor": 0.7820003397386263,
+        "sharpe": -7.374920582774192,
+        "total_return": -0.10227304018939809,
+        "trades": 159.0,
+        "turnover": 140155.84463667654
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.1113795136464795,
+      "test_splits": 1,
+      "total_closed_trades": 73
+    },
+    {
+      "alpha_id": "qlib158_sumn10",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": true,
+        "minimum_test_splits": false,
+        "positive_test_return": true
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": 1.9398912034495157,
+        "closed_trades": 73.0,
+        "expectancy": 3.6966564556063894,
+        "fees_paid": 213.0013478255096,
+        "final_equity": 10259.3582243837,
+        "max_drawdown": -0.1211970677753083,
+        "profit_factor": 1.2292282777844257,
+        "return_profit_factor": 1.0732609802182256,
+        "sharpe": 2.0216553865098197,
+        "total_return": 0.025935822438370115,
+        "trades": 161.0,
+        "turnover": 142000.89855033983
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": 0.016829348981288704,
+      "test_splits": 1,
+      "total_closed_trades": 73
+    },
+    {
+      "alpha_id": "qlib158_sumn20",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "gtja191_111",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_sumn5",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "qlib158_qtlu10",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    }
+  ],
+  "schema_version": "1.0",
+  "universe": {
+    "bar_count": 8339,
+    "first_bar": "2025-01-18 13:00:00+00:00",
+    "last_bar": "2025-12-31 23:00:00+00:00",
+    "symbol_count": 28,
+    "symbols": [
+      "1000BONK-USDT",
+      "1000PEPE-USDT",
+      "1000XEC-USDT",
+      "AAVE-USDT",
+      "ADA-USDT",
+      "AVAAI-USDT",
+      "AVAX-USDT",
+      "BCH-USDT",
+      "BNB-USDT",
+      "BTC-USDT",
+      "DOGE-USDT",
+      "ETH-USDT",
+      "FIL-USDT",
+      "G-USDT",
+      "LTC-USDT",
+      "NEAR-USDT",
+      "ONDO-USDT",
+      "SOL-USDT",
+      "SUI-USDT",
+      "SYN-USDT",
+      "TAO-USDT",
+      "TLM-USDT",
+      "TRUMP-USDT",
+      "VANRY-USDT",
+      "WLD-USDT",
+      "XLM-USDT",
+      "XRP-USDT",
+      "ZEC-USDT"
+    ]
+  }
+}

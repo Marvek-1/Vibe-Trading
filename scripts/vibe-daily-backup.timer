@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Vibe-Trading PostgreSQL backup schedule
+
+[Timer]
+OnCalendar=*-*-* 02:15:00 UTC
+RandomizedDelaySec=30m
+Persistent=true
+Unit=vibe-daily-backup.service
+
+[Install]
+WantedBy=timers.target

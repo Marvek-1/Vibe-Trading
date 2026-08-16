@@ -1,0 +1,966 @@
+{
+  "adapter_rejections": [],
+  "bench": {
+    "n_alphas_tested": 4,
+    "n_skipped": 0,
+    "report_path": "/home/idona/.vibe-trading/reports/alpha_bench_20260721T165812Z.html",
+    "status": "ok",
+    "top": [
+      {
+        "formula_latex": "-\\left(\\mathrm{close}_t/\\mathrm{close}_{t-20} - 1\\right)",
+        "ic_count": 8318,
+        "ic_mean": 0.027685,
+        "ic_positive_ratio": 0.5332,
+        "ic_std": 0.269298,
+        "id": "custom_crypto_reversal_20",
+        "ir": 0.1028,
+        "theme": [
+          "reversal"
+        ],
+        "zoo": "custom"
+      },
+      {
+        "formula_latex": "\\bigl(0.7\\,\\mathrm{zscore}_x(r_{20}) - 0.3\\,\\mathrm{zscore}_x(r_{5})\\bigr) \\text{ where } |r_{20}| > \\mathrm{std}_{60}(r_{20})\\text{, else NaN}",
+        "ic_count": 5888,
+        "ic_mean": -0.013202,
+        "ic_positive_ratio": 0.4781,
+        "ic_std": 0.374083,
+        "id": "custom_crypto_trend_reversal_regime",
+        "ir": -0.0353,
+        "theme": [
+          "momentum",
+          "reversal"
+        ],
+        "zoo": "custom"
+      },
+      {
+        "formula_latex": "\\frac{\\mathrm{close}_t/\\mathrm{close}_{t-24} - 1}{\\mathrm{ATR}_{14}} \\cdot \\mathbb{1}[\\mathrm{close}_t > \\mathrm{SMA}_{50}]",
+        "ic_count": 7484,
+        "ic_mean": -0.022003,
+        "ic_positive_ratio": 0.4634,
+        "ic_std": 0.245016,
+        "id": "custom_crypto_momentum_trend",
+        "ir": -0.0898,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "custom"
+      },
+      {
+        "formula_latex": "\\left(\\frac{\\mathrm{close}_t}{\\mathrm{SMA}_{50}} - 1\\right) \\cdot \\mathbb{1}[\\mathrm{close}_t > \\mathrm{SMA}_{50}]",
+        "ic_count": 7484,
+        "ic_mean": -0.026523,
+        "ic_positive_ratio": 0.4619,
+        "ic_std": 0.250041,
+        "id": "custom_crypto_momentum_trend_v2",
+        "ir": -0.1061,
+        "theme": [
+          "momentum"
+        ],
+        "zoo": "custom"
+      }
+    ]
+  },
+  "configuration": {
+    "bars_per_year": 8760.0,
+    "bench_top": 20,
+    "fee_rate": 0.001,
+    "initial_cash": 10000.0,
+    "n_splits": 10,
+    "period": "2025-2025",
+    "portfolio_top_n": 20,
+    "promotion_metric": "sharpe",
+    "rebalance_every": 1,
+    "slippage_rate": 0.0005,
+    "stop_loss": 0.03,
+    "take_profit": 0.05,
+    "universe": "binance_perps_34",
+    "zoo": "custom"
+  },
+  "gauntlet": {
+    "per_split": {
+      "split_1": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.4352987872015781,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9865.227642895356,
+          "max_drawdown": -0.1293510700685846,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.9908964957099426,
+          "sharpe": -0.31086448618285195,
+          "total_return": -0.013477235710464441,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": -0.9429488764750523,
+          "closed_trades": 1471.0,
+          "expectancy": -0.4122873560350595,
+          "fees_paid": 592.0296139582516,
+          "final_equity": 9342.613308459242,
+          "max_drawdown": -0.13605603822730833,
+          "profit_factor": 0.7867424677123456,
+          "return_profit_factor": 0.9054245734618,
+          "sharpe": -3.4138097869926516,
+          "total_return": -0.06573866915407578,
+          "trades": 2957,
+          "turnover": 394686.40930550074
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.40357576524510486,
+          "closed_trades": 1420.0,
+          "expectancy": 0.06977769053067491,
+          "fees_paid": 26.867730666094435,
+          "final_equity": 9878.038602764782,
+          "max_drawdown": -0.12795589816128117,
+          "profit_factor": 2.469781620916836,
+          "return_profit_factor": 0.9929468611059901,
+          "sharpe": -0.24091996446058886,
+          "total_return": -0.012196139723521848,
+          "trades": 3075,
+          "turnover": 17911.82044406295
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9999379675336789,
+          "closed_trades": 2894.0,
+          "expectancy": -0.6481538256828562,
+          "fees_paid": 1801.1534073774324,
+          "final_equity": 7945.088097045133,
+          "max_drawdown": -0.22500440787073395,
+          "profit_factor": 0.5260730516542433,
+          "return_profit_factor": 0.7046216173572215,
+          "sharpe": -11.787696762961671,
+          "total_return": -0.2054911902954868,
+          "trades": 5726,
+          "turnover": 1200768.938251629
+        }
+      },
+      "split_10": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 0.386533464750608,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10077.89979540773,
+          "max_drawdown": -0.060317340538913286,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.0302621347663323,
+          "sharpe": 0.9740181860317182,
+          "total_return": 0.007789979540772984,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_reversal_20": {
+          "bars": 209,
+          "cagr": -0.5055975956755783,
+          "closed_trades": 1247.0,
+          "expectancy": -0.10180353356673602,
+          "fees_paid": 521.335205017574,
+          "final_equity": 9834.134861720877,
+          "max_drawdown": -0.06674668475658838,
+          "profit_factor": 0.8933698961620479,
+          "return_profit_factor": 0.957448594439972,
+          "sharpe": -1.3882267972050886,
+          "total_return": -0.01658651382791232,
+          "trades": 2492,
+          "turnover": 347556.80334504944
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 0.35630684262076295,
+          "closed_trades": 1005.0,
+          "expectancy": 0.07449912574354514,
+          "fees_paid": 21.897825528510847,
+          "final_equity": 10072.626861886822,
+          "max_drawdown": -0.06016581848508014,
+          "profit_factor": 5.488630250032408,
+          "return_profit_factor": 1.028697820391461,
+          "sharpe": 0.9229313500462599,
+          "total_return": 0.007262686188682199,
+          "trades": 2240,
+          "turnover": 14598.550352340539
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9996740203640688,
+          "closed_trades": 2873.0,
+          "expectancy": -0.6001714058159939,
+          "fees_paid": 1848.3422644703944,
+          "final_equity": 8264.339991108607,
+          "max_drawdown": -0.1865972964292365,
+          "profit_factor": 0.3938881978909013,
+          "return_profit_factor": 0.5612301333546765,
+          "sharpe": -18.728500777169305,
+          "total_return": -0.17356600088913932,
+          "trades": 5728,
+          "turnover": 1232228.1763135996
+        }
+      },
+      "split_2": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 35.364829410772394,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10890.737213513325,
+          "max_drawdown": -0.10260031062848461,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.167374181213395,
+          "sharpe": 5.23286720084679,
+          "total_return": 0.0890737213513324,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": 3.933041413550434,
+          "closed_trades": 1390.0,
+          "expectancy": 0.31966954030023476,
+          "fees_paid": 556.2222411488733,
+          "final_equity": 10386.220045573507,
+          "max_drawdown": -0.11307849751534925,
+          "profit_factor": 1.1905054182680144,
+          "return_profit_factor": 1.0800624516605624,
+          "sharpe": 2.5542495760216672,
+          "total_return": 0.03862200455735065,
+          "trades": 2840,
+          "turnover": 370814.8274325808
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 37.46695481303891,
+          "closed_trades": 1377.0,
+          "expectancy": 0.3123160622771311,
+          "fees_paid": 26.448352874205618,
+          "final_equity": 10905.279178232071,
+          "max_drawdown": -0.10210306756346389,
+          "profit_factor": 291.64185037422294,
+          "return_profit_factor": 1.1731219015503889,
+          "sharpe": 5.372431651801927,
+          "total_return": 0.09052791782320702,
+          "trades": 3014,
+          "turnover": 17632.235249470337
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9946325743079407,
+          "closed_trades": 2835.0,
+          "expectancy": -0.4138039903751473,
+          "fees_paid": 2063.222245477745,
+          "final_equity": 8832.728908876808,
+          "max_drawdown": -0.15691883549528246,
+          "profit_factor": 0.7012101827351958,
+          "return_profit_factor": 0.8160279045556346,
+          "sharpe": -6.9530615670787235,
+          "total_return": -0.1167271091123192,
+          "trades": 5729,
+          "turnover": 1375481.4969851666
+        }
+      },
+      "split_3": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.9578241728009885,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9275.83700325778,
+          "max_drawdown": -0.12443248165028918,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.876288012653412,
+          "sharpe": -4.534155900584256,
+          "total_return": -0.07241629967422192,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_reversal_20": {
+          "bars": 209,
+          "cagr": -0.9802513886470052,
+          "closed_trades": 1310.0,
+          "expectancy": -0.8466953925030303,
+          "fees_paid": 613.0830569288047,
+          "final_equity": 9110.217006534614,
+          "max_drawdown": -0.1411535703143855,
+          "profit_factor": 0.5627905917960628,
+          "return_profit_factor": 0.8431454644725946,
+          "sharpe": -5.866705265795827,
+          "total_return": -0.08897829934653856,
+          "trades": 2554,
+          "turnover": 408722.0379525369
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.9567672779527849,
+          "closed_trades": 1049.0,
+          "expectancy": -0.09622037493210985,
+          "fees_paid": 21.61586823451914,
+          "final_equity": 9281.289840788386,
+          "max_drawdown": -0.12432844307526765,
+          "profit_factor": 0.06138708660053523,
+          "return_profit_factor": 0.8775557844348238,
+          "sharpe": -4.485037511700658,
+          "total_return": -0.07187101592116141,
+          "trades": 2277,
+          "turnover": 14410.578823012724
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9999940834618591,
+          "closed_trades": 2861.0,
+          "expectancy": -0.9100344084605918,
+          "fees_paid": 1756.5294316408913,
+          "final_equity": 7513.917924944702,
+          "max_drawdown": -0.28123830579914716,
+          "profit_factor": 0.325985815097149,
+          "return_profit_factor": 0.5930351107410368,
+          "sharpe": -17.923787849030003,
+          "total_return": -0.2486082075055298,
+          "trades": 5720,
+          "turnover": 1171019.6210939253
+        }
+      },
+      "split_4": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 15.696921675518379,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10691.302956832638,
+          "max_drawdown": -0.08490991329445564,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.1960363645279877,
+          "sharpe": 6.141663721406354,
+          "total_return": 0.06913029568326379,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": 0.9577780357743158,
+          "closed_trades": 1311.0,
+          "expectancy": 0.04867221501412163,
+          "fees_paid": 472.5933655979761,
+          "final_equity": 10160.79564008521,
+          "max_drawdown": -0.09674791800341344,
+          "profit_factor": 1.0429039740111519,
+          "return_profit_factor": 1.048829144000588,
+          "sharpe": 1.6476058570771457,
+          "total_return": 0.016079564008521174,
+          "trades": 2751,
+          "turnover": 315062.2437319848
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 15.017459475739923,
+          "closed_trades": 1222.0,
+          "expectancy": 0.07983117477568856,
+          "fees_paid": 24.0396162055837,
+          "final_equity": 10680.761643497643,
+          "max_drawdown": -0.08461549164237443,
+          "profit_factor": 3.337046599387795,
+          "return_profit_factor": 1.1929934266847113,
+          "sharpe": 6.0649625521274695,
+          "total_return": 0.06807616434976427,
+          "trades": 2664,
+          "turnover": 16026.410803722441
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.997290056193442,
+          "closed_trades": 2874.0,
+          "expectancy": -0.46615064710850534,
+          "fees_paid": 1899.6540395535685,
+          "final_equity": 8690.553927321673,
+          "max_drawdown": -0.1711695062508839,
+          "profit_factor": 0.5548221808823222,
+          "return_profit_factor": 0.6993783420218392,
+          "sharpe": -12.046441002513266,
+          "total_return": -0.13094460726783275,
+          "trades": 5732,
+          "turnover": 1266436.0263690462
+        }
+      },
+      "split_5": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 308.2126877561379,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 11458.542956981888,
+          "max_drawdown": -0.04261338910758829,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.347230922482852,
+          "sharpe": 9.989664234382953,
+          "total_return": 0.14585429569818875,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": 7.6646102791802555,
+          "closed_trades": 1369.0,
+          "expectancy": 0.38174441176978546,
+          "fees_paid": 533.5790400780593,
+          "final_equity": 10526.068382954138,
+          "max_drawdown": -0.051016454610982136,
+          "profit_factor": 1.3407610802027585,
+          "return_profit_factor": 1.1345811767749538,
+          "sharpe": 4.234877244653386,
+          "total_return": 0.05260683829541368,
+          "trades": 2781,
+          "turnover": 355719.3600520383
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 133.40707941519045,
+          "closed_trades": 1185.0,
+          "expectancy": 0.3776038028779699,
+          "fees_paid": 24.900356202062977,
+          "final_equity": 11234.089445584503,
+          "max_drawdown": -0.0432099020933933,
+          "profit_factor": 74.21948654250296,
+          "return_profit_factor": 1.312653303425556,
+          "sharpe": 9.014525158458824,
+          "total_return": 0.1234089445584503,
+          "trades": 2706,
+          "turnover": 16600.23746804198
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9450500299079467,
+          "closed_trades": 2838.0,
+          "expectancy": -0.23906006172025274,
+          "fees_paid": 1949.467900867861,
+          "final_equity": 9334.29278602918,
+          "max_drawdown": -0.07555380292784306,
+          "profit_factor": 0.7742109306630165,
+          "return_profit_factor": 0.8630557546144,
+          "sharpe": -4.943589834980594,
+          "total_return": -0.06657072139708198,
+          "trades": 5728,
+          "turnover": 1299645.2672452377
+        }
+      },
+      "split_6": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.9857747304696304,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9039.52746981392,
+          "max_drawdown": -0.1595817703392799,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.860817295184333,
+          "sharpe": -4.987349364165176,
+          "total_return": -0.09604725301860795,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": -0.9955151391104208,
+          "closed_trades": 1254.0,
+          "expectancy": -1.0642519721588088,
+          "fees_paid": 459.5963864367312,
+          "final_equity": 8795.13361185149,
+          "max_drawdown": -0.15684134127734378,
+          "profit_factor": 0.54248493715261,
+          "return_profit_factor": 0.8107428403934245,
+          "sharpe": -7.035728347024321,
+          "total_return": -0.120486638814851,
+          "trades": 2436,
+          "turnover": 306397.59095782036
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.9845323890886531,
+          "closed_trades": 1146.0,
+          "expectancy": -0.11448989058212383,
+          "fees_paid": 23.17813588094988,
+          "final_equity": 9057.516550194756,
+          "max_drawdown": -0.1594876670055935,
+          "profit_factor": 0.1880737320815888,
+          "return_profit_factor": 0.8637130335051451,
+          "sharpe": -4.869596439307245,
+          "total_return": -0.09424834498052437,
+          "trades": 2430,
+          "turnover": 15452.090587299926
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9999969618600342,
+          "closed_trades": 2856.0,
+          "expectancy": -0.8987406193877863,
+          "fees_paid": 1759.5661267770292,
+          "final_equity": 7395.940807629549,
+          "max_drawdown": -0.2726328120203308,
+          "profit_factor": 0.413157590331608,
+          "return_profit_factor": 0.620302553380628,
+          "sharpe": -15.957221647726826,
+          "total_return": -0.26040591923704504,
+          "trades": 5726,
+          "turnover": 1173044.084518018
+        }
+      },
+      "split_7": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": 1.2316237133226133,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 10192.430485012184,
+          "max_drawdown": -0.16402038598994007,
+          "profit_factor": 0.0,
+          "return_profit_factor": 1.040851746650644,
+          "sharpe": 1.301722663995762,
+          "total_return": 0.019243048501218496,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": -0.9904132313265773,
+          "closed_trades": 1462.0,
+          "expectancy": -0.7577137967506922,
+          "fees_paid": 601.7690169259806,
+          "final_equity": 8955.219516224663,
+          "max_drawdown": -0.21088728987535704,
+          "profit_factor": 0.7072730069914979,
+          "return_profit_factor": 0.8675729319350697,
+          "sharpe": -4.538316097664133,
+          "total_return": -0.10447804837753372,
+          "trades": 3006,
+          "turnover": 401179.3446173196
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": 0.5840898155530174,
+          "closed_trades": 1408.0,
+          "expectancy": 0.05645811734708803,
+          "fees_paid": 29.18665579834501,
+          "final_equity": 10109.824812202805,
+          "max_drawdown": -0.16240775217840958,
+          "profit_factor": 1.3401577457750653,
+          "return_profit_factor": 1.0297059337320171,
+          "sharpe": 0.9589957251488359,
+          "total_return": 0.01098248122028056,
+          "trades": 3130,
+          "turnover": 19457.77053222995
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9997827498474817,
+          "closed_trades": 2879.0,
+          "expectancy": -0.6362383709489072,
+          "fees_paid": 1768.7739832887191,
+          "final_equity": 8185.094726718765,
+          "max_drawdown": -0.23613951450227103,
+          "profit_factor": 0.6103636087113895,
+          "return_profit_factor": 0.7733541512571634,
+          "sharpe": -8.24022339337914,
+          "total_return": -0.18149052732812354,
+          "trades": 5735,
+          "turnover": 1179182.6555258138
+        }
+      },
+      "split_8": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.7149658022872836,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9706.37160987463,
+          "max_drawdown": -0.14633734716506663,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.9711176128117619,
+          "sharpe": -0.9887625100767161,
+          "total_return": -0.029362839012537,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": -0.9798732948960145,
+          "closed_trades": 1469.0,
+          "expectancy": -0.6165362803087479,
+          "fees_paid": 554.116026424018,
+          "final_equity": 9114.320219924006,
+          "max_drawdown": -0.16993034534433643,
+          "profit_factor": 0.6893136196008901,
+          "return_profit_factor": 0.8834467299027919,
+          "sharpe": -4.176598896696726,
+          "total_return": -0.08856797800759941,
+          "trades": 2916,
+          "turnover": 369410.68428267643
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.6891415705879913,
+          "closed_trades": 1381.0,
+          "expectancy": -0.08138520710446497,
+          "fees_paid": 25.63693258245167,
+          "final_equity": 9726.380587104137,
+          "max_drawdown": -0.14628266310482055,
+          "profit_factor": 0.34450428613736206,
+          "return_profit_factor": 0.9740754667433302,
+          "sharpe": -0.8860658808762731,
+          "total_return": -0.027361941289586356,
+          "trades": 2944,
+          "turnover": 17091.288388301084
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9999213493641453,
+          "closed_trades": 2865.0,
+          "expectancy": -0.6882054194257994,
+          "fees_paid": 1794.142294784227,
+          "final_equity": 7989.992184619677,
+          "max_drawdown": -0.23960791347060031,
+          "profit_factor": 0.5512478721957051,
+          "return_profit_factor": 0.7390424460222069,
+          "sharpe": -10.307097775645216,
+          "total_return": -0.20100078153803236,
+          "trades": 5734,
+          "turnover": 1196094.8631894828
+        }
+      },
+      "split_9": {
+        "buy_hold": {
+          "bars": 209,
+          "cagr": -0.47697062339025376,
+          "closed_trades": 0.0,
+          "expectancy": 0.0,
+          "fees_paid": 14.977533699450829,
+          "final_equity": 9847.287122146727,
+          "max_drawdown": -0.09699249978842817,
+          "profit_factor": 0.0,
+          "return_profit_factor": 0.9764135159560643,
+          "sharpe": -0.7163612614943259,
+          "total_return": -0.015271287785327381,
+          "trades": 28,
+          "turnover": 9985.02246630055
+        },
+        "custom_crypto_momentum_trend_v2": {
+          "bars": 209,
+          "cagr": -0.9570348224639804,
+          "closed_trades": 1358.0,
+          "expectancy": -0.46006780351707993,
+          "fees_paid": 529.060389499927,
+          "final_equity": 9279.921903115648,
+          "max_drawdown": -0.12566921975432901,
+          "profit_factor": 0.7432315555265421,
+          "return_profit_factor": 0.850525297167412,
+          "sharpe": -4.86478871394465,
+          "total_return": -0.07200780968843523,
+          "trades": 2767,
+          "turnover": 352706.9263332849
+        },
+        "equal_weight": {
+          "bars": 209,
+          "cagr": -0.4512222108148237,
+          "closed_trades": 1239.0,
+          "expectancy": 0.10831800369043745,
+          "fees_paid": 24.440196146632502,
+          "final_equity": 9858.529831850252,
+          "max_drawdown": -0.09652350044006344,
+          "profit_factor": 6.416287341361368,
+          "return_profit_factor": 0.978823878775214,
+          "sharpe": -0.6411370061683251,
+          "total_return": -0.014147016814974767,
+          "trades": 2685,
+          "turnover": 16293.464097754979
+        },
+        "random": {
+          "bars": 209,
+          "cagr": -0.9999012970456718,
+          "closed_trades": 2914.0,
+          "expectancy": -0.6483122358346737,
+          "fees_paid": 1916.925374928934,
+          "final_equity": 8033.193062341893,
+          "max_drawdown": -0.20020283873837905,
+          "profit_factor": 0.47905058337737777,
+          "return_profit_factor": 0.6225558835798818,
+          "sharpe": -14.505291135886216,
+          "total_return": -0.19668069376581065,
+          "trades": 5741,
+          "turnover": 1277950.2499526227
+        }
+      }
+    },
+    "selected_per_split": {
+      "split_1": {
+        "custom_crypto_momentum_trend_v2": 4.144318721796235
+      },
+      "split_10": {
+        "custom_crypto_reversal_20": -6.30470047740542
+      },
+      "split_2": {
+        "custom_crypto_momentum_trend_v2": -9.354799584139931
+      },
+      "split_3": {
+        "custom_crypto_reversal_20": -2.144058961177076
+      },
+      "split_4": {
+        "custom_crypto_momentum_trend_v2": 2.474537731018621
+      },
+      "split_5": {
+        "custom_crypto_momentum_trend_v2": -16.2742935401055
+      },
+      "split_6": {
+        "custom_crypto_momentum_trend_v2": -3.0355633525490315
+      },
+      "split_7": {
+        "custom_crypto_momentum_trend_v2": -0.882255923114154
+      },
+      "split_8": {
+        "custom_crypto_momentum_trend_v2": -10.395026890757938
+      },
+      "split_9": {
+        "custom_crypto_momentum_trend_v2": -9.324255128616956
+      }
+    },
+    "splits": [
+      "split_1",
+      "split_2",
+      "split_3",
+      "split_4",
+      "split_5",
+      "split_6",
+      "split_7",
+      "split_8",
+      "split_9",
+      "split_10"
+    ],
+    "test_summary": {
+      "buy_hold": {
+        "bars": 209.0,
+        "cagr": 35.73217619043521,
+        "closed_trades": 0.0,
+        "expectancy": 0.0,
+        "fees_paid": 14.977533699450827,
+        "final_equity": 10104.516425573618,
+        "max_drawdown": -0.11111565085710304,
+        "profit_factor": 0.0,
+        "return_profit_factor": 1.0457288281956725,
+        "sharpe": 1.210244248416025,
+        "total_return": 0.010451642557361774,
+        "trades": 28.0,
+        "turnover": 9985.02246630055
+      },
+      "custom_crypto_momentum_trend_v2": {
+        "bars": 209.0,
+        "cagr": 0.96120554552912,
+        "closed_trades": 1385.5,
+        "expectancy": -0.3200963802107808,
+        "fees_paid": 537.3707600087271,
+        "final_equity": 9570.036578523488,
+        "max_drawdown": -0.13252838807605244,
+        "profit_factor": 0.8804020074332263,
+        "return_profit_factor": 0.9476481431620752,
+        "sharpe": -1.9490636455712853,
+        "total_return": -0.042996342147651204,
+        "trades": 2806.75,
+        "turnover": 358247.17333915073
+      },
+      "custom_crypto_reversal_20": {
+        "bars": 209.0,
+        "cagr": -0.7429244921612917,
+        "closed_trades": 1278.5,
+        "expectancy": -0.47424946303488313,
+        "fees_paid": 567.2091309731893,
+        "final_equity": 9472.175934127747,
+        "max_drawdown": -0.10395012753548694,
+        "profit_factor": 0.7280802439790554,
+        "return_profit_factor": 0.9002970294562833,
+        "sharpe": -3.6274660315004574,
+        "total_return": -0.05278240658722544,
+        "trades": 2523.0,
+        "turnover": 378139.42064879317
+      },
+      "equal_weight": {
+        "bars": 209.0,
+        "cagr": 18.33466511484537,
+        "closed_trades": 1243.2,
+        "expectancy": 0.07867085046238365,
+        "fees_paid": 24.82116701193558,
+        "final_equity": 10080.433735410616,
+        "max_drawdown": -0.11070802037497476,
+        "profit_factor": 38.55072055790189,
+        "return_profit_factor": 1.0424287410348638,
+        "sharpe": 1.1211089635070226,
+        "total_return": 0.00804337354106156,
+        "trades": 2716.5,
+        "turnover": 16547.44467462369
+      },
+      "random": {
+        "bars": 209.0,
+        "cagr": -0.9936181089886269,
+        "closed_trades": 2868.9,
+        "expectancy": -0.6148870984760514,
+        "fees_paid": 1855.77770691668,
+        "final_equity": 8218.514241663599,
+        "max_drawdown": -0.20450652335047081,
+        "profit_factor": 0.5330010013538908,
+        "return_profit_factor": 0.6992603896884689,
+        "sharpe": -12.139291174637096,
+        "total_return": -0.17814857583364013,
+        "trades": 5729.9,
+        "turnover": 1237185.137944454
+      }
+    }
+  },
+  "generated_at": "2026-07-21T16:58:24.485005Z",
+  "paper_handoff": {
+    "auto_start": false,
+    "candidates": [],
+    "destination": "paper_trading_shadow_only",
+    "generated_at": "2026-07-21T16:58:24.484985Z",
+    "production_authority": "none",
+    "schema_version": "1.0"
+  },
+  "pipeline": "alpha_zoo_to_gauntlet_to_shadow_paper",
+  "readiness": [
+    {
+      "alpha_id": "custom_crypto_reversal_20",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": -0.7429244921612917,
+        "closed_trades": 1278.5,
+        "expectancy": -0.47424946303488313,
+        "fees_paid": 567.2091309731893,
+        "final_equity": 9472.175934127747,
+        "max_drawdown": -0.10395012753548694,
+        "profit_factor": 0.7280802439790554,
+        "return_profit_factor": 0.9002970294562833,
+        "sharpe": -3.6274660315004574,
+        "total_return": -0.05278240658722544,
+        "trades": 2523.0,
+        "turnover": 378139.42064879317
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.060825780128287,
+      "test_splits": 2,
+      "total_closed_trades": 2557
+    },
+    {
+      "alpha_id": "custom_crypto_trend_reversal_regime",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "custom_crypto_momentum_trend",
+      "gates": {
+        "finite_profit_factor": false,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": false,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": false,
+        "positive_test_return": false
+      },
+      "metrics": {},
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": null,
+      "test_splits": 0,
+      "total_closed_trades": 0
+    },
+    {
+      "alpha_id": "custom_crypto_momentum_trend_v2",
+      "gates": {
+        "finite_profit_factor": true,
+        "maximum_drawdown": false,
+        "minimum_closed_trades": true,
+        "minimum_profit_factor": false,
+        "minimum_test_splits": true,
+        "positive_test_return": false
+      },
+      "metrics": {
+        "bars": 209.0,
+        "cagr": 0.96120554552912,
+        "closed_trades": 1385.5,
+        "expectancy": -0.3200963802107808,
+        "fees_paid": 537.3707600087271,
+        "final_equity": 9570.036578523488,
+        "max_drawdown": -0.13252838807605244,
+        "profit_factor": 0.8804020074332263,
+        "return_profit_factor": 0.9476481431620752,
+        "sharpe": -1.9490636455712853,
+        "total_return": -0.042996342147651204,
+        "trades": 2806.75,
+        "turnover": 358247.17333915073
+      },
+      "qualified_for_shadow_paper": false,
+      "return_edge_vs_benchmark": -0.05103971568871277,
+      "test_splits": 8,
+      "total_closed_trades": 11084
+    }
+  ],
+  "schema_version": "1.0",
+  "universe": {
+    "bar_count": 8339,
+    "first_bar": "2025-01-18 13:00:00+00:00",
+    "last_bar": "2025-12-31 23:00:00+00:00",
+    "symbol_count": 28,
+    "symbols": [
+      "1000BONK-USDT",
+      "1000PEPE-USDT",
+      "1000XEC-USDT",
+      "AAVE-USDT",
+      "ADA-USDT",
+      "AVAAI-USDT",
+      "AVAX-USDT",
+      "BCH-USDT",
+      "BNB-USDT",
+      "BTC-USDT",
+      "DOGE-USDT",
+      "ETH-USDT",
+      "FIL-USDT",
+      "G-USDT",
+      "LTC-USDT",
+      "NEAR-USDT",
+      "ONDO-USDT",
+      "SOL-USDT",
+      "SUI-USDT",
+      "SYN-USDT",
+      "TAO-USDT",
+      "TLM-USDT",
+      "TRUMP-USDT",
+      "VANRY-USDT",
+      "WLD-USDT",
+      "XLM-USDT",
+      "XRP-USDT",
+      "ZEC-USDT"
+    ]
+  }
+}

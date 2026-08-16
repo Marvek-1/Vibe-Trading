@@ -1,0 +1,10 @@
+Fetch BTC-USDT daily market data for 2024-01-01 to 2024-01-31.
+
+Try these sources in order:
+1. source="auto"
+2. source="okx" 
+3. source="ccxt" with exchange="binance" and symbol="BTC/USDT"
+4. source="ccxt" with exchange="okx" and symbol="BTC/USDT"
+5. source="yfinance" with symbol="BTC-USD"
+
+Report which source worked and show the first 3 rows of data.
