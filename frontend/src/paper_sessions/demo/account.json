@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "initial_balance": 10000.0,
+  "wallet_balance": 10000.0,
+  "reserved_margin": 0.0,
+  "realized_gross_pnl": 0.0,
+  "realized_net_pnl": 0.0,
+  "total_fees": 0.0,
+  "total_funding": 0.0,
+  "total_liquidation_fees": 0.0,
+  "opened_trades": 0,
+  "closed_trades": 0,
+  "positions": {},
+  "updated_at": "2026-07-22T23:20:55.759945+00:00",
+  "available_balance": 10000.0
+}
