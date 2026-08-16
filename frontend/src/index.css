@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Mostar Royal — Light mode surfaces */
+    --background: 220 35% 97%;
+    --foreground: 222 45% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 45% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 45% 8%;
+    --primary: 42 68% 63%;
+    --primary-foreground: 28 40% 8%;
+    --muted: 220 20% 92%;
+    --muted-foreground: 220 12% 42%;
+    --destructive: 4 68% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 85%;
+    --radius: 0.5rem;
+    --success: 158 62% 51%;
+    --danger: 4 68% 60%;
+    --warning: 38 85% 55%;
+    --info: 217 60% 68%;
+    --chart-grid: 220 20% 88%;
+    --chart-text: 220 12% 42%;
+    --chart-axis: 220 20% 76%;
+    --chart-compare-a: #C9A24B;
+    --chart-compare-b: #46d6a0;
+    --glass-surface-bg: rgba(255, 255, 255, 0.52);
+    --glass-panel-bg: rgba(255, 255, 255, 0.34);
+    --glass-overlay-bg: rgba(255, 255, 255, 0.78);
+    --glass-input-bg: rgba(255, 255, 255, 0.7);
+    --glass-muted-bg: rgba(255, 255, 255, 0.3);
+    --glass-border-soft: rgba(148, 163, 184, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.62);
+    --glass-border-strong: rgba(255, 255, 255, 0.82);
+    --glass-shadow: 0 18px 48px rgba(15, 23, 42, 0.14);
+    --glass-shadow-lg: 0 24px 64px rgba(15, 23, 42, 0.2);
+    --glass-ring: 0 0 0 3px rgba(8, 145, 178, 0.14);
+    --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.18) 38%, rgba(255, 255, 255, 0.06) 100%);
+    --glass-highlight-soft: linear-gradient(135deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.04) 100%);
+    --glass-primary-start: rgba(8, 145, 178, 0.72);
+    --glass-primary-end: rgba(37, 99, 235, 0.68);
+    --glass-accent-start: rgba(124, 58, 237, 0.6);
+    --glass-accent-end: rgba(219, 39, 119, 0.54);
+    --glass-danger-start: rgba(239, 68, 68, 0.56);
+    --glass-danger-end: rgba(220, 38, 38, 0.5);
+    --glass-chip-bg: rgba(255, 255, 255, 0.42);
+    --glass-chip-bg-strong: rgba(255, 255, 255, 0.68);
+  }
+
+  .dark {
+    --background: 222 45% 6%;
+    --foreground: 42 22% 87%;
+    --card: 222 42% 9%;
+    --card-foreground: 42 22% 87%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 42 22% 87%;
+    --primary: 42 68% 63%;
+    --primary-foreground: 28 40% 8%;
+    --muted: 222 35% 14%;
+    --muted-foreground: 42 12% 55%;
+    --destructive: 3 72% 65%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 42 40% 55% / 0.16;
+    --success: 158 62% 57%;
+    --danger: 3 72% 65%;
+    --warning: 42 68% 63%;
+    --info: 217 60% 73%;
+    --chart-grid: 222 30% 16%;
+    --chart-text: 42 12% 55%;
+    --chart-axis: 222 30% 26%;
+    --chart-compare-a: #E8B84B;
+    --chart-compare-b: #46d6a0;
+    --glass-surface-bg: rgba(16, 20, 40, 0.58);
+    --glass-panel-bg: rgba(14, 18, 34, 0.42);
+    --glass-overlay-bg: rgba(18, 24, 48, 0.82);
+    --glass-input-bg: rgba(15, 23, 42, 0.56);
+    --glass-muted-bg: rgba(255, 255, 255, 0.06);
+    --glass-border-soft: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-border-strong: rgba(255, 255, 255, 0.28);
+    --glass-shadow: 0 20px 52px rgba(0, 0, 0, 0.34);
+    --glass-shadow-lg: 0 28px 72px rgba(0, 0, 0, 0.48);
+    --glass-ring: 0 0 0 3px rgba(94, 231, 223, 0.16);
+    --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.07) 40%, rgba(255, 255, 255, 0.02) 100%);
+    --glass-highlight-soft: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 44%, rgba(255, 255, 255, 0.01) 100%);
+    --glass-primary-start: rgba(94, 231, 223, 0.48);
+    --glass-primary-end: rgba(59, 130, 246, 0.44);
+    --glass-accent-start: rgba(180, 144, 245, 0.4);
+    --glass-accent-end: rgba(247, 168, 196, 0.34);
+    --glass-danger-start: rgba(239, 68, 68, 0.42);
+    --glass-danger-end: rgba(185, 28, 28, 0.38);
+    --glass-chip-bg: rgba(255, 255, 255, 0.08);
+    --glass-chip-bg-strong: rgba(255, 255, 255, 0.14);
+  }
+
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Chakra Petch', sans-serif;
+    min-height: 100vh;
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.18), transparent 30%),
+      radial-gradient(circle at 100% 100%, hsl(var(--success) / 0.16), transparent 28%),
+      radial-gradient(circle at 52% 22%, hsl(var(--info) / 0.14), transparent 24%);
+    background-attachment: fixed;
+    transition: background-color 360ms ease, color 360ms ease;
+  }
+
+  .prose table { border-collapse: collapse; width: 100%; }
+  .prose th, .prose td { border: 1px solid hsl(var(--border)); }
+  .prose tbody tr:nth-child(even) { background: hsl(var(--muted) / 0.3); }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--primary) / 0.35); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.55); }
+}
+
+@keyframes pulse-slide {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(200%); }
+  100% { transform: translateX(-100%); }
+}
+
+[dir="rtl"] .rtl\:flip-x { transform: scaleX(-1); }
+
+/* ── Ambient scene: slow drifting blobs behind the chat, gold/teal/info
+   tokens (not a foreign palette) at low opacity so they read as atmosphere,
+   never compete with foreground text. ── */
+@keyframes scene-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(4%, 6%) scale(1.08); }
+}
+@keyframes scene-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-5%, -4%) scale(1.1); }
+}
+@keyframes scene-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(3%, -5%) scale(0.95); }
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.scene__blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.24;
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+.dark .scene__blob { opacity: 0.34; }
+.scene__blob--1 {
+  top: -12%; left: -8%; width: 42rem; height: 42rem;
+  background: radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.9), transparent 72%);
+  animation: scene-drift-1 30s ease-in-out infinite;
+}
+.scene__blob--2 {
+  bottom: -16%; right: -10%; width: 36rem; height: 36rem;
+  background: radial-gradient(circle at 60% 40%, hsl(var(--success) / 0.92), transparent 72%);
+  animation: scene-drift-2 34s ease-in-out infinite;
+}
+.scene__blob--3 {
+  top: 34%; right: 14%; width: 28rem; height: 28rem;
+  background: radial-gradient(circle at 50% 50%, hsl(var(--info) / 0.88), transparent 72%);
+  animation: scene-drift-3 24s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene__blob { animation: none; }
+}
+
+/* ── Glass surface: frosted card used for elevated overlays (modals, the
+   governed-backtest panel). Falls back to a solid tinted surface when
+   backdrop-filter isn't supported instead of silently losing contrast. ── */
+.glass-surface {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--glass-highlight), var(--glass-surface-bg);
+  box-shadow: inset 0 0 0 1px var(--glass-border-soft), inset 0 1px 0 var(--glass-border), var(--glass-shadow);
+  transition: background 240ms ease, box-shadow 240ms ease, transform 240ms ease;
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass-surface {
+    backdrop-filter: blur(22px) saturate(165%);
+    -webkit-backdrop-filter: blur(22px) saturate(165%);
+  }
+}
+.glass-surface--accent-edge {
+  position: relative;
+  border-top: none;
+}
+.glass-surface--accent-edge::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 9999px 9999px 0 0;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--info)), hsl(var(--success)));
+}
+
+/* Same frosted background as .glass-surface but no border/shadow of its own
+   -- for panels that already carry a directional border (e.g. the sidebar's
+   RTL-aware border-e) and shouldn't get a second, conflicting one. */
+.glass-panel {
+  background: hsl(var(--card) / 0.72);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass-panel {
+    background: hsl(var(--card) / 0.5);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+}

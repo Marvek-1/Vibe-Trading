@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#0b0e14;font-family:'IBM Plex Sans',sans-serif;color:#e6e9ef}a{color:#3b82f6;text-decoration:none}a:hover{color:#60a5fa}</style>
+</helmet>
+<div style="min-height:100vh;background:#0b0e14;padding:20px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:22px;font-weight:700">Live Paper Trading Dashboard</div>
+      <div style="display:flex;align-items:center;gap:18px;font-size:13px;color:#9aa3b2;flex-wrap:wrap">
+        <div>Session: <span style="color:#22c55e;font-weight:600">demo_session</span></div>
+        <div style="display:flex;align-items:center;gap:6px">Mode: <span style="border:1px solid #2b5cd9;color:#6ea0ff;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:600">ISOLATED (Default)</span></div>
+        <div style="display:flex;align-items:center;gap:6px">Update: <span style="color:#cdd3de;font-family:'IBM Plex Mono',monospace">{{ clock }} UTC</span> <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span></div>
+        <div style="display:flex;align-items:center;gap:8px">Auto Refresh: <select style="background:#141924;border:1px solid #2a3242;color:#e6e9ef;border-radius:6px;padding:3px 8px;font-size:12px"><option>5s</option><option>10s</option><option>30s</option></select></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px">
+      <button style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit" style-hover="background:#1d4ed8">+ New Paper Position</button>
+      <button onClick="{{ closeAll }}" style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit" style-hover="background:#b91c1c">⊗ Close All Positions</button>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:8px;border-bottom:1px solid #1e2534;padding-bottom:0">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.go }}" style="background:transparent;border:none;border-bottom:2px solid {{ t.border }};color:{{ t.color }};padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">{{ t.label }}</button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+  <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:12px">
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">👛 Wallet Balance</div>
+      <div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$10,234.56</div>
+      <div style="font-size:12px;color:#22c55e">Available: $9,684.56</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">🔒 Reserved Margin</div>
+      <div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$550.00</div>
+      <div style="font-size:12px;color:#eab308">In Use: 5 Positions</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">📊 Open Notional</div>
+      <div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$2,750.00</div>
+      <div style="font-size:12px;color:#9aa3b2">Leverage Exposure</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">📈 Unrealized P&amp;L</div>
+      <div style="font-size:20px;font-weight:700;color:#22c55e;font-family:'IBM Plex Mono',monospace">+ $18.73</div>
+      <div style="font-size:12px;color:#22c55e">+0.18%</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">🏆 Realized P&amp;L</div>
+      <div style="font-size:20px;font-weight:700;color:#22c55e;font-family:'IBM Plex Mono',monospace">+ $124.36</div>
+      <div style="font-size:12px;color:#22c55e">All Time</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">🏷️ Fees Paid</div>
+      <div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$12.34</div>
+      <div style="font-size:12px;color:#9aa3b2">All Time</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">💱 Funding (Net)</div>
+      <div style="font-size:20px;font-weight:700;color:#ef4444;font-family:'IBM Plex Mono',monospace">- $1.23</div>
+      <div style="font-size:12px;color:#9aa3b2">All Time</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;color:#9aa3b2;display:flex;align-items:center;gap:6px">🎯 Current Equity</div>
+      <div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$10,377.66</div>
+      <div style="font-size:12px;color:#22c55e">+0.38%</div>
+    </div>
+  </div>
+
+  <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;overflow:hidden">
+    <div style="padding:14px 18px;font-size:16px;font-weight:700;border-bottom:1px solid #1e2534">Open Positions (5)</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="color:#9aa3b2;font-size:12px">
+        <th style="text-align:left;padding:10px 18px;font-weight:600">Symbol</th>
+        <th style="text-align:left;padding:10px 8px;font-weight:600">Side</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Margin (USDT)</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Leverage</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Notional (USDT)</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Entry Price</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Mark Price</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Liq. Price</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">TP / SL</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Unrealized P&amp;L (USDT)</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">ROI (Margin %)</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Duration</th>
+        <th style="text-align:center;padding:10px 18px 10px 8px;font-weight:600">Action</th>
+      </tr></thead>
+      <tbody>
+        <sc-for list="{{ positions }}" as="p" hint-placeholder-count="5">
+          <tr style="border-top:1px solid #1e2534">
+            <td style="padding:10px 18px"><div style="font-weight:700">{{ p.symbol }}</div><div style="font-size:11px;color:#9aa3b2">Perp</div></td>
+            <td style="padding:10px 8px;font-weight:700;color:{{ p.sideColor }}">{{ p.side }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ p.margin }}</td>
+            <td style="padding:10px 8px;text-align:right;color:#6ea0ff;font-weight:600">{{ p.lev }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ p.notional }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ p.entry }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:{{ p.markColor }}">{{ p.mark }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:#eab308">{{ p.liq }}</td>
+            <td style="padding:10px 8px;text-align:right;font-size:11px;font-family:'IBM Plex Mono',monospace"><div style="color:#22c55e">TP: {{ p.tp }}</div><div style="color:#ef4444">SL: {{ p.sl }}</div></td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:{{ p.pnlColor }};font-weight:600">{{ p.pnl }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:{{ p.pnlColor }};font-weight:600">{{ p.roi }}</td>
+            <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ p.dur }}</td>
+            <td style="padding:10px 18px 10px 8px;text-align:center"><button style="background:transparent;border:1px solid #dc2626;color:#ef4444;border-radius:6px;padding:4px 14px;font-size:12px;cursor:pointer;font-family:inherit" style-hover="background:#dc2626;color:#fff">Close</button></td>
+          </tr>
+        </sc-for>
+        <tr style="border-top:1px solid #1e2534;font-weight:600">
+          <td style="padding:12px 18px" colspan="2">Total / Average</td>
+          <td style="padding:12px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">$350.00</td>
+          <td></td>
+          <td style="padding:12px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">$2,850.00</td>
+          <td colspan="4"></td>
+          <td style="padding:12px 8px;text-align:right;color:#22c55e;font-family:'IBM Plex Mono',monospace">+$78.99</td>
+          <td style="padding:12px 8px;text-align:right;color:#22c55e;font-family:'IBM Plex Mono',monospace">+22.57%</td>
+          <td colspan="2"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.35fr 1.15fr 1fr 1fr;gap:14px">
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:16px;font-weight:700">Equity Curve</div>
+        <select style="background:#141924;border:1px solid #2a3242;color:#e6e9ef;border-radius:6px;padding:3px 8px;font-size:12px"><option>1H</option><option>4H</option><option>1D</option></select>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:24px">
+        <div><div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$10,377.66</div><div style="font-size:12px;color:#9aa3b2">Current Equity</div></div>
+        <div><div style="font-size:16px;font-weight:700;color:#22c55e">+0.38%</div><div style="font-size:12px;color:#9aa3b2">24H Change</div></div>
+      </div>
+      <div style="flex:1;min-height:150px">{{ equityChart }}</div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:16px;font-weight:700">Margin Allocation</div>
+      <div style="display:flex;align-items:center;gap:16px;flex:1">
+        <div style="position:relative;width:160px;height:160px;flex-shrink:0">{{ donut }}
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none">
+            <div style="font-size:17px;font-weight:700;font-family:'IBM Plex Mono',monospace">$350.00</div>
+            <div style="font-size:11px;color:#9aa3b2">Total Margin</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:12px">
+          <sc-for list="{{ alloc }}" as="a" hint-placeholder-count="5">
+            <div style="display:flex;align-items:flex-start;gap:8px">
+              <span style="width:9px;height:9px;border-radius:50%;background:{{ a.color }};margin-top:3px;flex-shrink:0"></span>
+              <div><div style="font-weight:600">{{ a.label }}</div><div style="color:#9aa3b2;font-family:'IBM Plex Mono',monospace">{{ a.amount }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:16px;font-weight:700">P&amp;L Summary <span style="font-weight:400;font-size:13px;color:#9aa3b2">(All Time)</span></div>
+      <div style="display:flex;flex-direction:column;font-size:13px">
+        <sc-for list="{{ pnlRows }}" as="r" hint-placeholder-count="8">
+          <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1a2130">
+            <span style="color:#9aa3b2">{{ r.k }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:{{ r.color }}">{{ r.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:16px;font-weight:700">Account Health</div>
+      <div style="display:flex;justify-content:center;flex:1;align-items:center">
+        <div style="position:relative;width:150px;height:150px">{{ healthRing }}
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <div style="font-size:26px;font-weight:700">95%</div>
+            <div style="font-size:12px;color:#22c55e;font-weight:600">Healthy</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <div><div style="color:#9aa3b2">Margin Usage</div><div style="font-size:18px;font-weight:700;color:#22c55e;font-family:'IBM Plex Mono',monospace">5.37%</div></div>
+        <div style="text-align:right"><div style="color:#9aa3b2">Risk Level</div><div style="font-size:18px;font-weight:700;color:#22c55e">Low</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;overflow:hidden">
+    <div style="padding:14px 18px;font-size:16px;font-weight:700;border-bottom:1px solid #1e2534;display:flex;justify-content:space-between;align-items:center">Recent Closed Trades <a href="#" style="font-size:13px;font-weight:500">View All</a></div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="color:#9aa3b2;font-size:12px">
+        <th style="text-align:left;padding:10px 18px;font-weight:600">Time</th>
+        <th style="text-align:left;padding:10px 8px;font-weight:600">Symbol</th>
+        <th style="text-align:left;padding:10px 8px;font-weight:600">Side</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Margin</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Lev.</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Notional</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Entry Price</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Exit Price</th>
+        <th style="text-align:left;padding:10px 8px;font-weight:600">Exit Reason</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Gross P&amp;L</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Fees</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Funding</th>
+        <th style="text-align:right;padding:10px 8px;font-weight:600">Net P&amp;L</th>
+        <th style="text-align:right;padding:10px 18px 10px 8px;font-weight:600">ROI (Margin %)</th>
+      </tr></thead>
+      <tbody>
+        <sc-for list="{{ closed }}" as="t" hint-placeholder-count="5">
+          <tr style="border-top:1px solid #1e2534">
+            <td style="padding:9px 18px;font-family:'IBM Plex Mono',monospace">{{ t.time }}</td>
+            <td style="padding:9px 8px;font-weight:600">{{ t.symbol }}</td>
+            <td style="padding:9px 8px;font-weight:700;color:{{ t.sideColor }}">{{ t.side }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ t.margin }}</td>
+            <td style="padding:9px 8px;text-align:right;color:#6ea0ff;font-weight:600">{{ t.lev }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ t.notional }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ t.entry }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ t.exit }}</td>
+            <td style="padding:9px 8px">{{ t.reason }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:{{ t.grossColor }}">{{ t.gross }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:#ef4444">{{ t.fees }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ t.funding }}</td>
+            <td style="padding:9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;font-weight:600;color:{{ t.netColor }}">{{ t.net }}</td>
+            <td style="padding:9px 18px 9px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;font-weight:600;color:{{ t.netColor }}">{{ t.roi }}</td>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px"><div style="font-size:12px;color:#9aa3b2">Active Grid Bots</div><div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">3</div><div style="font-size:12px;color:#9aa3b2">2 Long · 1 Neutral</div></div>
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px"><div style="font-size:12px;color:#9aa3b2">Total Grid Investment</div><div style="font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace">$1,500.00</div><div style="font-size:12px;color:#9aa3b2">Isolated per bot</div></div>
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px"><div style="font-size:12px;color:#9aa3b2">Grid Profit (Matched)</div><div style="font-size:20px;font-weight:700;color:#22c55e;font-family:'IBM Plex Mono',monospace">+$42.18</div><div style="font-size:12px;color:#22c55e">147 grid fills</div></div>
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 16px"><div style="font-size:12px;color:#9aa3b2">Best APR (7D annualized)</div><div style="font-size:20px;font-weight:700;color:#22c55e;font-family:'IBM Plex Mono',monospace">86.4%</div><div style="font-size:12px;color:#9aa3b2">BTCUSDT Neutral</div></div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;overflow:hidden">
+      <div style="padding:14px 18px;font-size:16px;font-weight:700;border-bottom:1px solid #1e2534;display:flex;justify-content:space-between;align-items:center">Futures Grid Bots
+        <button style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">+ Create Grid Bot</button>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="color:#9aa3b2;font-size:12px">
+          <th style="text-align:left;padding:10px 18px;font-weight:600">Pair</th>
+          <th style="text-align:left;padding:10px 8px;font-weight:600">Direction</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">Price Range</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">Grids</th>
+          <th style="text-align:left;padding:10px 8px;font-weight:600">Spacing</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">Lev.</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">Investment</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">Grid Profit</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">Unrealized</th>
+          <th style="text-align:right;padding:10px 8px;font-weight:600">APR</th>
+          <th style="text-align:left;padding:10px 8px;font-weight:600">Extras</th>
+          <th style="text-align:center;padding:10px 18px 10px 8px;font-weight:600">Action</th>
+        </tr></thead>
+        <tbody>
+          <sc-for list="{{ gridBots }}" as="g" hint-placeholder-count="3">
+            <tr style="border-top:1px solid #1e2534">
+              <td style="padding:10px 18px"><div style="font-weight:700">{{ g.pair }}</div><div style="font-size:11px;color:#9aa3b2">{{ g.exchangeStyle }}</div></td>
+              <td style="padding:10px 8px;font-weight:700;color:{{ g.dirColor }}">{{ g.dir }}</td>
+              <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ g.range }}</td>
+              <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ g.grids }}</td>
+              <td style="padding:10px 8px">{{ g.spacing }}</td>
+              <td style="padding:10px 8px;text-align:right;color:#6ea0ff;font-weight:600">{{ g.lev }}</td>
+              <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ g.inv }}</td>
+              <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:#22c55e">{{ g.profit }}</td>
+              <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:{{ g.unrColor }}">{{ g.unr }}</td>
+              <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:#22c55e">{{ g.apr }}</td>
+              <td style="padding:10px 8px;font-size:11px;color:#9aa3b2">{{ g.extras }}</td>
+              <td style="padding:10px 18px 10px 8px;text-align:center"><div style="display:flex;gap:6px;justify-content:center">
+                <button onClick="{{ g.flip }}" style="background:transparent;border:1px solid #2b5cd9;color:#6ea0ff;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:inherit" style-hover="background:#2b5cd9;color:#fff">{{ g.flipLabel }}</button>
+                <button style="background:transparent;border:1px solid #dc2626;color:#ef4444;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:inherit" style-hover="background:#dc2626;color:#fff">Stop</button>
+              </div></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px">
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px">
+        <div style="font-size:16px;font-weight:700;margin-bottom:10px">Grid Ladder — BTCUSDT Neutral <span style="font-size:12px;font-weight:400;color:#9aa3b2">(mark 68,123.50)</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <sc-for list="{{ ladder }}" as="l" hint-placeholder-count="9">
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-family:'IBM Plex Mono',monospace">
+              <span style="width:70px;color:#9aa3b2;text-align:right">{{ l.price }}</span>
+              <div style="flex:1;height:14px;background:#141924;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ l.w }};background:{{ l.color }};border-radius:3px"></div></div>
+              <span style="width:88px;color:{{ l.color }}">{{ l.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:16px;font-weight:700">Exchange-Style Playbook</div>
+        <sc-for list="{{ playbook }}" as="pb" hint-placeholder-count="3">
+          <div style="border:1px solid #1e2534;border-radius:8px;padding:12px 14px">
+            <div style="font-weight:700;font-size:13px;margin-bottom:4px">{{ pb.name }}</div>
+            <div style="font-size:12px;color:#9aa3b2;line-height:1.5">{{ pb.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isTimed }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div style="font-size:13px;color:#9aa3b2">Each timed trade runs <span style="color:#e6e9ef;font-weight:600">$100 ISOLATED margin</span> with its own limit entry — a losing trade can never draw from the main pot (unlike Cross mode).</div>
+      <button style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">+ New Timed Trade</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <sc-for list="{{ timedCols }}" as="col" hint-placeholder-count="3">
+        <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;overflow:hidden;display:flex;flex-direction:column">
+          <div style="padding:12px 16px;border-bottom:1px solid #1e2534;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-weight:700;font-size:15px">{{ col.title }}</span>
+            <span style="font-size:11px;color:#9aa3b2">{{ col.sub }}</span>
+          </div>
+          <div style="padding:12px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ col.trades }}" as="tt" hint-placeholder-count="2">
+              <div style="border:1px solid #1e2534;border-radius:8px;padding:12px;background:#0e1219;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div style="font-weight:700;font-size:13px">{{ tt.symbol }} <span style="color:{{ tt.sideColor }}">{{ tt.side }}</span></div>
+                  <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:{{ tt.badgeBg }};color:{{ tt.badgeColor }};font-weight:600">{{ tt.status }}</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;color:#9aa3b2;font-family:'IBM Plex Mono',monospace">
+                  <div>Limit: <span style="color:#e6e9ef">{{ tt.limit }}</span></div>
+                  <div>Mark: <span style="color:#e6e9ef">{{ tt.mark }}</span></div>
+                  <div>Margin: <span style="color:#eab308">$100.00 ISO</span></div>
+                  <div>P&amp;L: <span style="color:{{ tt.pnlColor }}">{{ tt.pnl }}</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;height:6px;background:#141924;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ tt.progress }};background:{{ tt.barColor }};transition:width 1s linear"></div></div>
+                  <span style="font-size:12px;font-family:'IBM Plex Mono',monospace;color:{{ tt.barColor }};font-weight:600">{{ tt.remaining }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isExp }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="background:#11151f;border:1px solid #1e2534;border-top:2px solid #22c55e;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px">
+      <div>
+        <div style="font-size:16px;font-weight:700">Live Research Capital</div>
+        <div style="font-size:12px;color:#9aa3b2;margin-top:2px">Only live, reconciled, accounting-healthy sessions are summed. Each strategy runs its own independent book — capital isn't pooled.</div>
+        <div style="font-size:15px;font-weight:700;color:#22c55e;font-family:'IBM Plex Mono',monospace;margin-top:6px">$9.82 (+0.02%)</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;border:1px solid #1e2534;border-radius:8px;padding:12px 14px">
+        <sc-for list="{{ capStats }}" as="c" hint-placeholder-count="7">
+          <div><div style="font-size:10px;letter-spacing:0.06em;color:#9aa3b2;text-transform:uppercase">{{ c.k }}</div><div style="font-size:15px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:{{ c.color }};margin-top:4px">{{ c.v }}</div></div>
+        </sc-for>
+      </div>
+      <div>
+        <div style="font-size:11px;letter-spacing:0.06em;color:#9aa3b2;text-transform:uppercase;margin-bottom:8px">Contribution — who's carrying the pot</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ contrib }}" as="cb" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-family:'IBM Plex Mono',monospace">
+              <span style="width:22px;color:#9aa3b2">{{ cb.rank }}</span>
+              <span style="width:72px;color:#6ea0ff">{{ cb.name }}</span>
+              <div style="flex:1;height:12px;background:#141924;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ cb.w }};background:#22c55e;border-radius:3px;opacity:0.85"></div></div>
+              <span style="width:52px;text-align:right">{{ cb.amt }}</span>
+              <span style="width:56px;text-align:right;color:#22c55e">{{ cb.pct }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1px solid #1e2534;display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-size:16px;font-weight:700">Shadow A/B — $10 no-trade-band candidate vs. control</div>
+        <div style="font-size:12px;color:#9aa3b2;margin-top:2px">Same symbols, cash, fee model, start time per regimen — only the minimum rebalance notional differs.</div></div>
+        <button style="background:transparent;border:1px solid #2a3242;color:#e6e9ef;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit" style-hover="border-color:#2b5cd9;color:#6ea0ff">⭳ Export CSV</button>
+      </div>
+      <sc-for list="{{ abGroups }}" as="grp" hint-placeholder-count="3">
+        <div style="border-top:1px solid #1e2534">
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead><tr style="color:#9aa3b2;font-size:11px;background:#0e1219">
+              <th style="text-align:left;padding:9px 18px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;width:130px">{{ grp.label }}</th>
+              <th style="text-align:right;padding:9px 8px;font-weight:600">Net Return</th>
+              <th style="text-align:right;padding:9px 8px;font-weight:600">Trades</th>
+              <th style="text-align:right;padding:9px 8px;font-weight:600">Rebalance Fees</th>
+              <th style="text-align:right;padding:9px 8px;font-weight:600">Turnover</th>
+              <th style="text-align:right;padding:9px 8px;font-weight:600">Max DD</th>
+              <th style="text-align:right;padding:9px 8px;font-weight:600">Tracking Error</th>
+              <th style="text-align:left;padding:9px 18px 9px 16px;font-weight:600">Status</th>
+            </tr></thead>
+            <tbody>
+              <sc-for list="{{ grp.rows }}" as="r" hint-placeholder-count="3">
+                <tr style="border-top:1px solid #1a2130">
+                  <td style="padding:10px 18px;font-weight:700">{{ r.name }}</td>
+                  <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:{{ r.retColor }};font-weight:600">{{ r.ret }}</td>
+                  <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ r.trades }}</td>
+                  <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:#ef4444">{{ r.fees }}</td>
+                  <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ r.turnover }}</td>
+                  <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace;color:#ef4444">{{ r.dd }}</td>
+                  <td style="padding:10px 8px;text-align:right;font-family:'IBM Plex Mono',monospace">{{ r.te }}</td>
+                  <td style="padding:10px 18px 10px 16px"><div style="display:flex;gap:5px;flex-wrap:wrap">
+                    <sc-for list="{{ r.pills }}" as="pill" hint-placeholder-count="3">
+                      <span style="font-size:10px;font-weight:700;letter-spacing:0.05em;padding:2px 8px;border-radius:10px;border:1px solid {{ pill.c }};color:{{ pill.c }};font-family:'IBM Plex Mono',monospace">{{ pill.t }}</span>
+                    </sc-for>
+                  </div></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:14px 18px">
+      <div style="font-size:11px;letter-spacing:0.06em;color:#9aa3b2;text-transform:uppercase;margin-bottom:10px">((•)) Live Prices</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ livePrices }}" as="lp" hint-placeholder-count="8">
+          <div style="border:1px solid {{ lp.border }};border-radius:8px;padding:6px 12px;font-size:12px;font-family:'IBM Plex Mono',monospace;color:{{ lp.color }};font-weight:600">{{ lp.sym }} {{ lp.arrow }} {{ lp.px }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isMorning }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="background:linear-gradient(120deg,#1a1508 0%,#11151f 45%);border:1px solid #3a2f14;border-radius:10px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-size:19px;font-weight:700;color:#f5d67a">☀️ Morning Alpha Briefing</div>
+        <div style="font-size:13px;color:#9aa3b2;margin-top:4px">Your pre-session read — pulse, movers, and where the edge is today. Have a beautiful one.</div>
+      </div>
+      <div style="text-align:right"><div style="font-size:12px;color:#9aa3b2">Session bias</div><div style="font-size:18px;font-weight:700;color:#22c55e">Cautiously Bullish</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:14px">
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="font-size:16px;font-weight:700;align-self:flex-start">Fear &amp; Greed</div>
+        <div style="position:relative;width:160px;height:160px">{{ fearGauge }}
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <div style="font-size:30px;font-weight:700;color:#eab308">61</div>
+            <div style="font-size:12px;color:#eab308;font-weight:600">Greed</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#9aa3b2;text-align:center">Up from 54 yesterday — momentum building, watch for chase entries.</div>
+      </div>
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:16px;font-weight:700">Today's Setups</div>
+        <sc-for list="{{ setups }}" as="s" hint-placeholder-count="3">
+          <div style="border:1px solid #1e2534;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;gap:12px;align-items:center">
+            <div>
+              <div style="font-weight:700;font-size:13px">{{ s.pair }} <span style="color:{{ s.sideColor }}">{{ s.side }}</span></div>
+              <div style="font-size:12px;color:#9aa3b2;margin-top:2px">{{ s.thesis }}</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0">
+              <div style="font-size:11px;color:#9aa3b2">Confidence</div>
+              <div style="font-size:16px;font-weight:700;color:{{ s.confColor }};font-family:'IBM Plex Mono',monospace">{{ s.conf }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#11151f;border:1px solid #1e2534;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:16px;font-weight:700">Funding Radar</div>
+        <sc-for list="{{ funding }}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1a2130;font-size:13px">
+            <span style="font-weight:600">{{ f.pair }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;color:{{ f.color }}">{{ f.rate }}</span>
+            <span style="font-size:11px;color:#9aa3b2">{{ f.note }}</span>
+          </div>
+        </sc-for>
+        <div style="font-size:12px;color:#9aa3b2;margin-top:auto">Negative funding pays longs — free carry while you wait.</div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dashboard&quot;,&quot;options&quot;:[&quot;dashboard&quot;,&quot;grid&quot;,&quot;timed&quot;,&quot;morning&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;autoRefreshSecs&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:60,&quot;min&quot;:1,&quot;max&quot;:60,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;riskCapLeverage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;10x&quot;,&quot;options&quot;:[&quot;3x&quot;,&quot;5x&quot;,&quot;10x&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  state = { clock: "10:24:35", mode: null, tick: 0, flipped: {} };
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      const d = new Date();
+      const p = n => String(n).padStart(2, "0");
+      this.setState(s => ({ clock: p(d.getUTCHours()) + ":" + p(d.getUTCMinutes()) + ":" + p(d.getUTCSeconds()), tick: s.tick + 1 }));
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  renderVals() {
+    const G = "#22c55e", R = "#ef4444", W = "#e6e9ef";
+    const positions = [
+      {symbol:"BTCUSDT",side:"LONG",sideColor:G,margin:"$100.00",lev:"10x",notional:"$1,000.00",entry:"67,845.10",mark:"68,123.50",markColor:G,liq:"61,234.90",tp:"69,000.00",sl:"66,500.00",pnl:"+$27.84",roi:"+27.84%",pnlColor:G,dur:"00:45:12"},
+      {symbol:"ETHUSDT",side:"SHORT",sideColor:R,margin:"$60.00",lev:"5x",notional:"$300.00",entry:"3,812.45",mark:"3,780.15",markColor:G,liq:"4,102.30",tp:"3,650.00",sl:"3,920.00",pnl:"+$8.05",roi:"+13.42%",pnlColor:G,dur:"01:15:33"},
+      {symbol:"SOLUSDT",side:"LONG",sideColor:G,margin:"$70.00",lev:"5x",notional:"$350.00",entry:"165.25",mark:"162.80",markColor:R,liq:"122.45",tp:"175.00",sl:"155.00",pnl:"-$12.25",roi:"-17.50%",pnlColor:R,dur:"00:22:18"},
+      {symbol:"BNBUSDT",side:"LONG",sideColor:G,margin:"$80.00",lev:"10x",notional:"$800.00",entry:"568.99",mark:"575.32",markColor:G,liq:"512.21",tp:"590.00",sl:"545.00",pnl:"+$50.64",roi:"+63.30%",pnlColor:G,dur:"00:18:41"},
+      {symbol:"XRPUSDT",side:"SHORT",sideColor:R,margin:"$40.00",lev:"10x",notional:"$400.00",entry:"0.5231",mark:"0.5172",markColor:G,liq:"0.5820",tp:"0.4900",sl:"0.5400",pnl:"+$4.72",roi:"+11.80%",pnlColor:G,dur:"00:05:22"},
+    ];
+    const alloc = [
+      {label:"BTCUSDT (28.6%)",amount:"$100.00",color:"#f59e0b",pct:28.6},
+      {label:"ETHUSDT (17.1%)",amount:"$60.00",color:"#ef4444",pct:17.1},
+      {label:"SOLUSDT (20.0%)",amount:"$70.00",color:"#8b5cf6",pct:20},
+      {label:"BNBUSDT (22.9%)",amount:"$80.00",color:"#22c55e",pct:22.9},
+      {label:"XRPUSDT (11.4%)",amount:"$40.00",color:"#3b82f6",pct:11.4},
+    ];
+    const pnlRows = [
+      {k:"Total Trades",v:"28",color:W},{k:"Win Rate",v:"64.29%",color:G},{k:"Profit Factor",v:"2.45",color:W},
+      {k:"Total Net P&L",v:"+$124.36",color:G},{k:"Average Win",v:"+$18.42",color:G},{k:"Average Loss",v:"-$7.51",color:R},
+      {k:"Largest Win",v:"+$46.21",color:G},{k:"Largest Loss",v:"-$21.33",color:R},
+    ];
+    const closed = [
+      {time:"10:22:15",symbol:"ADAUSDT",side:"LONG",sideColor:G,margin:"$50.00",lev:"5x",notional:"$250.00",entry:"0.4891",exit:"0.4950",reason:"Take Profit",gross:"+$6.03",grossColor:G,fees:"-$0.25",funding:"$0.00",net:"+$5.78",netColor:G,roi:"+11.56%"},
+      {time:"10:18:42",symbol:"TRXUSDT",side:"SHORT",sideColor:R,margin:"$50.00",lev:"5x",notional:"$250.00",entry:"0.1234",exit:"0.1256",reason:"Stop Loss",gross:"-$4.47",grossColor:R,fees:"-$0.25",funding:"$0.00",net:"-$4.72",netColor:R,roi:"-9.44%"},
+      {time:"10:15:10",symbol:"LTCUSDT",side:"LONG",sideColor:G,margin:"$40.00",lev:"5x",notional:"$200.00",entry:"86.25",exit:"88.10",reason:"Take Profit",gross:"+$4.28",grossColor:G,fees:"-$0.20",funding:"$0.00",net:"+$4.08",netColor:G,roi:"+10.20%"},
+      {time:"10:10:33",symbol:"MATICUSDT",side:"SHORT",sideColor:R,margin:"$30.00",lev:"10x",notional:"$150.00",entry:"0.8721",exit:"0.8602",reason:"Take Profit",gross:"+$2.05",grossColor:G,fees:"-$0.15",funding:"$0.00",net:"+$1.90",netColor:G,roi:"+6.33%"},
+      {time:"10:05:21",symbol:"DOGEUSDT",side:"LONG",sideColor:G,margin:"$40.00",lev:"10x",notional:"$400.00",entry:"0.1581",exit:"0.1574",reason:"Stop Loss",gross:"-$2.80",grossColor:R,fees:"-$0.40",funding:"$0.00",net:"-$3.20",netColor:R,roi:"-8.00%"},
+    ];
+    const mode = this.state.mode ?? this.props.defaultMode ?? "dashboard";
+    const tabDefs = [["dashboard","Dashboard"],["grid","Futures Grid"],["timed","Timed Trades"],["experiments","Experiments"],["morning","Morning Alpha"]];
+    const tabs = tabDefs.map(([id,label]) => ({
+      label, go: () => this.setState({ mode: id }),
+      border: mode === id ? "#2563eb" : "transparent",
+      color: mode === id ? "#e6e9ef" : "#9aa3b2",
+    }));
+    const flipped = this.state.flipped;
+    const gridBots = [
+      {pair:"BTCUSDT",exchangeStyle:"Neutral grid · KuCoin-style",dir:flipped.btc?"CLOSING":"NEUTRAL",dirColor:flipped.btc?"#eab308":"#6ea0ff",range:"62,000 – 74,000",grids:"40",spacing:"Arithmetic",lev:"3x",inv:"$600.00",profit:"+$24.51",unr:"+$6.10",unrColor:G,apr:"86.4%",extras:"AI params · Bot marketplace copy",flipLabel:flipped.btc?"Reopen":"Flip Mode",flip:()=>this.setState(s=>({flipped:{...s.flipped,btc:!s.flipped.btc}}))},
+      {pair:"ETHUSDT",exchangeStyle:"Long grid · Bybit-style",dir:flipped.eth?"CLOSING":"LONG",dirColor:flipped.eth?"#eab308":G,range:"3,400 – 4,100",grids:"30",spacing:"Geometric",lev:"5x",inv:"$500.00",profit:"+$12.87",unr:"-$3.42",unrColor:R,apr:"52.1%",extras:"Copy-bot config · trailing SL",flipLabel:flipped.eth?"Reopen":"Flip Mode",flip:()=>this.setState(s=>({flipped:{...s.flipped,eth:!s.flipped.eth}}))},
+      {pair:"SOLUSDT",exchangeStyle:"Long grid · Gate.io-style",dir:flipped.sol?"CLOSING":"LONG",dirColor:flipped.sol?"#eab308":G,range:"145 – 190",grids:"25",spacing:"Arithmetic",lev:"3x",inv:"$400.00",profit:"+$4.80",unr:"-$8.15",unrColor:R,apr:"31.7%",extras:"Open↔Close switch on live market",flipLabel:flipped.sol?"Reopen":"Flip Mode",flip:()=>this.setState(s=>({flipped:{...s.flipped,sol:!s.flipped.sol}}))},
+    ];
+    const ladder = [
+      {price:"71,000",w:"30%",color:R,label:"SELL wait"},
+      {price:"70,250",w:"42%",color:R,label:"SELL wait"},
+      {price:"69,500",w:"58%",color:R,label:"SELL wait"},
+      {price:"68,750",w:"74%",color:R,label:"SELL next"},
+      {price:"68,123",w:"100%",color:"#eab308",label:"◄ MARK"},
+      {price:"67,500",w:"78%",color:G,label:"BUY next"},
+      {price:"66,750",w:"60%",color:G,label:"BUY wait"},
+      {price:"66,000",w:"44%",color:G,label:"BUY wait"},
+      {price:"65,250",w:"28%",color:G,label:"BUY wait"},
+    ];
+    const playbook = [
+      {name:"KuCoin-style: AI Auto Params",desc:"Auto, copy-trading, or fully customized setup. AI presets pick range, grid count and leverage; infinity grids remove the upper bound."},
+      {name:"Bybit-style: Copy-Bot",desc:"Replicate top-performing grid configurations one-click. Futures grid up to 50x (we cap paper bots at 5x), plus DCA-grid hybrid."},
+      {name:"Gate.io-style: Live Open↔Close Switch",desc:"Flip a running bot from opening positions to closing-only without stopping it — unwind into strength on a live market. Use the Flip Mode button."},
+    ];
+    // timed trades: countdown driven by tick
+    const t0 = this.t0 ?? (this.t0 = Math.floor(Date.now()/1000));
+    const now = Math.floor(Date.now()/1000);
+    const mkT = (symbol, side, limit, mark, pnlNum, total, startOffset) => {
+      const elapsed = ((now - t0) + startOffset) % total;
+      const rem = total - elapsed;
+      const m = Math.floor(rem/60), s = rem%60;
+      const pos = pnlNum >= 0;
+      const filled = pnlNum !== null;
+      return { symbol, side, sideColor: side === "LONG" ? G : R,
+        limit, mark,
+        status: filled ? "FILLED" : "PENDING", badgeBg: filled ? "#12301f" : "#2b2410", badgeColor: filled ? G : "#eab308",
+        pnl: filled ? (pos?"+$":"-$") + Math.abs(pnlNum).toFixed(2) : "—",
+        pnlColor: filled ? (pos ? G : R) : "#9aa3b2",
+        progress: ((elapsed/total)*100).toFixed(1) + "%",
+        barColor: rem < 60 ? "#eab308" : "#3b82f6",
+        remaining: String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0") };
+    };
+    const timedCols = [
+      {title:"5m Sprints", sub:"expires at close of window", trades:[ mkT("BTCUSDT","LONG","68,050.00","68,123.50",1.08,300,40), mkT("DOGEUSDT","SHORT","0.1590","0.1574",1.01,300,150) ]},
+      {title:"10m Runners", sub:"$100 isolated each", trades:[ mkT("ETHUSDT","SHORT","3,815.00","3,780.15",0.91,600,220), mkT("SOLUSDT","LONG","164.00","162.80",-0.73,600,430) ]},
+      {title:"15m Swings", sub:"limit entry only", trades:[ mkT("BNBUSDT","LONG","567.00","575.32",1.47,900,510), mkT("XRPUSDT","SHORT","0.5250","0.5172",null,900,120) ]},
+    ];
+    const capStats = [
+      {k:"Live Research Capital",v:"$60,000.00",color:W},{k:"Live Research Equity",v:"$60,009.82",color:W},
+      {k:"Control Equity",v:"$30,004.32",color:W},{k:"Candidate Equity",v:"$30,005.50",color:W},
+      {k:"Candidate − Control",v:"+0.00%",color:G},{k:"Live Sessions",v:"6",color:W},{k:"Total Fees",v:"$61.41",color:"#ef4444"},
+    ];
+    const contrib = [
+      {rank:"#1",name:"10m $10",amt:"$2.38",pct:"+0.02%",w:"100%"},
+      {rank:"#2",name:"5m $10",amt:"$2.22",pct:"+0.02%",w:"93%"},
+      {rank:"#3",name:"10m ctrl",amt:"$2.00",pct:"+0.02%",w:"84%"},
+      {rank:"#4",name:"5m ctrl",amt:"$1.75",pct:"+0.02%",w:"74%"},
+      {rank:"#5",name:"15m $10",amt:"$0.91",pct:"+0.01%",w:"38%"},
+      {rank:"#6",name:"15m ctrl",amt:"$0.57",pct:"+0.01%",w:"24%"},
+    ];
+    const P = { stop:{t:"STOPPED",c:"#9aa3b2"}, acct:{t:"ACCOUNTING ERROR",c:"#ef4444"}, rec:{t:"RECONCILED",c:"#22c55e"}, ctl:{t:"CONTROL",c:"#6ea0ff"}, cand:{t:"CANDIDATE",c:"#eab308"}, v2:{t:"SCHEMA V2",c:"#8b5cf6"} };
+    const mkAB = (label, ctl, cand, diff) => ({label, rows:[
+      {name:"Control",ret:ctl[0],retColor:G,trades:ctl[1],fees:ctl[2],turnover:ctl[3],dd:ctl[4],te:ctl[5],pills:[P.stop,P.acct,P.ctl,P.v2]},
+      {name:"$10 Candidate",ret:cand[0],retColor:G,trades:cand[1],fees:cand[2],turnover:cand[3],dd:cand[4],te:cand[5],pills:[P.stop,P.rec,P.cand,P.v2]},
+      {name:"Candidate − Control",ret:diff[0],retColor:diff[0].startsWith("-")?R:G,trades:diff[1],fees:diff[2],turnover:diff[3],dd:diff[4],te:"—",pills:[]},
+    ]});
+    const abGroups = [
+      mkAB("10m",["+0.09%","541","$0.88","$2,483.39","-0.18%","0.105023"],["+0.25%","9","$0.21","$1,810.01","-0.17%","0.104966"],["+0.16%","-532","-$0.67","-$673.38","+0.01%"]),
+      mkAB("15m",["+0.23%","896","$1.64","$3,242.33","-0.18%","0.105088"],["+0.03%","9","$0.20","$1,804.42","-0.24%","0.104921"],["-0.20%","-887","-$1.44","-$1,437.91","-0.06%"]),
+      mkAB("5m",["+0.10%","378","$0.77","$2,369.89","-0.19%","0.105026"],["+0.26%","9","$0.21","$1,810.12","-0.20%","0.104928"],["+0.16%","-369","-$0.56","-$559.77","-0.01%"]),
+    ];
+    const livePrices = [
+      {sym:"BTC-USDT",px:"65,968.26",arrow:"↓",color:R,border:"#3a1e24"},
+      {sym:"ETH-USDT",px:"1,929.46",arrow:"↑",color:G,border:"#16301f"},
+      {sym:"SOL-USDT",px:"77.8000",arrow:"↑",color:G,border:"#16301f"},
+      {sym:"BNB-USDT",px:"570.30",arrow:"·",color:W,border:"#2a3242"},
+      {sym:"XRP-USDT",px:"1.1401",arrow:"·",color:W,border:"#2a3242"},
+      {sym:"ADA-USDT",px:"0.173900",arrow:"↑",color:G,border:"#16301f"},
+      {sym:"DOGE-USDT",px:"0.072810",arrow:"↓",color:R,border:"#3a1e24"},
+      {sym:"LINK-USDT",px:"8.6110",arrow:"·",color:W,border:"#2a3242"},
+    ];
+    const setups = [
+      {pair:"BTCUSDT",side:"LONG",sideColor:G,thesis:"Held 67.5k overnight; funding flat, spot bid leading perps.",conf:"78%",confColor:G},
+      {pair:"SOLUSDT",side:"SHORT",sideColor:R,thesis:"Rejected 165 twice; OI building against a weak bounce.",conf:"64%",confColor:"#eab308"},
+      {pair:"BNBUSDT",side:"LONG",sideColor:G,thesis:"Breakout retest at 568 with rising volume delta.",conf:"71%",confColor:G},
+    ];
+    const funding = [
+      {pair:"BTCUSDT",rate:"+0.0081%",color:R,note:"longs pay"},
+      {pair:"ETHUSDT",rate:"+0.0042%",color:R,note:"longs pay"},
+      {pair:"SOLUSDT",rate:"-0.0035%",color:G,note:"shorts pay"},
+      {pair:"BNBUSDT",rate:"+0.0010%",color:R,note:"near flat"},
+      {pair:"XRPUSDT",rate:"-0.0120%",color:G,note:"shorts pay"},
+    ];
+    return {
+      clock: this.state.clock, positions, alloc, pnlRows, closed,
+      tabs, isDash: mode === "dashboard", isGrid: mode === "grid", isTimed: mode === "timed", isMorning: mode === "morning", isExp: mode === "experiments",
+      capStats, contrib, abGroups, livePrices,
+      gridBots, ladder, playbook, timedCols, setups, funding,
+      fearGauge: this.fearGauge(),
+      closeAll: () => {},
+      equityChart: this.equityChart(),
+      donut: this.donut(alloc),
+      healthRing: this.healthRing(),
+    };
+  }
+  equityChart() {
+    const e = React.createElement;
+    const W = 520, H = 170, padL = 46, padB = 22;
+    // deterministic pseudo-random walk from 10,000 to ~10,377
+    const N = 80; let v = 10000; const pts = [];
+    for (let i = 0; i < N; i++) {
+      const r = Math.sin(i * 12.9898) * 43758.5453; const f = r - Math.floor(r);
+      v += (f - 0.42) * 45 + 3.0; pts.push(v);
+    }
+    const min = 9900, max = 10400;
+    const x = i => padL + (i / (N - 1)) * (W - padL - 8);
+    const y = val => (H - padB) - ((val - min) / (max - min)) * (H - padB - 8);
+    const line = pts.map((p, i) => (i ? "L" : "M") + x(i).toFixed(1) + "," + y(p).toFixed(1)).join(" ");
+    const area = line + ` L${x(N-1).toFixed(1)},${H-padB} L${padL},${H-padB} Z`;
+    const gridVals = [9900, 10000, 10100, 10200, 10300, 10400];
+    const kids = [
+      e("defs", {key:"d"}, e("linearGradient", {id:"eqg", x1:0, y1:0, x2:0, y2:1},
+        e("stop",{offset:"0%",stopColor:"#22c55e",stopOpacity:0.28}),
+        e("stop",{offset:"100%",stopColor:"#22c55e",stopOpacity:0}))),
+      ...gridVals.map(g => e("g",{key:"g"+g},
+        e("line",{x1:padL,x2:W-8,y1:y(g),y2:y(g),stroke:"#1a2130",strokeWidth:1}),
+        e("text",{x:padL-6,y:y(g)+3,fill:"#6b7484",fontSize:9,textAnchor:"end",fontFamily:"IBM Plex Mono"},g.toLocaleString()))),
+      ...["09:20","09:40","10:00","10:20"].map((t,i)=>e("text",{key:"t"+i,x:x(i*(N-1)/3.3+2),y:H-6,fill:"#6b7484",fontSize:9,textAnchor:"middle",fontFamily:"IBM Plex Mono"},t)),
+      e("path",{key:"a",d:area,fill:"url(#eqg)"}),
+      e("path",{key:"l",d:line,fill:"none",stroke:"#22c55e",strokeWidth:1.6}),
+    ];
+    return e("svg",{viewBox:`0 0 ${W} ${H}`,style:{width:"100%",height:"100%",display:"block"}},kids);
+  }
+  donut(alloc) {
+    const e = React.createElement, cx=80, cy=80, r=62, sw=26;
+    const C = 2*Math.PI*r; let off = 0;
+    const segs = alloc.map((a,i)=>{
+      const frac = a.pct/100;
+      const el = e("circle",{key:i,cx,cy,r,fill:"none",stroke:a.color,strokeWidth:sw,
+        strokeDasharray:`${(frac*C-3).toFixed(2)} ${(C-frac*C+3).toFixed(2)}`,
+        strokeDashoffset:(-off*C).toFixed(2),transform:`rotate(-90 ${cx} ${cy})`});
+      off += frac; return el;
+    });
+    return e("svg",{viewBox:"0 0 160 160",style:{width:"100%",height:"100%"}},segs);
+  }
+  fearGauge() {
+    const e = React.createElement, cx=80, cy=80, r=62, C=2*Math.PI*r;
+    const arc = frac => `${(frac*C*0.75).toFixed(1)} ${C.toFixed(1)}`;
+    const base = {cx,cy,r,fill:"none",strokeWidth:14,strokeLinecap:"round",transform:`rotate(135 ${cx} ${cy})`};
+    return e("svg",{viewBox:"0 0 160 160",style:{width:"100%",height:"100%"}},
+      e("circle",{...base,key:"bg",stroke:"#1e2534",strokeDasharray:arc(1)}),
+      e("circle",{...base,key:"fg",stroke:"#eab308",strokeDasharray:arc(0.61)}));
+  }
+  healthRing() {
+    const e = React.createElement, cx=75, cy=75, r=60, C=2*Math.PI*r, pct=0.95;
+    return e("svg",{viewBox:"0 0 150 150",style:{width:"100%",height:"100%"}},
+      e("circle",{cx,cy,r,fill:"none",stroke:"#1e2534",strokeWidth:16}),
+      e("circle",{cx,cy,r,fill:"none",stroke:"#22c55e",strokeWidth:16,strokeLinecap:"round",
+        strokeDasharray:`${(pct*C).toFixed(1)} ${C.toFixed(1)}`,transform:`rotate(-90 ${cx} ${cy})`}));
+  }
+}
+</script>
+</body>
+</html>
