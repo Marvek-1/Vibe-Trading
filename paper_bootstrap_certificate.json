@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "accounts_expected": 6,
+  "accounts_passed": 6,
+  "workers": [
+    {
+      "worker_id": "control_5m",
+      "session_id": "control_5m_futures",
+      "leverage": 5,
+      "passed": true,
+      "errors": [],
+      "engine_closed_trades": 1,
+      "engine_open_events": 1,
+      "engine_close_events": 1
+    },
+    {
+      "worker_id": "control_10m",
+      "session_id": "control_10m_futures",
+      "leverage": 5,
+      "passed": true,
+      "errors": [],
+      "engine_closed_trades": 1,
+      "engine_open_events": 1,
+      "engine_close_events": 1
+    },
+    {
+      "worker_id": "control_15m",
+      "session_id": "control_15m_futures",
+      "leverage": 5,
+      "passed": true,
+      "errors": [],
+      "engine_closed_trades": 1,
+      "engine_open_events": 2,
+      "engine_close_events": 1
+    },
+    {
+      "worker_id": "candidate_5m",
+      "session_id": "candidate_5m_futures",
+      "leverage": 10,
+      "passed": true,
+      "errors": [],
+      "engine_closed_trades": 1,
+      "engine_open_events": 1,
+      "engine_close_events": 1
+    },
+    {
+      "worker_id": "candidate_10m",
+      "session_id": "candidate_10m_futures",
+      "leverage": 10,
+      "passed": true,
+      "errors": [],
+      "engine_closed_trades": 1,
+      "engine_open_events": 1,
+      "engine_close_events": 1
+    },
+    {
+      "worker_id": "candidate_15m",
+      "session_id": "candidate_15m_futures",
+      "leverage": 10,
+      "passed": true,
+      "errors": [],
+      "engine_closed_trades": 1,
+      "engine_open_events": 2,
+      "engine_close_events": 1
+    }
+  ]
+}
