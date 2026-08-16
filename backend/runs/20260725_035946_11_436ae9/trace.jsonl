@@ -1,0 +1,9 @@
+{"type": "start", "iter": 1, "prompt": "use the probe", "ts": 1784941186.1266859}
+{"type": "message", "iter": 1, "role": "user", "content": "use the probe", "ts": 1784941186.1267583}
+{"type": "tool_call", "iter": 1, "tool": "echo_probe", "call_id": "dsml_call_1", "args": {"marker": "ran-dsml", "run_dir": "/home/idona/MoStar/_apps/financial/Vibe-Trading-main/Vibe-Trading-main/backend/agent/runs/20260725_035946_11_436ae9"}, "ts": 1784941186.1278658}
+{"type": "tool_result", "iter": 1, "tool": "echo_probe", "call_id": "dsml_call_1", "status": "ok", "elapsed_ms": 0, "preview": "{\"status\": \"ok\", \"marker\": \"ran-dsml\"}", "result": "{\"status\": \"ok\", \"marker\": \"ran-dsml\"}", "ts": 1784941186.128579}
+{"type": "forced_text_only", "iter": 2, "ts": 1784941186.1288831}
+{"type": "thinking", "iter": 2, "content": "final answer", "ts": 1784941186.129436}
+{"type": "answer", "iter": 2, "content": "final answer", "ts": 1784941186.1295085}
+{"type": "message", "iter": 2, "role": "assistant", "content": "final answer", "ts": 1784941186.1295304}
+{"type": "end", "iter": 2, "status": "success", "iterations": 2, "ts": 1784941186.1303885}

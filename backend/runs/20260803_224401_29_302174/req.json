@@ -1,0 +1,6 @@
+{
+  "prompt": "Calculate option Greeks using Black-Scholes: spot=100, strike=105, risk-free rate=3%, vol=25%, expiry=90 days, analyze Delta/Gamma/Theta/Vega",
+  "context": {
+    "session_id": "056e98a2882d"
+  }
+}

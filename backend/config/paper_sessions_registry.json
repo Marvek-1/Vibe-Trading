@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "execution_mode": "paper",
+  "market_source": "okx",
+  "active_sessions": [
+    "control_5m_futures",
+    "candidate_5m_futures",
+    "control_10m_futures",
+    "candidate_10m_futures",
+    "control_15m_futures",
+    "candidate_15m_futures",
+    "grid_futures_5x_v3",
+    "grid_futures_10x_v3",
+    "morning_glory_futures"
+  ],
+  "archived_sessions": [
+    "shadow_ab_v2_control_5m",
+    "shadow_ab_v2_candidate10_5m",
+    "shadow_ab_v2_control_10m",
+    "shadow_ab_v2_candidate10_10m",
+    "shadow_ab_v2_control_15m",
+    "shadow_ab_v2_candidate10_15m",
+    "funding_live",
+    "shadow_a_vx_control_5m_okx",
+    "shadow_b_vx_candidate10_5m_okx",
+    "shadow_a_vx_control_10m_okx",
+    "shadow_b_vx_candidate10_10m_okx",
+    "shadow_a_vx_control_15m_okx",
+    "shadow_b_vx_candidate10_15m_okx",
+    "grid_futures_10x_v2",
+    "grid_futures_5x_v2"
+  ]
+}

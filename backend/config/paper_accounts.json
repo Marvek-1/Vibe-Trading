@@ -1,0 +1,15 @@
+{
+  "database_dsn": "dbname=idim_ikang port=5433",
+  "live_trading_enabled": false,
+  "accounts": [
+    {"worker_id":"control_5m","account_id":"59961ec7-10d3-4284-aaac-2030b9de6cc1","strategy_id":"control","timeframe":"5m","mode":"paper","leverage":5,"capital_env":"PAPER_CONTROL_5M_CAPITAL","initial_capital":10000},
+    {"worker_id":"control_10m","account_id":"805a5633-81c5-40b6-bda8-eae4e42b414b","strategy_id":"control","timeframe":"10m","mode":"paper","leverage":5,"capital_env":"PAPER_CONTROL_10M_CAPITAL","initial_capital":10000},
+    {"worker_id":"control_15m","account_id":"ab23f2fe-368c-48ba-873d-9173da8ad489","strategy_id":"control","timeframe":"15m","mode":"paper","leverage":5,"capital_env":"PAPER_CONTROL_15M_CAPITAL","initial_capital":10000},
+    {"worker_id":"candidate_5m","account_id":"7673c15e-44fe-4520-b866-3f1d88e2a4be","strategy_id":"candidate","timeframe":"5m","mode":"paper","leverage":10,"capital_env":"PAPER_CANDIDATE_5M_CAPITAL","initial_capital":10000},
+    {"worker_id":"candidate_10m","account_id":"6ff5c12f-d48d-4f8b-bd79-ae4aa75eee7f","strategy_id":"candidate","timeframe":"10m","mode":"paper","leverage":10,"capital_env":"PAPER_CANDIDATE_10M_CAPITAL","initial_capital":10000},
+    {"worker_id":"candidate_15m","account_id":"f1e4fca1-b329-46fc-8b04-a25683b6abcf","strategy_id":"candidate","timeframe":"15m","mode":"paper","leverage":10,"capital_env":"PAPER_CANDIDATE_15M_CAPITAL","initial_capital":10000},
+    {"worker_id":"grid_futures_5x","account_id":"b7e2b9d0-6b7a-4c4a-9c8b-1a2f3e4d5c6a","strategy_id":"bounded_grid_v1","timeframe":"tick","mode":"paper","leverage":5,"capital_env":"PAPER_GRID_FUTURES_5X_CAPITAL","initial_capital":1000},
+    {"worker_id":"grid_futures_10x","account_id":"c8f3cae1-7c8b-4d5b-ad9c-2b3f4e5d6c7b","strategy_id":"bounded_grid_v1","timeframe":"tick","mode":"paper","leverage":10,"capital_env":"PAPER_GRID_FUTURES_10X_CAPITAL","initial_capital":1000},
+    {"worker_id":"morning_glory","account_id":"da4f02c8-b49e-4c87-a3bc-9399b78f60a1","strategy_id":"funding_rate_zscore","timeframe":"tick","mode":"paper","leverage":5,"capital_env":"PAPER_MORNING_GLORY_CAPITAL","initial_capital":1000}
+  ]
+}

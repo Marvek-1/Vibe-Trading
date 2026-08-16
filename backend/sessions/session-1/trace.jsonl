@@ -1,0 +1,84 @@
+{"type": "start", "iter": 1, "prompt": "Continue the analysis.", "ts": 1784941185.5935001}
+{"type": "message", "iter": 1, "role": "user", "content": "Continue the analysis.", "ts": 1784941185.593538}
+{"type": "answer", "iter": 1, "content": "done", "ts": 1784941185.5951602}
+{"type": "message", "iter": 1, "role": "assistant", "content": "done", "ts": 1784941185.595184}
+{"type": "end", "iter": 1, "status": "success", "iterations": 1, "ts": 1784941185.5952945}
+{"type": "start", "iter": 2, "prompt": "Continue the analysis.", "ts": 1784941185.629108}
+{"type": "message", "iter": 2, "role": "user", "content": "Continue the analysis.", "ts": 1784941185.6291423}
+{"type": "answer", "iter": 2, "content": "done", "ts": 1784941185.6311934}
+{"type": "message", "iter": 2, "role": "assistant", "content": "done", "ts": 1784941185.631214}
+{"type": "end", "iter": 2, "status": "success", "iterations": 1, "ts": 1784941185.6313732}
+{"type": "start", "iter": 3, "prompt": "Start the goal.", "ts": 1784941185.6589644}
+{"type": "message", "iter": 3, "role": "user", "content": "Start the goal.", "ts": 1784941185.6589916}
+{"type": "goal_intermediate_answer", "iter": 3, "goal_id": "goal_779a61585528", "progress": [0, 0], "content": "done", "ts": 1784941185.6609297}
+{"type": "message", "iter": 3, "role": "assistant", "content": "done", "ts": 1784941185.6609592}
+{"type": "forced_text_only", "iter": 4, "ts": 1784941185.6614761}
+{"type": "goal_continuation_suppressed", "iter": 4, "goal_id": "goal_779a61585528", "progress": [0, 0], "continuations": 1, "ts": 1784941185.6618462}
+{"type": "answer", "iter": 4, "content": "done", "ts": 1784941185.6618712}
+{"type": "message", "iter": 4, "role": "assistant", "content": "done", "ts": 1784941185.6618793}
+{"type": "end", "iter": 4, "status": "success", "iterations": 2, "ts": 1784941185.662015}
+{"type": "start", "iter": 5, "prompt": "Finish the goal.", "ts": 1784941185.7174127}
+{"type": "message", "iter": 5, "role": "user", "content": "Finish the goal.", "ts": 1784941185.7174497}
+{"type": "goal_intermediate_answer", "iter": 5, "goal_id": "goal_ff738ed1e112", "progress": [1, 1], "content": "done", "ts": 1784941185.719756}
+{"type": "message", "iter": 5, "role": "assistant", "content": "done", "ts": 1784941185.7197855}
+{"type": "forced_text_only", "iter": 6, "ts": 1784941185.7202544}
+{"type": "goal_continuation_suppressed", "iter": 6, "goal_id": "goal_ff738ed1e112", "progress": [1, 1], "continuations": 1, "ts": 1784941185.7207844}
+{"type": "answer", "iter": 6, "content": "done", "ts": 1784941185.720819}
+{"type": "message", "iter": 6, "role": "assistant", "content": "done", "ts": 1784941185.7208285}
+{"type": "end", "iter": 6, "status": "success", "iterations": 2, "ts": 1784941185.72101}
+{"type": "start", "iter": 7, "prompt": "Continue the analysis.", "ts": 1785492457.2846417}
+{"type": "message", "iter": 7, "role": "user", "content": "Continue the analysis.", "ts": 1785492457.284723}
+{"type": "answer", "iter": 7, "content": "done", "ts": 1785492457.286706}
+{"type": "message", "iter": 7, "role": "assistant", "content": "done", "ts": 1785492457.286733}
+{"type": "end", "iter": 7, "status": "success", "iterations": 1, "ts": 1785492457.286883}
+{"type": "start", "iter": 8, "prompt": "Continue the analysis.", "ts": 1785492457.3089442}
+{"type": "message", "iter": 8, "role": "user", "content": "Continue the analysis.", "ts": 1785492457.3089712}
+{"type": "answer", "iter": 8, "content": "done", "ts": 1785492457.3108044}
+{"type": "message", "iter": 8, "role": "assistant", "content": "done", "ts": 1785492457.310827}
+{"type": "end", "iter": 8, "status": "success", "iterations": 1, "ts": 1785492457.3109424}
+{"type": "start", "iter": 9, "prompt": "Start the goal.", "ts": 1785492457.3330166}
+{"type": "message", "iter": 9, "role": "user", "content": "Start the goal.", "ts": 1785492457.3330395}
+{"type": "goal_intermediate_answer", "iter": 9, "goal_id": "goal_261d88c04fef", "progress": [0, 0], "content": "done", "ts": 1785492457.3349223}
+{"type": "message", "iter": 9, "role": "assistant", "content": "done", "ts": 1785492457.3349495}
+{"type": "forced_text_only", "iter": 10, "ts": 1785492457.3354464}
+{"type": "goal_continuation_suppressed", "iter": 10, "goal_id": "goal_261d88c04fef", "progress": [0, 0], "continuations": 1, "ts": 1785492457.3360124}
+{"type": "answer", "iter": 10, "content": "done", "ts": 1785492457.3360417}
+{"type": "message", "iter": 10, "role": "assistant", "content": "done", "ts": 1785492457.33605}
+{"type": "end", "iter": 10, "status": "success", "iterations": 2, "ts": 1785492457.3362024}
+{"type": "start", "iter": 11, "prompt": "Finish the goal.", "ts": 1785492457.3592196}
+{"type": "message", "iter": 11, "role": "user", "content": "Finish the goal.", "ts": 1785492457.3592439}
+{"type": "goal_intermediate_answer", "iter": 11, "goal_id": "goal_914563725bac", "progress": [1, 1], "content": "done", "ts": 1785492457.3735583}
+{"type": "message", "iter": 11, "role": "assistant", "content": "done", "ts": 1785492457.3735936}
+{"type": "forced_text_only", "iter": 12, "ts": 1785492457.3740919}
+{"type": "goal_continuation_suppressed", "iter": 12, "goal_id": "goal_914563725bac", "progress": [1, 1], "continuations": 1, "ts": 1785492457.3745935}
+{"type": "answer", "iter": 12, "content": "done", "ts": 1785492457.374621}
+{"type": "message", "iter": 12, "role": "assistant", "content": "done", "ts": 1785492457.3746293}
+{"type": "end", "iter": 12, "status": "success", "iterations": 2, "ts": 1785492457.3747852}
+{"type": "start", "iter": 13, "prompt": "Continue the analysis.", "ts": 1785666753.3605533}
+{"type": "message", "iter": 13, "role": "user", "content": "Continue the analysis.", "ts": 1785666753.3606176}
+{"type": "answer", "iter": 13, "content": "done", "ts": 1785666753.3621078}
+{"type": "message", "iter": 13, "role": "assistant", "content": "done", "ts": 1785666753.3621268}
+{"type": "end", "iter": 13, "status": "success", "iterations": 1, "ts": 1785666753.3622382}
+{"type": "start", "iter": 14, "prompt": "Continue the analysis.", "ts": 1785666753.3995228}
+{"type": "message", "iter": 14, "role": "user", "content": "Continue the analysis.", "ts": 1785666753.3995447}
+{"type": "answer", "iter": 14, "content": "done", "ts": 1785666753.4017394}
+{"type": "message", "iter": 14, "role": "assistant", "content": "done", "ts": 1785666753.4017715}
+{"type": "end", "iter": 14, "status": "success", "iterations": 1, "ts": 1785666753.4018924}
+{"type": "start", "iter": 15, "prompt": "Start the goal.", "ts": 1785666753.4336874}
+{"type": "message", "iter": 15, "role": "user", "content": "Start the goal.", "ts": 1785666753.433714}
+{"type": "goal_intermediate_answer", "iter": 15, "goal_id": "goal_8c59320b56f9", "progress": [0, 0], "content": "done", "ts": 1785666753.4355779}
+{"type": "message", "iter": 15, "role": "assistant", "content": "done", "ts": 1785666753.435602}
+{"type": "forced_text_only", "iter": 16, "ts": 1785666753.4360802}
+{"type": "goal_continuation_suppressed", "iter": 16, "goal_id": "goal_8c59320b56f9", "progress": [0, 0], "continuations": 1, "ts": 1785666753.4363842}
+{"type": "answer", "iter": 16, "content": "done", "ts": 1785666753.4364052}
+{"type": "message", "iter": 16, "role": "assistant", "content": "done", "ts": 1785666753.4364126}
+{"type": "end", "iter": 16, "status": "success", "iterations": 2, "ts": 1785666753.436528}
+{"type": "start", "iter": 17, "prompt": "Finish the goal.", "ts": 1785666753.4659474}
+{"type": "message", "iter": 17, "role": "user", "content": "Finish the goal.", "ts": 1785666753.4659677}
+{"type": "goal_intermediate_answer", "iter": 17, "goal_id": "goal_0de8fe9ba565", "progress": [1, 1], "content": "done", "ts": 1785666753.4679282}
+{"type": "message", "iter": 17, "role": "assistant", "content": "done", "ts": 1785666753.4679582}
+{"type": "forced_text_only", "iter": 18, "ts": 1785666753.4684439}
+{"type": "goal_continuation_suppressed", "iter": 18, "goal_id": "goal_0de8fe9ba565", "progress": [1, 1], "continuations": 1, "ts": 1785666753.4688609}
+{"type": "answer", "iter": 18, "content": "done", "ts": 1785666753.4688852}
+{"type": "message", "iter": 18, "role": "assistant", "content": "done", "ts": 1785666753.468894}
+{"type": "end", "iter": 18, "status": "success", "iterations": 2, "ts": 1785666753.4690878}
